@@ -4,12 +4,13 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/Users/andrey/Desktop/minishell/main.c" "/Users/andrey/Desktop/minishell/cmake-build-debug/CMakeFiles/minishell.dir/main.c.o"
+  "/Users/andrey/Desktop/minishell/srcs/main.c" "/Users/andrey/Desktop/minishell/cmake-build-debug/CMakeFiles/minishell.dir/srcs/main.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 
 # The include file search paths:
 set(CMAKE_C_TARGET_INCLUDE_PATH
+  "../libft/includes"
   )
 
 # Targets to which this target links.

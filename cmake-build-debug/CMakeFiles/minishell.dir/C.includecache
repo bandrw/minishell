@@ -6,7 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/Users/andrey/Desktop/minishell/main.c
+../libft/includes/libft.h
+
+/Users/andrey/Desktop/minishell/srcs/main.c
 stdio.h
 -
+libft.h
+/Users/andrey/Desktop/minishell/srcs/libft.h
 
