@@ -5,6 +5,7 @@ set(CMAKE_C_STANDARD 99)
 
 add_library(ft
 		includes/libft.h
+		includes/get_next_line.h
 		srcs/ft_atoi.c
 		srcs/ft_bzero.c
 		srcs/ft_calloc.c
@@ -53,6 +54,8 @@ add_library(ft
 		srcs/ft_strtrim.c
 		srcs/ft_substr.c
 		srcs/ft_tolower.c
-		srcs/ft_toupper.c)
+		srcs/ft_toupper.c
+		srcs/get_next_line.c
+		srcs/get_next_line_utils.c)
 
 include_directories(includes)

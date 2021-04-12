@@ -714,6 +714,32 @@ CMakeFiles/ft.dir/srcs/ft_toupper.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ft.dir/srcs/ft_toupper.c.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/andrey/Desktop/minishell/libft/srcs/ft_toupper.c -o CMakeFiles/ft.dir/srcs/ft_toupper.c.s
 
+CMakeFiles/ft.dir/srcs/get_next_line.c.o: CMakeFiles/ft.dir/flags.make
+CMakeFiles/ft.dir/srcs/get_next_line.c.o: ../srcs/get_next_line.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/andrey/Desktop/minishell/libft/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building C object CMakeFiles/ft.dir/srcs/get_next_line.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ft.dir/srcs/get_next_line.c.o   -c /Users/andrey/Desktop/minishell/libft/srcs/get_next_line.c
+
+CMakeFiles/ft.dir/srcs/get_next_line.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ft.dir/srcs/get_next_line.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/andrey/Desktop/minishell/libft/srcs/get_next_line.c > CMakeFiles/ft.dir/srcs/get_next_line.c.i
+
+CMakeFiles/ft.dir/srcs/get_next_line.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ft.dir/srcs/get_next_line.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/andrey/Desktop/minishell/libft/srcs/get_next_line.c -o CMakeFiles/ft.dir/srcs/get_next_line.c.s
+
+CMakeFiles/ft.dir/srcs/get_next_line_utils.c.o: CMakeFiles/ft.dir/flags.make
+CMakeFiles/ft.dir/srcs/get_next_line_utils.c.o: ../srcs/get_next_line_utils.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/andrey/Desktop/minishell/libft/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Building C object CMakeFiles/ft.dir/srcs/get_next_line_utils.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ft.dir/srcs/get_next_line_utils.c.o   -c /Users/andrey/Desktop/minishell/libft/srcs/get_next_line_utils.c
+
+CMakeFiles/ft.dir/srcs/get_next_line_utils.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ft.dir/srcs/get_next_line_utils.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/andrey/Desktop/minishell/libft/srcs/get_next_line_utils.c > CMakeFiles/ft.dir/srcs/get_next_line_utils.c.i
+
+CMakeFiles/ft.dir/srcs/get_next_line_utils.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ft.dir/srcs/get_next_line_utils.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/andrey/Desktop/minishell/libft/srcs/get_next_line_utils.c -o CMakeFiles/ft.dir/srcs/get_next_line_utils.c.s
+
 # Object files for target ft
 ft_OBJECTS = \
 "CMakeFiles/ft.dir/srcs/ft_atoi.c.o" \
@@ -764,7 +790,9 @@ ft_OBJECTS = \
 "CMakeFiles/ft.dir/srcs/ft_strtrim.c.o" \
 "CMakeFiles/ft.dir/srcs/ft_substr.c.o" \
 "CMakeFiles/ft.dir/srcs/ft_tolower.c.o" \
-"CMakeFiles/ft.dir/srcs/ft_toupper.c.o"
+"CMakeFiles/ft.dir/srcs/ft_toupper.c.o" \
+"CMakeFiles/ft.dir/srcs/get_next_line.c.o" \
+"CMakeFiles/ft.dir/srcs/get_next_line_utils.c.o"
 
 # External object files for target ft
 ft_EXTERNAL_OBJECTS =
@@ -818,9 +846,11 @@ libft.a: CMakeFiles/ft.dir/srcs/ft_strtrim.c.o
 libft.a: CMakeFiles/ft.dir/srcs/ft_substr.c.o
 libft.a: CMakeFiles/ft.dir/srcs/ft_tolower.c.o
 libft.a: CMakeFiles/ft.dir/srcs/ft_toupper.c.o
+libft.a: CMakeFiles/ft.dir/srcs/get_next_line.c.o
+libft.a: CMakeFiles/ft.dir/srcs/get_next_line_utils.c.o
 libft.a: CMakeFiles/ft.dir/build.make
 libft.a: CMakeFiles/ft.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/andrey/Desktop/minishell/libft/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Linking C static library libft.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/andrey/Desktop/minishell/libft/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_52) "Linking C static library libft.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/ft.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ft.dir/link.txt --verbose=$(VERBOSE)
 

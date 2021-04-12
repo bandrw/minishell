@@ -53,6 +53,8 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/andrey/Desktop/minishell/libft/srcs/ft_substr.c" "/Users/andrey/Desktop/minishell/libft/cmake-build-debug/CMakeFiles/ft.dir/srcs/ft_substr.c.o"
   "/Users/andrey/Desktop/minishell/libft/srcs/ft_tolower.c" "/Users/andrey/Desktop/minishell/libft/cmake-build-debug/CMakeFiles/ft.dir/srcs/ft_tolower.c.o"
   "/Users/andrey/Desktop/minishell/libft/srcs/ft_toupper.c" "/Users/andrey/Desktop/minishell/libft/cmake-build-debug/CMakeFiles/ft.dir/srcs/ft_toupper.c.o"
+  "/Users/andrey/Desktop/minishell/libft/srcs/get_next_line.c" "/Users/andrey/Desktop/minishell/libft/cmake-build-debug/CMakeFiles/ft.dir/srcs/get_next_line.c.o"
+  "/Users/andrey/Desktop/minishell/libft/srcs/get_next_line_utils.c" "/Users/andrey/Desktop/minishell/libft/cmake-build-debug/CMakeFiles/ft.dir/srcs/get_next_line_utils.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 

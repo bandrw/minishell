@@ -137,3 +137,10 @@ CMakeFiles/ft.dir/srcs/ft_tolower.c.o: ../srcs/ft_tolower.c
 
 CMakeFiles/ft.dir/srcs/ft_toupper.c.o: ../srcs/ft_toupper.c
 
+CMakeFiles/ft.dir/srcs/get_next_line.c.o: ../includes/get_next_line.h
+CMakeFiles/ft.dir/srcs/get_next_line.c.o: ../includes/libft.h
+CMakeFiles/ft.dir/srcs/get_next_line.c.o: ../srcs/get_next_line.c
+
+CMakeFiles/ft.dir/srcs/get_next_line_utils.c.o: ../includes/libft.h
+CMakeFiles/ft.dir/srcs/get_next_line_utils.c.o: ../srcs/get_next_line_utils.c
+

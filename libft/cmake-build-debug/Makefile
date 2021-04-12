@@ -1466,6 +1466,60 @@ srcs/ft_toupper.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft.dir/build.make CMakeFiles/ft.dir/srcs/ft_toupper.c.s
 .PHONY : srcs/ft_toupper.c.s
 
+srcs/get_next_line.o: srcs/get_next_line.c.o
+
+.PHONY : srcs/get_next_line.o
+
+# target to build an object file
+srcs/get_next_line.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft.dir/build.make CMakeFiles/ft.dir/srcs/get_next_line.c.o
+.PHONY : srcs/get_next_line.c.o
+
+srcs/get_next_line.i: srcs/get_next_line.c.i
+
+.PHONY : srcs/get_next_line.i
+
+# target to preprocess a source file
+srcs/get_next_line.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft.dir/build.make CMakeFiles/ft.dir/srcs/get_next_line.c.i
+.PHONY : srcs/get_next_line.c.i
+
+srcs/get_next_line.s: srcs/get_next_line.c.s
+
+.PHONY : srcs/get_next_line.s
+
+# target to generate assembly for a file
+srcs/get_next_line.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft.dir/build.make CMakeFiles/ft.dir/srcs/get_next_line.c.s
+.PHONY : srcs/get_next_line.c.s
+
+srcs/get_next_line_utils.o: srcs/get_next_line_utils.c.o
+
+.PHONY : srcs/get_next_line_utils.o
+
+# target to build an object file
+srcs/get_next_line_utils.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft.dir/build.make CMakeFiles/ft.dir/srcs/get_next_line_utils.c.o
+.PHONY : srcs/get_next_line_utils.c.o
+
+srcs/get_next_line_utils.i: srcs/get_next_line_utils.c.i
+
+.PHONY : srcs/get_next_line_utils.i
+
+# target to preprocess a source file
+srcs/get_next_line_utils.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft.dir/build.make CMakeFiles/ft.dir/srcs/get_next_line_utils.c.i
+.PHONY : srcs/get_next_line_utils.c.i
+
+srcs/get_next_line_utils.s: srcs/get_next_line_utils.c.s
+
+.PHONY : srcs/get_next_line_utils.s
+
+# target to generate assembly for a file
+srcs/get_next_line_utils.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft.dir/build.make CMakeFiles/ft.dir/srcs/get_next_line_utils.c.s
+.PHONY : srcs/get_next_line_utils.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -1622,6 +1676,12 @@ help:
 	@echo "... srcs/ft_toupper.o"
 	@echo "... srcs/ft_toupper.i"
 	@echo "... srcs/ft_toupper.s"
+	@echo "... srcs/get_next_line.o"
+	@echo "... srcs/get_next_line.i"
+	@echo "... srcs/get_next_line.s"
+	@echo "... srcs/get_next_line_utils.o"
+	@echo "... srcs/get_next_line_utils.i"
+	@echo "... srcs/get_next_line_utils.s"
 .PHONY : help
 
 

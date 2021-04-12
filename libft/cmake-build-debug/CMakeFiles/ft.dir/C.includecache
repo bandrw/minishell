@@ -6,13 +6,17 @@
 
 #IncludeRegexTransform: 
 
+../includes/get_next_line.h
+
 ../includes/libft.h
 unistd.h
 -
 stdlib.h
 -
 
-/Users/andrey/Desktop/minishell/libft/srcs/ft_split.c
+/Users/andrey/Desktop/minishell/libft/srcs/get_next_line.c
 libft.h
 /Users/andrey/Desktop/minishell/libft/srcs/libft.h
+get_next_line.h
+/Users/andrey/Desktop/minishell/libft/srcs/get_next_line.h
 

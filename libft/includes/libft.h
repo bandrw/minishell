@@ -15,7 +15,6 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-//# include "get_next_line.h"
 //# include "ft_printf.h"
 
 typedef struct s_list
@@ -75,5 +74,6 @@ int					ft_putstr(char *s);
 void				ft_putnbr(int n);
 int					ft_max(int a, int b);
 char				*ft_hexstr(unsigned long p);
+int					get_next_line(int fd, char **line);
 
 #endif

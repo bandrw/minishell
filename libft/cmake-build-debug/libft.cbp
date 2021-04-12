@@ -80,6 +80,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/andrey/Desktop/minishell/libft/includes/get_next_line.h">
+			<Option target="ft"/>
+		</Unit>
 		<Unit filename="/Users/andrey/Desktop/minishell/libft/includes/libft.h">
 			<Option target="ft"/>
 		</Unit>
@@ -228,6 +231,12 @@
 			<Option target="ft"/>
 		</Unit>
 		<Unit filename="/Users/andrey/Desktop/minishell/libft/srcs/ft_toupper.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/andrey/Desktop/minishell/libft/srcs/get_next_line.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/andrey/Desktop/minishell/libft/srcs/get_next_line_utils.c">
 			<Option target="ft"/>
 		</Unit>
 		<Unit filename="/Users/andrey/Desktop/minishell/libft/CMakeLists.txt">
