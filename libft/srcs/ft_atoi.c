@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	int				sign;
 	unsigned int	number;
@@ -19,8 +19,8 @@ int		ft_atoi(const char *str)
 	number = 0;
 	if (!str)
 		return (0);
-	while (*str == '\t' || *str == '\n' || *str == ' ' ||
-		   *str == '\v' || *str == '\f' || *str == '\r')
+	while (*str == '\t' || *str == '\n' || *str == ' '
+		|| *str == '\v' || *str == '\f' || *str == '\r')
 		str++;
 	if (*str == '-')
 		sign = -1;

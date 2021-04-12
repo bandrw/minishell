@@ -6,5 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/Users/andrey/Desktop/minishell/libft/srcs/ft_atoi.c
+../includes/libft.h
+unistd.h
+-
+stdlib.h
+-
+
+/Users/andrey/Desktop/minishell/libft/srcs/ft_split.c
+libft.h
+/Users/andrey/Desktop/minishell/libft/srcs/libft.h
 
