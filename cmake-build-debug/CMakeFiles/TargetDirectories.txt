@@ -1,3 +1,4 @@
 /Users/andrey/Desktop/minishell/cmake-build-debug/CMakeFiles/rebuild_cache.dir
 /Users/andrey/Desktop/minishell/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/andrey/Desktop/minishell/cmake-build-debug/CMakeFiles/ft.dir
 /Users/andrey/Desktop/minishell/cmake-build-debug/CMakeFiles/minishell.dir

@@ -209,6 +209,9 @@ FT:FILEPATH=/Users/andrey/Desktop/minishell/libft/libft.a
 //Path to a program.
 ProcessorCount_cmd_sysctl:FILEPATH=/usr/sbin/sysctl
 
+//Path to a library.
+cmake-build-debug/FT:FILEPATH=cmake-build-debug/FT-NOTFOUND
+
 //Value Computed by CMake
 minishell_BINARY_DIR:STATIC=/Users/andrey/Desktop/minishell/cmake-build-debug
 

@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfriese <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/12 22:23:25 by kfriese           #+#    #+#             */
-/*   Updated: 2021/04/12 22:23:27 by kfriese          ###   ########.fr       */
+/*   Created: 2021/04/12 22:23:36 by kfriese           #+#    #+#             */
+/*   Updated: 2021/04/12 22:23:37 by kfriese          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-int main(void)
-{
-	char *command_line;
+# include "libft.h"
+# include <stdio.h>
 
-	while (1)
-	{
-		ft_putstr("minishell$ ");
-		get_next_line(0, &command_line);
-		if (ft_strncmp(command_line, "exit", 5) == 0)
-			return (0);
-	}
-}
+#endif

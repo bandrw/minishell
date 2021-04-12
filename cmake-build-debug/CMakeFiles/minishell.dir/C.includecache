@@ -6,6 +6,12 @@
 
 #IncludeRegexTransform: 
 
+../includes/minishell.h
+libft.h
+../includes/libft.h
+stdio.h
+-
+
 ../libft/includes/libft.h
 unistd.h
 -
@@ -13,8 +19,6 @@ stdlib.h
 -
 
 /Users/andrey/Desktop/minishell/srcs/main.c
-libft.h
-/Users/andrey/Desktop/minishell/srcs/libft.h
-fcntl.h
-/Users/andrey/Desktop/minishell/srcs/fcntl.h
+minishell.h
+/Users/andrey/Desktop/minishell/srcs/minishell.h
 
