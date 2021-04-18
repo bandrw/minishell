@@ -4,7 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/Users/andrey/Desktop/minishell/srcs/main.c" "/Users/andrey/Desktop/minishell/cmake-build-debug/CMakeFiles/minishell.dir/srcs/main.c.o"
+  "/Users/kfriese/Desktop/minishell/srcs/execute.c" "/Users/kfriese/Desktop/minishell/cmake-build-debug/CMakeFiles/minishell.dir/srcs/execute.c.o"
+  "/Users/kfriese/Desktop/minishell/srcs/ft_echo.c" "/Users/kfriese/Desktop/minishell/cmake-build-debug/CMakeFiles/minishell.dir/srcs/ft_echo.c.o"
+  "/Users/kfriese/Desktop/minishell/srcs/main.c" "/Users/kfriese/Desktop/minishell/cmake-build-debug/CMakeFiles/minishell.dir/srcs/main.c.o"
+  "/Users/kfriese/Desktop/minishell/srcs/parse.c" "/Users/kfriese/Desktop/minishell/cmake-build-debug/CMakeFiles/minishell.dir/srcs/parse.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 
@@ -16,7 +19,7 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/Users/andrey/Desktop/minishell/cmake-build-debug/CMakeFiles/ft.dir/DependInfo.cmake"
+  "/Users/kfriese/Desktop/minishell/cmake-build-debug/CMakeFiles/ft.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.
