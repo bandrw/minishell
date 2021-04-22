@@ -14,8 +14,8 @@
 
 void	execute_command_line(t_parse *parse, char **env)
 {
-	int pid;
-	int status;
+	int	pid;
+	int	status;
 
 	if (parse->command_id == CMD_ECHO)
 		ft_echo(parse->argv);
@@ -23,7 +23,7 @@ void	execute_command_line(t_parse *parse, char **env)
 	{
 		pid = fork();
 		if (pid == 0)
-			execve("/bin/ls", parse->argv + 1, env);
+			execve("/usr/bin/env", parse->argv, env);
 		else
 			waitpid(pid, &status, 0);
 	}
