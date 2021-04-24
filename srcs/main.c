@@ -18,18 +18,24 @@ int	main(int argc, char **argv, char **env)
 	char	*command_line;
 	t_parse	parse;
 
+	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, sigquit_handler);
 	while (1)
 	{
 		ft_putstr("minishell$ ");
 		n = get_next_line(0, &command_line);
 		if (n == 0)
-			ft_putchar_fd('\n', 2);
+		{
+			ft_putendl_fd("exit", 1);
+			return (0);
+		}
 		if (n != 1)
 		{
-			ft_putendl_fd("Error: Gnl", 2);
+			ft_putendl_fd("Error: GNL", 2);
 			return (1);
 		}
 		parse_line(command_line, &parse);
 		execute_command_line(&parse, env);
+		free(command_line);
 	}
 }

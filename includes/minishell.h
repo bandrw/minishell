@@ -19,6 +19,7 @@
 
 # define CMD_OTHER 0
 # define CMD_ECHO 1
+# define CMD_CD 2
 
 typedef struct	s_parse
 {
@@ -28,6 +29,9 @@ typedef struct	s_parse
 
 void	parse_line(char *command_line, t_parse *parse);
 void	execute_command_line(t_parse *parse, char **env);
-void	ft_echo(char **argv);
+void	ft_echo(char **argv, char **env);
+void	ft_cd(char **argv, char **env);
+void	sigint_handler(int sig);
+void	sigquit_handler(int sig);
 
 #endif

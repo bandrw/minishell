@@ -18,12 +18,20 @@ void	execute_command_line(t_parse *parse, char **env)
 	int	status;
 
 	if (parse->command_id == CMD_ECHO)
-		ft_echo(parse->argv);
+		ft_echo(parse->argv, env);
+	else if (parse->command_id == CMD_CD)
+		ft_cd(parse->argv, env);
 	else if (parse->command_id == CMD_OTHER)
 	{
 		pid = fork();
 		if (pid == 0)
-			execve("/usr/bin/env", parse->argv, env);
+		{
+			if (execve(parse->argv[0], parse->argv, env) == -1)
+			{
+				ft_putendl_fd("execve error", 2);
+				exit(1);
+			}
+		}
 		else
 			waitpid(pid, &status, 0);
 	}

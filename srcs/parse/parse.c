@@ -24,8 +24,5 @@ void	parse_line(char *command_line, t_parse *parse)
 
 	// other commands example
 	parse->command_id = CMD_OTHER;
-	parse->argv = (char **)malloc(sizeof(char *) * 3);
-	parse->argv[0] = ft_strdup("ls");
-	parse->argv[1] = ft_strdup("-l");
-	parse->argv[2] = 0;
+	parse->argv = ft_split(command_line, ' ');
 }
