@@ -38,12 +38,11 @@ void	ft_get_other(t_parse *parse, char *str)
 
 void	parse_line(char *line, t_parse *parse)
 {
-
 	if (ft_strncmp("echo", line, 4) == 0 && (!line[4]
 		|| ft_isspace(line[4])))
 		ft_get_echo(parse, line);
-	else if (ft_strncmp("echo", line, 4) == 0 && (!line[4]
-		|| ft_isspace(line[4])))
+	else if (ft_strncmp("cd", line, 2) == 0 && (!line[2]
+		|| ft_isspace(line[2])))
 		ft_get_cd(parse, line);
 	else if (ft_strncmp("pwd", line, 4) == 0)
 		ft_get_pwd(parse);

@@ -12,7 +12,8 @@
 
 #include "minishell.h"
 
-void	ft_pwd(char **env)
+void	ft_pwd(void)
 {
-	ft_putendl_fd(get_env("PWD", env), 1);
+	char pwd[1024];
+	ft_putendl_fd(getcwd(pwd, 1024), 1);
 }

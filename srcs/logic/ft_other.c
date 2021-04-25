@@ -12,7 +12,28 @@
 
 #include "minishell.h"
 
-void	ft_other(t_parse *parse, char **env)
+static void	exec_relative(t_parse *parse, char **env)
+{
+	int		pid;
+	int		status;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		execve(parse->argv[0], parse->argv, env);
+		exit(1);
+	}
+	else
+		waitpid(pid, &status, 0);
+	if (status == 256)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(parse->argv[0], 2);
+		ft_putendl_fd(": command not found", 2);
+	}
+}
+
+static void	exec_absolute(t_parse *parse, char **env)
 {
 	int		i;
 	int		pid;
@@ -44,5 +65,19 @@ void	ft_other(t_parse *parse, char **env)
 			waitpid(pid, &status, 0);
 		free(paths[i]);
 	}
+	if (status == 256)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(parse->argv[0], 2);
+		ft_putendl_fd(": command not found", 2);
+	}
 	free(paths);
+}
+
+void	ft_other(t_parse *parse, char **env)
+{
+	if (parse->argv[0][0] == '/' || parse->argv[0][0] == '.')
+		exec_relative(parse, env);
+	else
+		exec_absolute(parse, env);
 }

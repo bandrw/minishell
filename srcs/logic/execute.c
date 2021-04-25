@@ -21,5 +21,5 @@ void	execute_command_line(t_parse *parse, char **env)
 	else if (parse->command_id == CMD_CD)
 		ft_cd(parse->argv, env);
 	else if (parse->command_id == CMD_PWD)
-		ft_pwd(env);
+		ft_pwd();
 }

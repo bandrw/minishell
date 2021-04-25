@@ -16,6 +16,8 @@
 # include "libft.h"
 # include <stdio.h>
 # include <sys/wait.h>
+# include <string.h>
+# include <errno.h>
 
 # define CMD_OTHER 0
 # define CMD_ECHO 1
@@ -38,7 +40,7 @@ void	execute_command_line(t_parse *parse, char **env);
 void	ft_other(t_parse *parse, char **env);
 void	ft_echo(char **argv, char **env);
 void	ft_cd(char **argv, char **env);
-void	ft_pwd(char **env);
+void	ft_pwd(void);
 
 char	*get_env(char *s, char **env);
 
