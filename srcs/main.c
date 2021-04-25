@@ -22,7 +22,7 @@ int	main(int argc, char **argv, char **env)
 	signal(SIGQUIT, sigquit_handler);
 	while (1)
 	{
-		ft_putstr("minishell$ ");
+		ft_putstr("\033[35mminishell$ \033[0m");
 		n = get_next_line(0, &command_line);
 		if (n == 0)
 		{

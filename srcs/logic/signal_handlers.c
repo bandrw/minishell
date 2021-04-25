@@ -16,7 +16,7 @@ void	sigint_handler(int sig)
 {
 	if (sig != SIGINT)
 		return ;
-	ft_putstr("\b\b  \b\b\nminishell$ ");
+	ft_putstr("\b\b  \b\b\n\033[35mminishell$ \033[0m");
 }
 
 void	sigquit_handler(int sig)
@@ -24,6 +24,6 @@ void	sigquit_handler(int sig)
 	if (sig != SIGQUIT)
 		return ;
 	ft_putstr("\b\b  \b\b");
-//	ft_putstr("\nminishell$ ");
+//	ft_putstr("\n[35mminishell$ [0m");
 }
 
