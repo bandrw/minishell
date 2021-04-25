@@ -22,7 +22,7 @@ void	ft_echo(char **argv, char **env)
 	need_new_line = 1;
 	if (ft_strncmp(argv[0], "-n", 3) == 0)
 		need_new_line = 0;
-	i = 0;
+	i = -1;
 	if (!need_new_line)
 		i++;
 	while (argv[++i])

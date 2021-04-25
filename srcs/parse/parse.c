@@ -15,16 +15,14 @@
 void 	ft_get_echo(t_parse *parse, char *str)
 {
 	parse->command_id = CMD_ECHO;
+	str += 4;
 	parse->argv = ft_split(str, ' ');
 }
 
 void	ft_get_pwd(t_parse *parse)
 {
 	parse->command_id = CMD_PWD;
-	parse->argv = (char **)malloc(sizeof(char*) * 2);
-//		if (!parse->argv)
-	parse->argv[0] = ft_strdup("pwd");
-	parse->argv[1] = 0;
+	parse->argv = 0;
 }
 
 void	ft_get_other(t_parse *parse, char *str)
@@ -33,15 +31,15 @@ void	ft_get_other(t_parse *parse, char *str)
 	parse->argv = ft_split(str, ' ');
 }
 
-void	parse_line(char *command_line, t_parse *parse)
+void	parse_line(char *line, t_parse *parse)
 {
 
-	if (ft_strncmp("echo ", command_line, 5) == 0)
-		ft_get_echo(parse, command_line);
-	else if (ft_strncmp("pwd", command_line, 4) == 0)
+	if (ft_strncmp("echo", line, 4) == 0 && (!line[4] || line[4] == ' '))
+		ft_get_echo(parse, line);
+	else if (ft_strncmp("pwd", line, 4) == 0)
 		ft_get_pwd(parse);
 	else
-		ft_get_other(parse, command_line);
+		ft_get_other(parse, line);
 		//	// echo example
 //	parse->command_id = CMD_ECHO;
 //	parse->argv = (char **)malloc(sizeof(char *) * 4);
