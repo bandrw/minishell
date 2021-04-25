@@ -22,6 +22,7 @@ int	main(int argc, char **argv, char **env)
 //		execve(av[0], av, 0);
 //	else
 //		waitpid(pid, &status, 0);
+
 	int		n;
 	char	*command_line;
 	t_parse	parse;

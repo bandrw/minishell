@@ -41,6 +41,7 @@ void	ft_other(t_parse *parse, char **env);
 void	ft_echo(char **argv, char **env);
 void	ft_cd(char **argv, char **env);
 void	ft_pwd(void);
+void	ft_export(char **argv, char **env);
 
 char	*get_env(char *s, char **env);
 

@@ -48,7 +48,11 @@ void	parse_line(char *line, t_parse *parse)
 		ft_get_pwd(parse);
 	else
 		ft_get_other(parse, line);
-		//	// echo example
+//	// ⚠️ export usage: `export NEW=123 NEW1=456`
+//	parse->command_id = CMD_EXPORT;
+//	parse->argv = ft_split(line + 6, ' ');
+
+//	// echo example
 //	parse->command_id = CMD_ECHO;
 //	parse->argv = (char **)malloc(sizeof(char *) * 4);
 //	parse->argv[0] = ft_strdup("abcd");
