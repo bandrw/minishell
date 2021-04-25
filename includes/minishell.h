@@ -20,6 +20,11 @@
 # define CMD_OTHER 0
 # define CMD_ECHO 1
 # define CMD_CD 2
+# define CMD_PWD 3
+# define CMD_EXPORT 4
+# define CMD_UNSET 5
+# define CMD_ENV 6
+# define CMD_EXIT 7
 
 typedef struct	s_parse
 {
