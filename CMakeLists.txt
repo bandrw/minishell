@@ -3,7 +3,7 @@ project(minishell C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(minishell srcs/main.c srcs/parse/parse.c srcs/logic/execute.c srcs/logic/ft_echo.c srcs/logic/signal_handlers.c srcs/logic/ft_cd.c srcs/logic/ft_other.c srcs/logic/get_env.c)
+add_executable(minishell srcs/main.c srcs/parse/parse.c srcs/logic/execute.c srcs/logic/ft_echo.c srcs/logic/signal_handlers.c srcs/logic/ft_cd.c srcs/logic/ft_other.c srcs/logic/get_env.c srcs/logic/ft_pwd.c)
 
 include_directories(includes)
 include_directories(libft/includes)

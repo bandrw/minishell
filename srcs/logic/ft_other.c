@@ -14,20 +14,36 @@
 
 void	ft_other(t_parse *parse, char **env)
 {
+	int		i;
 	int		pid;
 	int		status;
 	char	*path;
+	char	*str;
+	char	**paths;
 
+	path = get_env("PATH", env);
+	if (!path)
+		return ;
 	pid = fork();
-	if (pid == 0)
+	paths = ft_split(path, ':');
+	i = -1;
+	while (paths[++i])
 	{
-		path = get_env("PATH", env);
-		if (execve(parse->argv[0], parse->argv, env) == -1)
+		if (pid == 0)
 		{
-			ft_putendl_fd("<execve error>", 2);
-			exit(1);
+				str = ft_strjoin(paths[i], "/");
+				char *tmp = str;
+				str = ft_strjoin(tmp, parse->argv[0]);
+				free(tmp);
+				if (execve(str, parse->argv, env) == -1)
+				{
+					free(str);
+					ft_putendl_fd("<execve error>", 2);
+					exit(1);
+				}
+				free(str);
 		}
+		else
+			waitpid(pid, &status, 0);
 	}
-	else
-		waitpid(pid, &status, 0);
 }
