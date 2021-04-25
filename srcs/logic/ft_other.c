@@ -15,7 +15,6 @@
 void	ft_other(t_parse *parse, char **env)
 {
 	int		i;
-	int		res;
 	int		pid;
 	int		status;
 	char	*path;
@@ -27,7 +26,8 @@ void	ft_other(t_parse *parse, char **env)
 		return ;
 	paths = ft_split(path, ':');
 	i = -1;
-	while (paths[++i])
+	status = 1;
+	while (paths[++i] && status != 0)
 	{
 		pid = fork();
 		if (pid == 0)
@@ -36,9 +36,9 @@ void	ft_other(t_parse *parse, char **env)
 			char *tmp = str;
 			str = ft_strjoin(tmp, parse->argv[0]);
 			free(tmp);
-			res = execve(str, parse->argv, env);
+			execve(str, parse->argv, env);
 			free(str);
-			exit(0);
+			exit(1);
 		}
 		else
 			waitpid(pid, &status, 0);
