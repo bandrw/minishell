@@ -14,6 +14,16 @@
 
 int	main(int argc, char **argv, char **env)
 {
+//	int n = fork();
+//	if (n == 0)
+//	{
+//		char *av[] = {"ls", "-l", 0};
+//		int m = execve("/bin/ls", av, env);
+//	}
+//	else
+//	{
+//		waitpid(n, )
+//	}
 	int		n;
 	char	*command_line;
 	t_parse	parse;

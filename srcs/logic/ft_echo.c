@@ -22,9 +22,9 @@ void	ft_echo(char **argv, char **env)
 	need_new_line = 1;
 	if (ft_strncmp(argv[0], "-n", 3) == 0)
 		need_new_line = 0;
-	i = -1;
+	i = 0;
 	if (!need_new_line)
-		i = 0;
+		i++;
 	while (argv[++i])
 	{
 		ft_putstr_fd(argv[i], 1);
