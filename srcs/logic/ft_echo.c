@@ -28,7 +28,8 @@ void	ft_echo(char **argv, char **env)
 	while (argv[++i])
 	{
 		ft_putstr_fd(argv[i], 1);
-		ft_putchar_fd(' ', 1);
+		if (argv[i + 1])
+			ft_putchar_fd(' ', 1);
 	}
 	if (need_new_line)
 		ft_putchar_fd('\n', 1);
