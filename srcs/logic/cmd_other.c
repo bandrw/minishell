@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_other.c                                         :+:      :+:    :+:   */
+/*   cmd_other.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfriese <kfriese@student.21-school>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -74,7 +74,7 @@ static void	exec_absolute(t_parse *parse, char ***env, char **argv_arr)
 	free(paths);
 }
 
-void	ft_other(t_parse *parse, char ***env)
+void	cmd_other(t_parse *parse, char ***env)
 {
 	char	**argv_arr;
 

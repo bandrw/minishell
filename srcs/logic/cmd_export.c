@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_export.c                                        :+:      :+:    :+:   */
+/*   cmd_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfriese <kfriese@student.21-school>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -20,7 +20,11 @@ static void	write_vars(char **env)
 	while (env[++i])
 	{
 		ft_putstr("declare -x ");
-		ft_putendl_fd(env[i], 1);
+//		ft_putendl_fd(env[i], 1);
+		write(1, env[i], ft_strchr(env[i], '=') - env[i] + 1);
+		write(1, "\"", 1);
+		ft_putstr(ft_strchr(env[i], '=') + 1);
+		write(1, "\"\n", 2);
 	}
 }
 
@@ -41,7 +45,7 @@ static void	insert_new_env(char *new_env, char ***env)
 	*env = arr;
 }
 
-static void	insert_env(char *key, char *new_env, char ***env)
+void	insert_env(char *key, char *new_env, char ***env)
 {
 	int i;
 
@@ -57,7 +61,7 @@ static void	insert_env(char *key, char *new_env, char ***env)
 	insert_new_env(new_env, env);
 }
 
-void	ft_export(t_list *argv, char ***env)
+void	cmd_export(t_list *argv, char ***env)
 {
 	char	**pair;
 	char	*new_env;

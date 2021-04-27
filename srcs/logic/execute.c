@@ -15,13 +15,15 @@
 void	execute_command_line(t_parse *parse, char ***env)
 {
 	if (parse->command_id == CMD_OTHER)
-		ft_other(parse, env);
+		cmd_other(parse, env);
 	else if (parse->command_id == CMD_ECHO)
-		ft_echo(parse->argv);
+		cmd_echo(parse->argv);
 	else if (parse->command_id == CMD_CD)
-		ft_cd(parse->argv);
+		cmd_cd(parse->argv, env);
 	else if (parse->command_id == CMD_PWD)
-		ft_pwd();
+		cmd_pwd();
 	else if (parse->command_id == CMD_EXPORT)
-		ft_export(parse->argv, env);
+		cmd_export(parse->argv, env);
+	else if (parse->command_id == CMD_UNSET)
+		cmd_unset(parse->argv, env);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cd.c                                            :+:      :+:    :+:   */
+/*   cmd_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfriese <kfriese@student.21-school>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,8 +12,10 @@
 
 #include "minishell.h"
 
-void	ft_cd(t_list *argv)
+void	cmd_cd(t_list *argv, char ***env)
 {
+	char *buf;
+
 	if (argv->content)
 	{
 		chdir(argv->content);
@@ -24,6 +26,11 @@ void	ft_cd(t_list *argv)
 			ft_putstr_fd(": ", 2);
 			ft_putendl_fd(strerror(errno), 2);
 			errno = 0;
+		}
+		else
+		{
+			buf = (char*)malloc(sizeof(char) * 1024);
+			insert_env("PWD", ft_strjoin("PWD=", getcwd(buf, 1024)), env);
 		}
 	}
 }
