@@ -12,27 +12,30 @@
 
 #include "minishell.h"
 
-void	ft_text(char **str, t_parse *parse, int *ac)
+void	ft_text(char **str, t_parse *parse, int n)
 {
 	char	*buff;
 
-	buff = ft_for_print(str, parse, ac);
-	ft_push_argv(buff, parse, ac);
+	buff = ft_for_print(str, parse);
+	ft_push_argv(buff, parse, n);
 }
 
 void	ft_read_line(char **str, t_parse *parse)
 {
-	int	ac;
+	int check;
 
-	ac = 0;
 	while (**str)
 	{
+		check = 1;
 		while (ft_isspace(**str))
+		{
 			(*str)++;
+			check = 0;
+		}
 		if (**str == '$')
-			ft_dollar(str, parse, &ac);
+			ft_dollar(str, parse, check);
 		else
-			ft_text(str, parse, &ac);
+			ft_text(str, parse, check);
 	}
 
 }

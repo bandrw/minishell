@@ -12,13 +12,24 @@
 
 #include "minishell.h"
 
-void	ft_push_argv(char *str, t_parse *parse, int *ac)
+void	ft_push_argv(char *str, t_parse *parse, int n)
 {
-	ft_lstadd_back(&parse->argv, ft_lstnew(str));
-	(*ac)++;
+	char *buff;
+	t_list	*last;
+
+	buff = 0;
+	if (n == 1)
+	{
+		last = ft_lstlast(parse->argv);
+		buff = ft_strjoin(last->content, str);
+		free(last->content);
+		last->content = ft_strdup(buff);
+	}
+	else
+		ft_lstadd_back(&parse->argv, ft_lstnew(str));
 }
 
-char	*ft_for_print(char **str, t_parse *parse, int *ac)
+char	*ft_for_print(char **str, t_parse *parse)
 {
 	char	*tmp;
 	int		i;
