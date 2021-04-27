@@ -24,21 +24,59 @@ static void	write_vars(char **env)
 	}
 }
 
-void	ft_export(t_list *argv, char **env)
+static void	insert_new_env(char *new_env, char ***env)
+{
+	int		l;
+	char	**arr;
+
+	l = 0;
+	while ((*env)[l])
+		l++;
+	arr = (char**)malloc(sizeof(char*) * (l + 2));
+	l = -1;
+	while ((*env)[++l])
+		arr[l] = (*env)[l];
+	arr[l] = new_env;
+	arr[l + 1] = 0;
+	*env = arr;
+}
+
+static void	insert_env(char *key, char *new_env, char ***env)
+{
+	int i;
+
+	i = -1;
+	while ((*env)[++i])
+	{
+		if (ft_strncmp((*env)[i], key, ft_strlen(key)) == 0)
+		{
+			(*env)[i] = new_env;
+			return ;
+		}
+	}
+	insert_new_env(new_env, env);
+}
+
+void	ft_export(t_list *argv, char ***env)
 {
 	char	**pair;
+	char	*new_env;
 
 	if (!argv)
-		write_vars(env);
+		write_vars(*env);
 	else
 	{
 		while (argv)
 		{
 			pair = ft_split(argv->content, '=');
+			new_env = (char *)malloc(sizeof(char) * (ft_strlen(pair[0]) + ft_strlen(pair[1]) + 1));
+			ft_strlcpy(new_env, pair[0], ft_strlen(pair[0]) + 1);
 			if (pair[1])
-				printf("Export: %s will be %s\n", pair[0], pair[1]);
-			else
-				printf("Export: %s (null)\n", pair[0]);
+			{
+				ft_strlcat(new_env, "=", ft_strlen(new_env) + 2);
+				ft_strlcat(new_env, pair[1], ft_strlen(new_env) + ft_strlen(pair[1]) + 1);
+			}
+			insert_env(pair[0], new_env, env);
 			argv = argv->next;
 		}
 	}

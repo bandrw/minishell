@@ -12,9 +12,8 @@
 
 #include "minishell.h"
 
-void	ft_echo(t_list *argv, char **env)
+void	ft_echo(t_list *argv)
 {
-	int	i;
 	int	need_new_line;
 
 	if (argv->content == 0)
@@ -22,9 +21,6 @@ void	ft_echo(t_list *argv, char **env)
 	need_new_line = 1;
 	if (ft_strncmp(argv->content, "-n", 3) == 0)
 		need_new_line = 0;
-	i = -1;
-	if (!need_new_line)
-		i++;
 	while (argv)
 	{
 		ft_putstr_fd(argv->content, 1);

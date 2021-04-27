@@ -35,20 +35,20 @@ typedef struct	s_parse
 	t_list		*argv;
 }				t_parse;
 
-void	parse_line(char *command_line, t_parse *parse);
-void	execute_command_line(t_parse *parse, char **env);
+//	Logic
+void	execute_command_line(t_parse *parse, char ***env);
 
-void	ft_other(t_parse *parse, char **env);
-void	ft_echo(t_list *argv, char **env);
+void	ft_other(t_parse *parse, char ***env);
+void	ft_echo(t_list *argv);
 void	ft_cd(t_list *argv);
 void	ft_pwd(void);
-void	ft_export(t_list *argv, char **env);
-
-//char	*get_env(char *s, char **env);
+void	ft_export(t_list *argv, char ***env);
 
 void	sigint_handler(int sig);
 void	sigquit_handler(int sig);
 
+//	Parse
+void	parse_line(char *command_line, t_parse *parse);
 void	ft_get_pwd_env_exit(t_parse *parse, int id);
 void 	ft_get_echo(t_parse *parse, char **str);
 void	ft_get_cd(t_parse *parse, char **str);

@@ -12,12 +12,12 @@
 
 #include "minishell.h"
 
-void	execute_command_line(t_parse *parse, char **env)
+void	execute_command_line(t_parse *parse, char ***env)
 {
 	if (parse->command_id == CMD_OTHER)
 		ft_other(parse, env);
 	else if (parse->command_id == CMD_ECHO)
-		ft_echo(parse->argv, env);
+		ft_echo(parse->argv);
 	else if (parse->command_id == CMD_CD)
 		ft_cd(parse->argv);
 	else if (parse->command_id == CMD_PWD)

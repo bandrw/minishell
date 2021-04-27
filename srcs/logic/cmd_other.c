@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static void	exec_relative(t_parse *parse, char **env, char **argv_arr)
+static void	exec_relative(t_parse *parse, char ***env, char **argv_arr)
 {
 	int		pid;
 	int		status;
@@ -20,7 +20,7 @@ static void	exec_relative(t_parse *parse, char **env, char **argv_arr)
 	pid = fork();
 	if (pid == 0)
 	{
-		execve(parse->argv->content, argv_arr, env);
+		execve(parse->argv->content, argv_arr, *env);
 		exit(1);
 	}
 	else
@@ -33,7 +33,7 @@ static void	exec_relative(t_parse *parse, char **env, char **argv_arr)
 	}
 }
 
-static void	exec_absolute(t_parse *parse, char **env, char **argv_arr)
+static void	exec_absolute(t_parse *parse, char ***env, char **argv_arr)
 {
 	int		i;
 	int		pid;
@@ -57,7 +57,7 @@ static void	exec_absolute(t_parse *parse, char **env, char **argv_arr)
 			char *tmp = str;
 			str = ft_strjoin(tmp, parse->argv->content);
 			free(tmp);
-			execve(str, argv_arr, env);
+			execve(str, argv_arr, *env);
 			free(str);
 			exit(1);
 		}
@@ -74,7 +74,7 @@ static void	exec_absolute(t_parse *parse, char **env, char **argv_arr)
 	free(paths);
 }
 
-void	ft_other(t_parse *parse, char **env)
+void	ft_other(t_parse *parse, char ***env)
 {
 	char	**argv_arr;
 
