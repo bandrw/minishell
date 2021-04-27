@@ -12,16 +12,6 @@
 
 #include "minishell.h"
 
-//void	ft_dollar(char **str, t_parse *parse)
-//{
-//	char	*tmp;
-//	int		i;
-//
-//	i = 0;
-//	tmp = (char *) malloc(sizeof(char) * (ft_strlen(*str) + 1));
-//	while (**str != )
-//}
-
 void	ft_for_print(char **str, t_parse *parse, int *ac)
 {
 	char	*tmp;
@@ -29,9 +19,7 @@ void	ft_for_print(char **str, t_parse *parse, int *ac)
 	int		j;
 
 	j = 0;
-	while (ft_isspace(**str))
-			(*str)++;
-	i = ft_strchr_int("$\t\n\v\f\r ", *str) + 1;
+	i = ft_strchar_int("$\t\n\v\f\r ", *str) + 1;
 	tmp = (char *) malloc(sizeof(char) * (i));
 	ft_strlcpy(tmp, *str, i);
 	(*str) += i - 1;
@@ -44,22 +32,22 @@ void	ft_read_line(char **str, t_parse *parse)
 	int	ac;
 
 	ac = 0;
-//	while (**str)
-//	{
-//		while (ft_isspace(**str))
-//			(*str)++;
-//		if (**str == '$')
-//			ft_dollar(str, parse);
-//		else
+	while (**str)
+	{
+		while (ft_isspace(**str))
+			(*str)++;
+		if (**str == '$')
+			ft_dollar(str, parse, &ac);
+		else
 			ft_for_print(str, parse, &ac);
-	//}
+	}
 
 }
 
 void	ft_get_other(t_parse *parse, char *str)
 {
 	parse->command_id = CMD_OTHER;
-	parse->argv = ft_split(str, ' ');
+	//parse->argv = ft_split(str, ' ');
 }
 
 void	parse_line(char *line, t_parse *parse)
@@ -67,22 +55,22 @@ void	parse_line(char *line, t_parse *parse)
 	if (ft_strncmp("echo", line, 4) == 0 && (!line[4]
 		|| ft_isspace(line[4])))
 		ft_get_echo(parse, &line);
-	else if (ft_strncmp("cd", line, 2) == 0 && (!line[2]
-		|| ft_isspace(line[2])))
-		ft_get_cd(parse, line);
-	else if (ft_strncmp("pwd", line, 4) == 0)
-		ft_get_pwd_env(parse, 3);
-	else if (ft_strncmp("export", line, 6) == 0 && (!line[6]
-		|| ft_isspace(line[6])))
-		ft_get_export(parse, line);
-	else if (ft_strncmp("unset", line, 5) == 0 && (!line[5]
-		|| ft_isspace(line[5])))
-		ft_get_unset(parse, line);
-	else if (ft_strncmp("env", line, 4) == 0)
-		ft_get_pwd_env(parse, 6);
-	else if (ft_strncmp("exit", line, 4) == 0 && (!line[4]
-		|| ft_isspace(line[4])))
-		ft_get_exit(parse, line);
+//	else if (ft_strncmp("cd", line, 2) == 0 && (!line[2]
+//		|| ft_isspace(line[2])))
+//		ft_get_cd(parse, line);
+//	else if (ft_strncmp("pwd", line, 4) == 0)
+//		ft_get_pwd_env(parse, 3);
+//	else if (ft_strncmp("export", line, 6) == 0 && (!line[6]
+//		|| ft_isspace(line[6])))
+//		ft_get_export(parse, line);
+//	else if (ft_strncmp("unset", line, 5) == 0 && (!line[5]
+//		|| ft_isspace(line[5])))
+//		ft_get_unset(parse, line);
+//	else if (ft_strncmp("env", line, 4) == 0)
+//		ft_get_pwd_env(parse, 6);
+//	else if (ft_strncmp("exit", line, 4) == 0 && (!line[4]
+//		|| ft_isspace(line[4])))
+//		ft_get_exit(parse, line);
 	else
 		ft_get_other(parse, line);
 }

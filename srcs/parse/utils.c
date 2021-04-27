@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int 	ft_strchr_int(const char *str, char *line)
+int 	ft_strchar_int(const char *str, char *line)
 {
 	int i;
 	int j;

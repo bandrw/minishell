@@ -57,6 +57,7 @@ void	ft_get_unset(t_parse *parse, char *str);
 void	ft_get_exit(t_parse *parse, char *str);
 void	ft_read_line(char **str, t_parse *parse);
 void	ft_for_print(char **str, t_parse *parse, int *ac);
-int 	ft_strchr_int(const char *str, char *line);
+int 	ft_strchar_int(const char *str, char *line);
+void	ft_dollar(char **str, t_parse *parse, int *ac);
 
 #endif
