@@ -15,5 +15,5 @@
 void	ft_get_exit(t_parse *parse, char *str)
 {
 	parse->command_id = CMD_EXIT;
-	parse->argv = ft_split(str + 4, ' ');
+	//parse->argv = ft_split(str + 4, ' ');
 }

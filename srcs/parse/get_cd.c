@@ -15,6 +15,6 @@
 void	ft_get_cd(t_parse *parse, char *str)
 {
 	parse->command_id = CMD_CD;
-	parse->argv = ft_split(str + 2, ' ');
+	//parse->argv = ft_split(str + 2, ' ');
 }
 

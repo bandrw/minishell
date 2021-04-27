@@ -12,8 +12,11 @@
 
 #include "minishell.h"
 
-void	ft_get_export(t_parse *parse, char *str)
+void	ft_get_export(t_parse *parse, char **str)
 {
+	char	*tmp;
+
+	tmp = *str + 6;
 	parse->command_id = CMD_EXPORT;
-	parse->argv = ft_split(str + 6, ' ');
+	ft_read_line(&tmp, parse);
 }

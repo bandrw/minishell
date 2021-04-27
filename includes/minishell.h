@@ -52,12 +52,13 @@ void	sigquit_handler(int sig);
 void	ft_get_pwd_env(t_parse *parse, int id);
 void 	ft_get_echo(t_parse *parse, char **str);
 void	ft_get_cd(t_parse *parse, char *str);
-void	ft_get_export(t_parse *parse, char *str);
+void	ft_get_export(t_parse *parse, char **str);
 void	ft_get_unset(t_parse *parse, char *str);
 void	ft_get_exit(t_parse *parse, char *str);
 void	ft_read_line(char **str, t_parse *parse);
-void	ft_for_print(char **str, t_parse *parse, int *ac);
+char	*ft_for_print(char **str, t_parse *parse, int *ac);
 int 	ft_strchar_int(const char *str, char *line);
+void	ft_push_argv(char *str, t_parse *parse, int *ac);
 void	ft_dollar(char **str, t_parse *parse, int *ac);
 
 #endif

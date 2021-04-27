@@ -12,19 +12,12 @@
 
 #include "minishell.h"
 
-void	ft_for_print(char **str, t_parse *parse, int *ac)
+void	ft_text(char **str, t_parse *parse, int *ac)
 {
-	char	*tmp;
-	int		i;
-	int		j;
+	char	*buff;
 
-	j = 0;
-	i = ft_strchar_int("$\t\n\v\f\r ", *str) + 1;
-	tmp = (char *) malloc(sizeof(char) * (i));
-	ft_strlcpy(tmp, *str, i);
-	(*str) += i - 1;
-	ft_lstadd_back(&parse->argv, ft_lstnew(tmp));
-	(*ac)++;
+	buff = ft_for_print(str, parse, ac);
+	ft_push_argv(buff, parse, ac);
 }
 
 void	ft_read_line(char **str, t_parse *parse)
@@ -39,7 +32,7 @@ void	ft_read_line(char **str, t_parse *parse)
 		if (**str == '$')
 			ft_dollar(str, parse, &ac);
 		else
-			ft_for_print(str, parse, &ac);
+			ft_text(str, parse, &ac);
 	}
 
 }
@@ -52,6 +45,8 @@ void	ft_get_other(t_parse *parse, char *str)
 
 void	parse_line(char *line, t_parse *parse)
 {
+	while (ft_isspace(*line))
+		line++;
 	if (ft_strncmp("echo", line, 4) == 0 && (!line[4]
 		|| ft_isspace(line[4])))
 		ft_get_echo(parse, &line);
@@ -60,9 +55,9 @@ void	parse_line(char *line, t_parse *parse)
 //		ft_get_cd(parse, line);
 //	else if (ft_strncmp("pwd", line, 4) == 0)
 //		ft_get_pwd_env(parse, 3);
-//	else if (ft_strncmp("export", line, 6) == 0 && (!line[6]
-//		|| ft_isspace(line[6])))
-//		ft_get_export(parse, line);
+	else if (ft_strncmp("export", line, 6) == 0 && (!line[6]
+		|| ft_isspace(line[6])))
+		ft_get_export(parse, &line);
 //	else if (ft_strncmp("unset", line, 5) == 0 && (!line[5]
 //		|| ft_isspace(line[5])))
 //		ft_get_unset(parse, line);

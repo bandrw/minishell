@@ -15,5 +15,5 @@
 void	ft_get_unset(t_parse *parse, char *str)
 {
 	parse->command_id = CMD_UNSET;
-	parse->argv = ft_split(str + 5, ' ');
+	//parse->argv = ft_split(str + 5, ' ');
 }
