@@ -16,7 +16,7 @@ char	**ft_lsttoarr(t_list *list)
 			arr[++i] = list->content;
 			list = list->next;
 		}
-		arr[i] = 0;
+		arr[++i] = 0;
 	}
 	return (arr);
 }
