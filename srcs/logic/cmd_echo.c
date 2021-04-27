@@ -12,24 +12,25 @@
 
 #include "minishell.h"
 
-void	ft_echo(char **argv, char **env)
+void	ft_echo(t_list *argv, char **env)
 {
 	int	i;
 	int	need_new_line;
 
-	if (argv[0] == 0)
+	if (argv->content == 0)
 		ft_putchar_fd('\n', 1);
 	need_new_line = 1;
-	if (ft_strncmp(argv[0], "-n", 3) == 0)
+	if (ft_strncmp(argv->content, "-n", 3) == 0)
 		need_new_line = 0;
 	i = -1;
 	if (!need_new_line)
 		i++;
-	while (argv[++i])
+	while (argv)
 	{
-		ft_putstr_fd(argv[i], 1);
-		if (argv[i + 1])
+		ft_putstr_fd(argv->content, 1);
+		if (argv->next)
 			ft_putchar_fd(' ', 1);
+		argv = argv->next;
 	}
 	if (need_new_line)
 		ft_putchar_fd('\n', 1);

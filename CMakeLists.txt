@@ -62,6 +62,8 @@ add_library(ft
 		libft/srcs/ft_toupper.c
 		libft/srcs/get_next_line.c
 		libft/srcs/ft_isspace.c
-		libft/srcs/get_next_line_utils.c includes/minishell.h)
+		libft/srcs/get_next_line_utils.c includes/minishell.h libft/srcs/ft_lsttoarr.c)
+
+target_link_libraries(minishell LINK_PUBLIC termcap)
 
 target_link_libraries(minishell LINK_PUBLIC ft)

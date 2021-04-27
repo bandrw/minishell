@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static void	exec_relative(t_parse *parse, char **env)
+static void	exec_relative(t_parse *parse, char **env, char **argv_arr)
 {
 	int		pid;
 	int		status;
@@ -20,7 +20,7 @@ static void	exec_relative(t_parse *parse, char **env)
 	pid = fork();
 	if (pid == 0)
 	{
-		execve(parse->argv[0], parse->argv, env);
+		execve(parse->argv->content, argv_arr, env);
 		exit(1);
 	}
 	else
@@ -28,12 +28,12 @@ static void	exec_relative(t_parse *parse, char **env)
 	if (status == 256)
 	{
 		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(parse->argv[0], 2);
+		ft_putstr_fd(parse->argv->content, 2);
 		ft_putendl_fd(": command not found", 2);
 	}
 }
 
-static void	exec_absolute(t_parse *parse, char **env)
+static void	exec_absolute(t_parse *parse, char **env, char **argv_arr)
 {
 	int		i;
 	int		pid;
@@ -42,7 +42,7 @@ static void	exec_absolute(t_parse *parse, char **env)
 	char	*str;
 	char	**paths;
 
-	path = get_env("PATH", env);
+	path = getenv("PATH");
 	if (!path)
 		return ;
 	paths = ft_split(path, ':');
@@ -55,9 +55,9 @@ static void	exec_absolute(t_parse *parse, char **env)
 		{
 			str = ft_strjoin(paths[i], "/");
 			char *tmp = str;
-			str = ft_strjoin(tmp, parse->argv[0]);
+			str = ft_strjoin(tmp, parse->argv->content);
 			free(tmp);
-			execve(str, parse->argv, env);
+			execve(str, argv_arr, env);
 			free(str);
 			exit(1);
 		}
@@ -68,7 +68,7 @@ static void	exec_absolute(t_parse *parse, char **env)
 	if (status == 256)
 	{
 		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(parse->argv[0], 2);
+		ft_putstr_fd(parse->argv->content, 2);
 		ft_putendl_fd(": command not found", 2);
 	}
 	free(paths);
@@ -76,8 +76,11 @@ static void	exec_absolute(t_parse *parse, char **env)
 
 void	ft_other(t_parse *parse, char **env)
 {
-	if (parse->argv[0][0] == '/' || parse->argv[0][0] == '.')
-		exec_relative(parse, env);
+	char	**argv_arr;
+
+	argv_arr = ft_lsttoarr(parse->argv);
+	if (((char*)parse->argv->content)[0] == '/' || ((char*)parse->argv->content)[0] == '.')
+		exec_relative(parse, env, argv_arr);
 	else
-		exec_absolute(parse, env);
+		exec_absolute(parse, env, argv_arr);
 }

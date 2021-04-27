@@ -12,15 +12,17 @@
 
 #include "minishell.h"
 
-void	ft_export(char **argv, char **env)
+void	ft_export(t_list *argv, char **env)
 {
 	int		i;
 	char	**pair;
 
 	i = -1;
-	while (argv[++i])
+	while (argv)
 	{
-		pair = ft_split(argv[i], '=');
+		pair = ft_split(argv->content, '=');
+		
 		printf("Export: %s will be %s\n", pair[0], pair[1]);
+		argv = argv->next;
 	}
 }

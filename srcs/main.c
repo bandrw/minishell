@@ -14,14 +14,18 @@
 
 int	main(int argc, char **argv, char **env)
 {
-//	// execve test
-//	int status;
-//	int pid = fork();
-//	char *av[] = {"./ls", 0};
-//	if (pid == 0)
-//		execve(av[0], av, 0);
-//	else
-//		waitpid(pid, &status, 0);
+//	// Termcap test
+//	char buf[1024];
+//	char buf2[30];
+//	char *ap = buf2;
+//	char *gotostr;
+//
+//	tgetent(buf, getenv("TERM"));
+////	gotostr = tgetstr("cm", &ap);
+//	gotostr = tgetstr("hey", &ap);
+//	tputs(tgoto(gotostr, 20, 0), 1, (int (*)(int)) ft_putchar);
+////	ft_putstr(tgoto(gotostr, 20, 0));
+//	ft_putstr("Hello, world!\n");
 
 	int		n;
 	char	*command_line;

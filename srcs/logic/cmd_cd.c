@@ -12,15 +12,15 @@
 
 #include "minishell.h"
 
-void	ft_cd(char **argv, char **env)
+void	ft_cd(t_list *argv)
 {
-	if (argv[0])
+	if (argv->content)
 	{
-		chdir(argv[0]);
+		chdir(argv->content);
 		if (errno)
 		{
 			ft_putstr_fd("minishell: cd: ", 2);
-			ft_putstr_fd(argv[0], 2);
+			ft_putstr_fd(argv->content, 2);
 			ft_putstr_fd(": ", 2);
 			ft_putendl_fd(strerror(errno), 2);
 			errno = 0;

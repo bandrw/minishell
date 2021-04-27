@@ -18,6 +18,7 @@
 # include <sys/wait.h>
 # include <string.h>
 # include <errno.h>
+#include <termcap.h>
 
 # define CMD_OTHER 0
 # define CMD_ECHO 1
@@ -38,12 +39,12 @@ void	parse_line(char *command_line, t_parse *parse);
 void	execute_command_line(t_parse *parse, char **env);
 
 void	ft_other(t_parse *parse, char **env);
-void	ft_echo(char **argv, char **env);
-void	ft_cd(char **argv, char **env);
+void	ft_echo(t_list *argv, char **env);
+void	ft_cd(t_list *argv);
 void	ft_pwd(void);
-void	ft_export(char **argv, char **env);
+void	ft_export(t_list *argv, char **env);
 
-char	*get_env(char *s, char **env);
+//char	*get_env(char *s, char **env);
 
 void	sigint_handler(int sig);
 void	sigquit_handler(int sig);
