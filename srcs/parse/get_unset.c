@@ -12,8 +12,11 @@
 
 #include "minishell.h"
 
-void	ft_get_unset(t_parse *parse, char *str)
+void	ft_get_unset(t_parse *parse, char **str)
 {
+	char	*tmp;
+
+	tmp = *str + 5;
 	parse->command_id = CMD_UNSET;
-	//parse->argv = ft_split(str + 5, ' ');
+	ft_read_line(&tmp, parse);
 }
