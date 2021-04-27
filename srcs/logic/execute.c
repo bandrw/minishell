@@ -26,4 +26,6 @@ void	execute_command_line(t_parse *parse, char ***env)
 		cmd_export(parse->argv, env);
 	else if (parse->command_id == CMD_UNSET)
 		cmd_unset(parse->argv, env);
+	else if (parse->command_id == CMD_EXIT)
+		cmd_exit(parse->argv);
 }

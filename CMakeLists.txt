@@ -3,7 +3,7 @@ project(minishell C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(minishell srcs/main.c srcs/parse/parse.c srcs/logic/execute.c srcs/logic/cmd_echo.c srcs/logic/signal_handlers.c srcs/logic/cmd_cd.c srcs/logic/cmd_other.c srcs/logic/cmd_pwd.c srcs/logic/cmd_export.c srcs/parse/get_pwd_env.c srcs/parse/get_echo.c srcs/parse/get_cd.c srcs/parse/get_export.c srcs/parse/get_unset.c srcs/parse/utils.c srcs/parse/dollar.c srcs/logic/cmd_unset.c)
+add_executable(minishell srcs/main.c srcs/parse/parse.c srcs/logic/execute.c srcs/logic/cmd_echo.c srcs/logic/signal_handlers.c srcs/logic/cmd_cd.c srcs/logic/cmd_other.c srcs/logic/cmd_pwd.c srcs/logic/cmd_export.c srcs/parse/get_pwd_env.c srcs/parse/get_echo.c srcs/parse/get_cd.c srcs/parse/get_export.c srcs/parse/get_unset.c srcs/parse/utils.c srcs/parse/dollar.c srcs/logic/cmd_unset.c srcs/logic/cmd_exit.c)
 
 include_directories(includes)
 include_directories(libft/includes)
