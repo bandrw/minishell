@@ -12,9 +12,12 @@
 
 #include "minishell.h"
 
-void	ft_get_cd(t_parse *parse, char *str)
+void	ft_get_cd(t_parse *parse, char **str)
 {
+	char	*tmp;
+
+	tmp = *str + 2;
 	parse->command_id = CMD_CD;
-	//parse->argv = ft_split(str + 2, ' ');
+	ft_read_line(&tmp, parse);
 }
 
