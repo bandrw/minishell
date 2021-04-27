@@ -44,6 +44,7 @@ void	cmd_cd(t_list *argv, char ***env);
 void	cmd_pwd(void);
 void	cmd_export(t_list *argv, char ***env);
 void	cmd_unset(t_list *argv, char ***env);
+void	cmd_env(char **env);
 void	cmd_exit(t_list *argv);
 
 void	insert_env(char *key, char *new_env, char ***env);
