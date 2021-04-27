@@ -12,24 +12,6 @@
 
 #include "minishell.h"
 
-void 	ft_get_echo(t_parse *parse, char *str)
-{
-	parse->command_id = CMD_ECHO;
-	parse->argv = ft_split(str + 4, ' ');
-}
-
-void	ft_get_cd(t_parse *parse, char *str)
-{
-	parse->command_id = CMD_CD;
-	parse->argv = ft_split(str + 2, ' ');
-}
-
-void	ft_get_pwd(t_parse *parse)
-{
-	parse->command_id = CMD_PWD;
-	parse->argv = 0;
-}
-
 void	ft_get_other(t_parse *parse, char *str)
 {
 	parse->command_id = CMD_OTHER;
@@ -45,18 +27,18 @@ void	parse_line(char *line, t_parse *parse)
 		|| ft_isspace(line[2])))
 		ft_get_cd(parse, line);
 	else if (ft_strncmp("pwd", line, 4) == 0)
-		ft_get_pwd(parse);
+		ft_get_pwd_env(parse, 3);
+	else if (ft_strncmp("export", line, 6) == 0 && (!line[6]
+		|| ft_isspace(line[6])))
+		ft_get_export(parse, line);
+	else if (ft_strncmp("unset", line, 5) == 0 && (!line[5]
+		|| ft_isspace(line[5])))
+		ft_get_unset(parse, line);
+	else if (ft_strncmp("env", line, 4) == 0)
+		ft_get_pwd_env(parse, 6);
+	else if (ft_strncmp("exit", line, 4) == 0 && (!line[4]
+		|| ft_isspace(line[4])))
+		ft_get_exit(parse, line);
 	else
 		ft_get_other(parse, line);
-//	// ⚠️ export usage: `export NEW=123 NEW1=456`
-//	parse->command_id = CMD_EXPORT;
-//	parse->argv = ft_split(line + 6, ' ');
-
-//	// echo example
-//	parse->command_id = CMD_ECHO;
-//	parse->argv = (char **)malloc(sizeof(char *) * 4);
-//	parse->argv[0] = ft_strdup("abcd");
-//	parse->argv[1] = ft_strdup("123");
-//	parse->argv[2] = ft_strdup("456");
-//	parse->argv[3] = 0;
 }

@@ -48,4 +48,11 @@ char	*get_env(char *s, char **env);
 void	sigint_handler(int sig);
 void	sigquit_handler(int sig);
 
+void	ft_get_pwd_env(t_parse *parse, int id);
+void 	ft_get_echo(t_parse *parse, char *str);
+void	ft_get_cd(t_parse *parse, char *str);
+void	ft_get_export(t_parse *parse, char *str);
+void	ft_get_unset(t_parse *parse, char *str);
+void	ft_get_exit(t_parse *parse, char *str);
+
 #endif
