@@ -12,6 +12,50 @@
 
 #include "minishell.h"
 
+//void	ft_dollar(char **str, t_parse *parse)
+//{
+//	char	*tmp;
+//	int		i;
+//
+//	i = 0;
+//	tmp = (char *) malloc(sizeof(char) * (ft_strlen(*str) + 1));
+//	while (**str != )
+//}
+
+void	ft_for_print(char **str, t_parse *parse, int *ac)
+{
+	char	*tmp;
+	int		i;
+	int		j;
+
+	j = 0;
+	while (ft_isspace(**str))
+			(*str)++;
+	i = ft_strchr_int("$\t\n\v\f\r ", *str) + 1;
+	tmp = (char *) malloc(sizeof(char) * (i));
+	ft_strlcpy(tmp, *str, i);
+	(*str) += i - 1;
+	ft_lstadd_back(&parse->argv, ft_lstnew(tmp));
+	(*ac)++;
+}
+
+void	ft_read_line(char **str, t_parse *parse)
+{
+	int	ac;
+
+	ac = 0;
+//	while (**str)
+//	{
+//		while (ft_isspace(**str))
+//			(*str)++;
+//		if (**str == '$')
+//			ft_dollar(str, parse);
+//		else
+			ft_for_print(str, parse, &ac);
+	//}
+
+}
+
 void	ft_get_other(t_parse *parse, char *str)
 {
 	parse->command_id = CMD_OTHER;
@@ -22,7 +66,7 @@ void	parse_line(char *line, t_parse *parse)
 {
 	if (ft_strncmp("echo", line, 4) == 0 && (!line[4]
 		|| ft_isspace(line[4])))
-		ft_get_echo(parse, line);
+		ft_get_echo(parse, &line);
 	else if (ft_strncmp("cd", line, 2) == 0 && (!line[2]
 		|| ft_isspace(line[2])))
 		ft_get_cd(parse, line);

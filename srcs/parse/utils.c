@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_echo.c                                         :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pantigon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/27 16:34:21 by pantigon          #+#    #+#             */
-/*   Updated: 2021/04/27 16:34:24 by pantigon         ###   ########.fr       */
+/*   Created: 2021/04/27 17:43:55 by pantigon          #+#    #+#             */
+/*   Updated: 2021/04/27 17:43:57 by pantigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void 	ft_get_echo(t_parse *parse, char **str)
+int 	ft_strchr_int(const char *str, char *line)
 {
-	char	*tmp;
+	int i;
+	int j;
 
-	tmp = *str + 4;
-	parse->command_id = CMD_ECHO;
-	ft_read_line(&tmp, parse);
-	//parse->argv = ft_split(str + 4, ' ');
+	i = 0;
+	while (line[i])
+	{
+		j = 0;
+		while (str[j])
+		{
+			if (str[j] == line[i])
+				return (i);
+			j++;
+		}
+		i++;
+	}
+	return (i);
 }

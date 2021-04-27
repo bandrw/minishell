@@ -31,7 +31,7 @@
 typedef struct	s_parse
 {
 	int			command_id;
-	char		**argv;
+	t_list		*argv;
 }				t_parse;
 
 void	parse_line(char *command_line, t_parse *parse);
@@ -49,10 +49,13 @@ void	sigint_handler(int sig);
 void	sigquit_handler(int sig);
 
 void	ft_get_pwd_env(t_parse *parse, int id);
-void 	ft_get_echo(t_parse *parse, char *str);
+void 	ft_get_echo(t_parse *parse, char **str);
 void	ft_get_cd(t_parse *parse, char *str);
 void	ft_get_export(t_parse *parse, char *str);
 void	ft_get_unset(t_parse *parse, char *str);
 void	ft_get_exit(t_parse *parse, char *str);
+void	ft_read_line(char **str, t_parse *parse);
+void	ft_for_print(char **str, t_parse *parse, int *ac);
+int 	ft_strchr_int(const char *str, char *line);
 
 #endif
