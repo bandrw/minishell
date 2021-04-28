@@ -76,7 +76,7 @@ void	parse_line(char *line, t_parse *parse)
 		ft_get_pwd_env_exit(parse, CMD_ENV);
 	else if (ft_strncmp("exit", line, 4) == 0 && (!line[4] // todo: exit with argv
 		|| ft_isspace(line[4])))
-		ft_get_pwd_env_exit(parse, CMD_EXIT);
+		ft_get_exit(parse, &line);
 	else
 		ft_get_other(parse, line);
 }
