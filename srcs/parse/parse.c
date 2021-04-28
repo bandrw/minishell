@@ -16,14 +16,16 @@ void	ft_text(char **str, t_parse *parse, int n)
 {
 	char	*buff;
 
-	buff = ft_for_print(str, parse);
+	buff = ft_for_print(str, parse, "$\t\n\v\f\r ");
 	ft_push_argv(buff, parse, n);
 }
 
 void	ft_read_line(char **str, t_parse *parse)
 {
 	int check;
+	int	num_quote;
 
+	num_quote = 0;
 	while (**str)
 	{
 		check = 1;
@@ -34,6 +36,8 @@ void	ft_read_line(char **str, t_parse *parse)
 		}
 		if (**str == '\'')
 			ft_quote(str, parse, check);
+		else if (**str == '\"')
+			ft_wquote(str, parse, check, ++num_quote);
 		else if (**str == '$')
 			ft_dollar(str, parse, check);
 		else
@@ -76,7 +80,7 @@ void	parse_line(char *line, t_parse *parse)
 	else if (ft_strncmp("env", line, 3) == 0 && (!line[3]
 		|| ft_isspace(line[3])))
 		ft_get_pwd_env_exit(parse, CMD_ENV);
-	else if (ft_strncmp("exit", line, 4) == 0 && (!line[4] // todo: exit with argv
+	else if (ft_strncmp("exit", line, 4) == 0 && (!line[4]
 		|| ft_isspace(line[4])))
 		ft_get_exit(parse, &line);
 	else

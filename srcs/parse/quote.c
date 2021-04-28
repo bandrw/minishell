@@ -12,20 +12,6 @@
 
 #include "minishell.h"
 
-char	*ft_for_print_qoute(char **str, t_parse *parse, char *ch)
-{
-	char	*tmp;
-	int		i;
-	int		j;
-
-	j = 0;
-	i = ft_strchar_int(ch, *str) + 1;
-	tmp = (char *) malloc(sizeof(char) * (i));
-	ft_strlcpy(tmp, *str, i);
-	(*str) += i - 1;
-	return (tmp);
-}
-
 void	ft_quote(char **str, t_parse *parse, int n)
 {
 	int		check;
@@ -33,15 +19,40 @@ void	ft_quote(char **str, t_parse *parse, int n)
 
 	check = 1;
 	(*str) += 1;
-	buff = ft_for_print_qoute(str, parse, "\'");
+	buff = ft_for_print(str, parse, "\'");
 	if (**str != '\'')
 	{
-		ft_putendl_fd("need second quote", 1);
-		parse->argv = (void *)-1;
+		ft_putendl_fd("Error: need second quote", 2);
+		parse->command_id = -1;
 	}
 	else
 	{
 		ft_push_argv(buff, parse, n);
 		(*str) += 1;
+	}
+}
+
+void	ft_wquote(char **str, t_parse *parse, int n, int num_quote)
+{
+	int		check;
+	char	*buff;
+
+	check = 1;
+	(*str) += 1;
+	if (num_quote % 2 != 0)
+	{
+		buff = ft_for_print(str, parse, "$\"");
+		while (**str && **str != '\"')
+			ft_read_line(str, parse);
+		if (**str != '\"')
+		{
+			ft_putendl_fd("Error: need second quote", 2);
+			parse->command_id = -1;
+		}
+		else
+		{
+			ft_push_argv(buff, parse, n);
+			(*str) += 1;
+		}
 	}
 }
