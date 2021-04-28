@@ -79,8 +79,11 @@ void	cmd_other(t_parse *parse, char ***env)
 	char	**argv_arr;
 
 	argv_arr = ft_lsttoarr(parse->argv);
-	if (((char*)parse->argv->content)[0] == '/' || ((char*)parse->argv->content)[0] == '.')
-		exec_relative(parse, env, argv_arr);
-	else
-		exec_absolute(parse, env, argv_arr);
+	if (argv_arr)
+	{
+		if (argv_arr[0][0] == '/' || argv_arr[0][0] == '.')
+			exec_relative(parse, env, argv_arr);
+		else
+			exec_absolute(parse, env, argv_arr);
+	}
 }

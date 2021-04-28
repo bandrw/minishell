@@ -19,7 +19,7 @@ void	ft_dollar(char **str, t_parse *parse, int n)
 
 	(*str) += 1;
 	buff = ft_for_print(str, parse);
-	env = getenv(buff);
+	env = getenv(buff); // todo: handle "$?"
 	if (!env)
 		ft_putendl_fd("not env", 1);
 	ft_push_argv(env, parse, n);

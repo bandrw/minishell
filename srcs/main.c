@@ -19,7 +19,6 @@ int	main(int argc, char **argv, char **env)
 //	char buf2[30];
 //	char *ap = buf2;
 //	char *gotostr;
-//
 //	tgetent(buf, getenv("TERM"));
 ////	gotostr = tgetstr("cm", &ap);
 //	gotostr = tgetstr("hey", &ap);
