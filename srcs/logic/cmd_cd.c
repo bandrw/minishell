@@ -18,6 +18,7 @@ void	cmd_cd(t_list *argv, char ***env)
 
 	if (argv->content)
 	{
+		errno = 0;
 		chdir(argv->content);
 		if (errno)
 		{
@@ -25,7 +26,6 @@ void	cmd_cd(t_list *argv, char ***env)
 			ft_putstr_fd(argv->content, 2);
 			ft_putstr_fd(": ", 2);
 			ft_putendl_fd(strerror(errno), 2);
-			errno = 0;
 		}
 		else
 		{
