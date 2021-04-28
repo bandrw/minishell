@@ -12,12 +12,10 @@
 
 #include "minishell.h"
 
-void	ft_get_pwd_env_exit(t_parse *parse, int id)
+void	ft_get_pwd_env(t_parse *parse, int id)
 {
 	if (id == 3)
 		parse->command_id = CMD_PWD;
-	else if (id == 7)
-		parse->command_id = CMD_EXIT;
 	else
 		parse->command_id = CMD_ENV;
 	parse->argv = 0;

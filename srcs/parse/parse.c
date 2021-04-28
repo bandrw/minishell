@@ -20,12 +20,10 @@ void	ft_text(char **str, t_parse *parse, int n)
 	ft_push_argv(buff, parse, n);
 }
 
-void	ft_read_line(char **str, t_parse *parse)
+void	ft_read_line(char **str, t_parse *parse, int num_quote)
 {
 	int check;
-	int	num_quote;
 
-	num_quote = 0;
 	while (**str)
 	{
 		check = 1;
@@ -43,7 +41,6 @@ void	ft_read_line(char **str, t_parse *parse)
 		else
 			ft_text(str, parse, check);
 	}
-
 }
 
 void	ft_get_other(t_parse *parse, char *str)
@@ -70,7 +67,7 @@ void	parse_line(char *line, t_parse *parse)
 		ft_get_cd(parse, &line);
 	else if (ft_strncmp("pwd", line, 3) == 0 && (!line[3]
 		|| ft_isspace(line[3])))
-		ft_get_pwd_env_exit(parse, CMD_PWD);
+		ft_get_pwd_env(parse, CMD_PWD);
 	else if (ft_strncmp("export", line, 6) == 0 && (!line[6]
 		|| ft_isspace(line[6])))
 		ft_get_export(parse, &line);
@@ -79,7 +76,7 @@ void	parse_line(char *line, t_parse *parse)
 		ft_get_unset(parse, &line);
 	else if (ft_strncmp("env", line, 3) == 0 && (!line[3]
 		|| ft_isspace(line[3])))
-		ft_get_pwd_env_exit(parse, CMD_ENV);
+		ft_get_pwd_env(parse, CMD_ENV);
 	else if (ft_strncmp("exit", line, 4) == 0 && (!line[4]
 		|| ft_isspace(line[4])))
 		ft_get_exit(parse, &line);

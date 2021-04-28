@@ -12,19 +12,6 @@
 
 #include "minishell.h"
 
-char	*ft_check_env(char *buff)
-{
-	char	*n;
-
-	while (*buff)
-	{
-		if (*buff == '\'' || *buff == '\"')
-			*buff = '\0';
-		buff++;
-	}
-	return (buff);
-}
-
 void	ft_dollar(char **str, t_parse *parse, int n)
 {
 	char	*buff;
@@ -40,8 +27,7 @@ void	ft_dollar(char **str, t_parse *parse, int n)
 	else
 	{
 		buff = ft_for_print(str, parse, "$\t\n\v\f\r\'\" ");
-		//buff = ft_check_env(buff);	//todo: leaks
-		env = getenv(buff);
+		env = get_env(buff, parse->env);
 		if (!env)
 			ft_putendl_fd("Error: not env", 2);
 		else

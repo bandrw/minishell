@@ -60,16 +60,21 @@ void	sigquit_handler(int sig);
 
 //	Parse
 void	parse_line(char *command_line, t_parse *parse);
-void	ft_get_pwd_env_exit(t_parse *parse, int id);
+void	ft_parse_wquotes(char **str, t_parse *parse);
+
+void	ft_get_pwd_env(t_parse *parse, int id);
 void	ft_get_echo(t_parse *parse, char **str);
 void	ft_get_cd(t_parse *parse, char **str);
 void	ft_get_export(t_parse *parse, char **str);
 void	ft_get_unset(t_parse *parse, char **str);
+void	ft_text(char **str, t_parse *parse, int n);
 void	ft_get_exit(t_parse *parse, char **str);
-void	ft_read_line(char **str, t_parse *parse);
+
+void	ft_read_line(char **str, t_parse *parse, int num_quote);
 char	*ft_for_print(char **str, t_parse *parse, char *ch);
 int		ft_strchar_int(const char *str, char *line);
 void	ft_push_argv(char *str, t_parse *parse, int n);
+
 void	ft_dollar(char **str, t_parse *parse, int n);
 void	ft_quote(char **str, t_parse *parse, int n);
 void	ft_wquote(char **str, t_parse *parse, int n, int num_quote);

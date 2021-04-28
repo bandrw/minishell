@@ -32,6 +32,26 @@ void	ft_quote(char **str, t_parse *parse, int n)
 	}
 }
 
+void	ft_parse_wquotes(char **str, t_parse *parse)
+{
+	int check;
+
+	while (**str && **str != '\"')
+	{
+		check = 1;
+		while (ft_isspace(**str)) {
+			(*str)++;
+			check = 0;
+		}
+		if (**str == '\'')
+			ft_quote(str, parse, check);
+		else if (**str == '$')
+			ft_dollar(str, parse, check);
+		else
+			ft_text(str, parse, check);
+	}
+}
+
 void	ft_wquote(char **str, t_parse *parse, int n, int num_quote)
 {
 	int		check;
@@ -43,7 +63,7 @@ void	ft_wquote(char **str, t_parse *parse, int n, int num_quote)
 	{
 		buff = ft_for_print(str, parse, "$\"");
 		while (**str && **str != '\"')
-			ft_read_line(str, parse);
+			ft_parse_wquotes(str, parse);
 		if (**str != '\"')
 		{
 			ft_putendl_fd("Error: need second quote", 2);
