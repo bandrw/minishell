@@ -32,7 +32,9 @@ void	ft_read_line(char **str, t_parse *parse)
 			(*str)++;
 			check = 0;
 		}
-		if (**str == '$')
+		if (**str == '\'')
+			ft_quote(str, parse, check);
+		else if (**str == '$')
 			ft_dollar(str, parse, check);
 		else
 			ft_text(str, parse, check);
