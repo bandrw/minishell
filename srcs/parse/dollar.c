@@ -18,9 +18,18 @@ void	ft_dollar(char **str, t_parse *parse, int n)
 	char	*env;
 
 	(*str) += 1;
-	buff = ft_for_print(str, parse);
-	env = getenv(buff); // todo: handle "$?"
-	if (!env)
-		ft_putendl_fd("not env", 1);
-	ft_push_argv(env, parse, n);
+	if (**str == '?')
+	{
+		env = ft_itoa(errno);
+		ft_push_argv(env, parse, 0);
+		(*str) += 1;
+	}
+	else
+	{
+		buff = ft_for_print(str, parse);
+		env = getenv(buff); // todo: handle "$?"
+		if (!env)
+			ft_putendl_fd("not env", 1);
+		ft_push_argv(env, parse, n);
+	}
 }
