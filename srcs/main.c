@@ -47,6 +47,7 @@ int	main(int argc, char **argv, char **env)
 			return (1);
 		}
 		ft_bzero(&parse, sizeof(parse));
+		parse.env = env;
 		parse_line(command_line, &parse);
 		execute_command_line(&parse, &env);
 		free(command_line);

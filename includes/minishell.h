@@ -35,8 +35,9 @@ typedef struct s_parse
 	int			command_id;
 	t_list		*argv;
 	char		**env;
-	char		*out_filename;
-	char		*int_filename;
+	char		*file_out;
+	char		*file_in;
+	int			append_output;
 }				t_parse;
 
 //	Logic
