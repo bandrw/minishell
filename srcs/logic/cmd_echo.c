@@ -21,13 +21,13 @@ void	cmd_echo(t_parse *parse)
 	if (parse->out_filename)
 		fd = open(parse->out_filename, O_CREAT | O_WRONLY, S_IRWXU);
 	if (parse->argv->content == 0)
-		ft_putchar_fd('\n', fd);
+		ft_putchar_fd('\n', 1);
 	need_new_line = 1;
 	if (ft_strncmp(parse->argv->content, "-n", 3) == 0)
 		need_new_line = 0;
 	while (parse->argv)
 	{
-		ft_putstr_fd(parse->argv->content, 1);
+		ft_putstr_fd(parse->argv->content, fd);
 		if (parse->argv->next)
 			ft_putchar_fd(' ', fd);
 		parse->argv = parse->argv->next;
