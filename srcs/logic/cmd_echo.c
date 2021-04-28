@@ -12,22 +12,26 @@
 
 #include "minishell.h"
 
-void	cmd_echo(t_list *argv)
+void	cmd_echo(t_parse *parse)
 {
 	int	need_new_line;
+	int	fd;
 
-	if (argv->content == 0)
-		ft_putchar_fd('\n', 1);
+	fd = 1;
+	if (parse->out_filename)
+		fd = open(parse->out_filename, O_CREAT | O_WRONLY, S_IRWXU);
+	if (parse->argv->content == 0)
+		ft_putchar_fd('\n', fd);
 	need_new_line = 1;
-	if (ft_strncmp(argv->content, "-n", 3) == 0)
+	if (ft_strncmp(parse->argv->content, "-n", 3) == 0)
 		need_new_line = 0;
-	while (argv)
+	while (parse->argv)
 	{
-		ft_putstr_fd(argv->content, 1);
-		if (argv->next)
-			ft_putchar_fd(' ', 1);
-		argv = argv->next;
+		ft_putstr_fd(parse->argv->content, 1);
+		if (parse->argv->next)
+			ft_putchar_fd(' ', fd);
+		parse->argv = parse->argv->next;
 	}
 	if (need_new_line)
-		ft_putchar_fd('\n', 1);
+		ft_putchar_fd('\n', fd);
 }

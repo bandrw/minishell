@@ -19,4 +19,5 @@ void 	ft_get_echo(t_parse *parse, char **str)
 	tmp = *str + 4;
 	parse->command_id = CMD_ECHO;
 	ft_read_line(&tmp, parse);
+	parse->out_filename = ft_strdup("out.txt");
 }

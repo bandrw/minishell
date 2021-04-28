@@ -19,6 +19,7 @@
 # include <string.h>
 # include <errno.h>
 # include <termcap.h>
+# include <fcntl.h>
 
 # define CMD_OTHER 0
 # define CMD_ECHO 1
@@ -33,13 +34,16 @@ typedef struct s_parse
 {
 	int			command_id;
 	t_list		*argv;
+	char		**env;
+	char		*out_filename;
+	char		*int_filename;
 }				t_parse;
 
 //	Logic
 void	execute_command_line(t_parse *parse, char ***env);
 
 void	cmd_other(t_parse *parse, char **env);
-void	cmd_echo(t_list *argv);
+void	cmd_echo(t_parse *parse);
 void	cmd_cd(t_list *argv, char ***env);
 void	cmd_pwd(void);
 void	cmd_export(t_list *argv, char ***env);
