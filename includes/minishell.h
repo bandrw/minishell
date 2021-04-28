@@ -38,7 +38,7 @@ typedef struct s_parse
 //	Logic
 void	execute_command_line(t_parse *parse, char ***env);
 
-void	cmd_other(t_parse *parse, char ***env);
+void	cmd_other(t_parse *parse, char **env);
 void	cmd_echo(t_list *argv);
 void	cmd_cd(t_list *argv, char ***env);
 void	cmd_pwd(void);
@@ -48,6 +48,7 @@ void	cmd_env(char **env);
 void	cmd_exit(t_list *argv);
 
 void	insert_env(char *key, char *new_env, char ***env);
+char	*get_env(char *key, char **env);
 
 void	sigint_handler(int sig);
 void	sigquit_handler(int sig);

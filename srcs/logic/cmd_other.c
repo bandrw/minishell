@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static void	exec_relative(t_parse *parse, char ***env, char **argv_arr)
+static void	exec_relative(t_parse *parse, char **env, char **argv_arr)
 {
 	int		pid;
 	int		status;
@@ -20,7 +20,7 @@ static void	exec_relative(t_parse *parse, char ***env, char **argv_arr)
 	pid = fork();
 	if (pid == 0)
 	{
-		execve(parse->argv->content, argv_arr, *env);
+		execve(parse->argv->content, argv_arr, env);
 		exit(1);
 	}
 	else
@@ -33,18 +33,14 @@ static void	exec_relative(t_parse *parse, char ***env, char **argv_arr)
 	}
 }
 
-static void	exec_absolute(t_parse *parse, char ***env, char **argv_arr)
+static void	exec_from_path(t_parse *parse, char **env, char **argv_arr, char *path)
 {
 	int		i;
 	int		pid;
 	int		status;
-	char	*path;
 	char	*str;
 	char	**paths;
 
-	path = getenv("PATH");
-	if (!path)
-		return ;
 	paths = ft_split(path, ':');
 	i = -1;
 	status = 1;
@@ -57,7 +53,7 @@ static void	exec_absolute(t_parse *parse, char ***env, char **argv_arr)
 			char *tmp = str;
 			str = ft_strjoin(tmp, parse->argv->content);
 			free(tmp);
-			execve(str, argv_arr, *env);
+			execve(str, argv_arr, env);
 			free(str);
 			exit(1);
 		}
@@ -74,16 +70,19 @@ static void	exec_absolute(t_parse *parse, char ***env, char **argv_arr)
 	free(paths);
 }
 
-void	cmd_other(t_parse *parse, char ***env)
+void	cmd_other(t_parse *parse, char **env)
 {
+	char	*path;
 	char	**argv_arr;
 
+	errno = 0;
 	argv_arr = ft_lsttoarr(parse->argv);
 	if (argv_arr)
 	{
-		if (argv_arr[0][0] == '/' || argv_arr[0][0] == '.')
+		path = get_env("PATH", env);
+		if (argv_arr[0][0] == '/' || argv_arr[0][0] == '.' || !path)
 			exec_relative(parse, env, argv_arr);
 		else
-			exec_absolute(parse, env, argv_arr);
+			exec_from_path(parse, env, argv_arr, path);
 	}
 }

@@ -15,7 +15,7 @@
 void	execute_command_line(t_parse *parse, char ***env)
 {
 	if (parse->command_id == CMD_OTHER)
-		cmd_other(parse, env);
+		cmd_other(parse, *env);
 	else if (parse->command_id == CMD_ECHO)
 		cmd_echo(parse->argv);
 	else if (parse->command_id == CMD_CD)
