@@ -100,27 +100,27 @@ static int	iter_action(char **new_line_p, char *str, t_list **list,
 
 int	get_next_line(int fd, char **line)
 {
-	int			r;
-	int			bytes_read;
-	t_list		*list;
-	static char	*new_line_p;
-	static char	str[BUFFER_SIZE + 1];
+	int			r[1024];
+	int			bytes_read[1024];
+	t_list		*list[1024];
+	static char	*new_line_p[1024];
+	static char	str[1024][BUFFER_SIZE + 1];
 
-	list = 0;
-	if (new_line_handle(&new_line_p, &list, line) == 1)
+	list[fd] = 0;
+	if (new_line_handle(&new_line_p[fd], &list[fd], line) == 1)
 		return (1);
-	bytes_read = read(fd, str, BUFFER_SIZE);
-	while (bytes_read > 0)
+	bytes_read[fd] = read(fd, str[fd], BUFFER_SIZE);
+	while (bytes_read[fd] > 0)
 	{
-		str[bytes_read] = '\0';
-		r = iter_action(&new_line_p, str, &list, line);
-		if (r == -1)
+		str[fd][bytes_read[fd]] = '\0';
+		r[fd] = iter_action(&new_line_p[fd], str[fd], &list[fd], line);
+		if (r[fd] == -1)
 			return (-1);
-		else if (r != 0)
-			return (r);
-		bytes_read = read(fd, str, BUFFER_SIZE);
+		else if (r[fd] != 0)
+			return (r[fd]);
+		bytes_read[fd] = read(fd, str[fd], BUFFER_SIZE);
 	}
-	if (final_string(&list, line) == 1)
-		return (bytes_read);
+	if (final_string(&list[fd], line) == 1)
+		return (bytes_read[fd]);
 	return (-1);
 }
