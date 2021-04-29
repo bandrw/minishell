@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+// todo: sort
 static void	write_vars(char **env)
 {
 	int	i;

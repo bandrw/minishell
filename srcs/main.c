@@ -26,6 +26,18 @@ int	main(int argc, char **argv, char **env)
 ////	ft_putstr(tgoto(gotostr, 20, 0));
 //	ft_putstr("Hello, world!\n");
 
+//	// dup2 test
+//	char *buf;
+//	int fd[2];
+//	pipe(fd);
+//	int stdout_copy = dup(1);
+//	dup2(fd[1], stdout_copy);
+//	close(fd[1]);
+//	write(stdout_copy, "Test str\n", 9);
+//	get_next_line(fd[0], &buf);
+//	close(fd[0]);
+//	ft_putendl_fd(buf, 1);
+
 	int		n;
 	char	*command_line;
 	t_parse	parse;

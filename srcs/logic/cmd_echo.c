@@ -17,14 +17,7 @@ void	cmd_echo(t_parse *parse)
 	int	need_new_line;
 	int	fd;
 
-	fd = 1;
-	if (parse->file_out)
-	{
-		if (parse->append_output)
-			fd = open(parse->file_out, O_CREAT | O_WRONLY | O_APPEND, S_IRWXU);
-		else
-			fd = open(parse->file_out, O_CREAT | O_WRONLY, S_IRWXU);
-	}
+	fd = get_fd_out(parse);
 	if (parse->argv->content == 0)
 		ft_putchar_fd('\n', 1);
 	need_new_line = 1;
@@ -39,4 +32,5 @@ void	cmd_echo(t_parse *parse)
 	}
 	if (need_new_line)
 		ft_putchar_fd('\n', fd);
+	close(fd);
 }

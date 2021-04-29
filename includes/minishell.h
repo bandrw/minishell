@@ -54,6 +54,9 @@ void	cmd_exit(t_list *argv);
 
 void	insert_env(char *key, char *new_env, char ***env);
 char	*get_env(char *key, char **env);
+int		get_fd_out(t_parse *parse);
+int		get_fd_in(t_parse *parse);
+void	redirect(int fd_in, int fd_out);
 
 void	sigint_handler(int sig);
 void	sigquit_handler(int sig);

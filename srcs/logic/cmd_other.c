@@ -36,7 +36,7 @@ static void	exec_relative(t_parse *parse, char **env, char **argv_arr)
 static void	exec_from_path(t_parse *parse, char **env, char **argv_arr, char *path)
 {
 	int		i;
-	int		pid;
+	pid_t 	pid;
 	int		status;
 	char	*str;
 	char	**paths;
@@ -72,17 +72,27 @@ static void	exec_from_path(t_parse *parse, char **env, char **argv_arr, char *pa
 
 void	cmd_other(t_parse *parse, char **env)
 {
+	int		fd[2];
 	char	*path;
 	char	**argv_arr;
+	int		stdout_copy;
 
 	errno = 0;
 	argv_arr = ft_lsttoarr(parse->argv);
 	if (argv_arr)
 	{
 		path = get_env("PATH", env);
+		pipe(fd);
+		redirect(get_fd_in(parse), fd[1]);
+		stdout_copy = dup(1);
+		dup2(fd[1], 1);
+		close(fd[1]);
 		if (argv_arr[0][0] == '/' || argv_arr[0][0] == '.' || !path)
 			exec_relative(parse, env, argv_arr);
 		else
 			exec_from_path(parse, env, argv_arr, path);
+		dup2(stdout_copy, 1);
+		redirect(fd[0], get_fd_out(parse));
+		close(fd[0]);
 	}
 }
