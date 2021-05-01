@@ -53,10 +53,10 @@ void	execute_command_line(t_list *parse_list, char ***env);
 void	cmd_other(t_parse *parse, t_parse *parse_next, char **env);
 void	cmd_echo(t_parse *parse, t_parse *parse_next);
 void	cmd_cd(t_list *argv, char ***env);
-void	cmd_pwd(t_parse *parse_next);
-void	cmd_export(t_list *argv, t_parse *parse_next, char ***env);
+void	cmd_pwd(t_parse *parse, t_parse *parse_next);
+void	cmd_export(t_list *argv, t_parse *parse, t_parse *parse_next, char ***env);
 void	cmd_unset(t_list *argv, char ***env);
-void	cmd_env(t_parse *parse_next, char **env);
+void	cmd_env(t_parse *parse, t_parse *parse_next, char **env);
 void	cmd_exit(t_list *argv);
 
 void	insert_env(char *key, char *new_env, char ***env);

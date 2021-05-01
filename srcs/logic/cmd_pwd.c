@@ -12,8 +12,11 @@
 
 #include "minishell.h"
 
-void	cmd_pwd(t_parse *parse_next)
+void	cmd_pwd(t_parse *parse, t_parse *parse_next)
 {
-	char pwd[1024];
-	ft_putendl_fd(getcwd(pwd, 1024), 1);
+	int		fd_out;
+	char	pwd[1024];
+
+	fd_out = get_fd_out(parse, parse_next);
+	ft_putendl_fd(getcwd(pwd, 1024), fd_out);
 }
