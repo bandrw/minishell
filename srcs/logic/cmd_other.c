@@ -70,12 +70,14 @@ static void	exec_from_path(t_parse *parse, char **env, char **argv_arr, char *pa
 	free(paths);
 }
 
-void	cmd_other(t_parse *parse, char **env)
+void	cmd_other(t_parse *parse, t_parse *parse_next, char **env)
 {
 	int		fd[2];
 	char	*path;
 	char	**argv_arr;
+	int		fd_in;
 	int		stdout_copy;
+	int		stdin_copy;
 
 	errno = 0;
 	argv_arr = ft_lsttoarr(parse->argv);
@@ -83,16 +85,23 @@ void	cmd_other(t_parse *parse, char **env)
 	{
 		path = get_env("PATH", env);
 		pipe(fd);
-		redirect(get_fd_in(parse), fd[1]);
 		stdout_copy = dup(1);
+		stdin_copy = dup(0);
 		dup2(fd[1], 1);
 		close(fd[1]);
+		fd_in = get_fd_in(parse);
+		if (parse->pipe_info.fd_in)
+			dup2(parse->pipe_info.fd_in, 0);
+		else if (parse->pipe_info.file_in)
+			dup2(fd_in, 0);
 		if (argv_arr[0][0] == '/' || argv_arr[0][0] == '.' || !path)
 			exec_relative(parse, env, argv_arr);
 		else
 			exec_from_path(parse, env, argv_arr, path);
 		dup2(stdout_copy, 1);
-		redirect(fd[0], get_fd_out(parse));
+		dup2(stdin_copy, 0);
+		redirect(fd[0], get_fd_out(parse, parse_next));
+		close(fd_in);
 		close(fd[0]);
 	}
 }

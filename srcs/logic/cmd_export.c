@@ -61,7 +61,7 @@ void	insert_env(char *key, char *new_env, char ***env)
 	insert_new_env(new_env, env);
 }
 
-void	cmd_export(t_list *argv, char ***env)
+void	cmd_export(t_list *argv, t_parse *parse_next, char ***env)
 {
 	char	**pair;
 	char	*new_env;

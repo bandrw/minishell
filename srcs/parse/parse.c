@@ -57,31 +57,50 @@ void	ft_get_other(t_parse *parse, char *str)
 //	parse->file_in = ft_strdup("../srcs/main.c"); // (logic почти handled)
 }
 
-void	parse_line(char *line, t_parse *parse)
+void	parse_line(char *line, t_list **parse_line, char **env)
 {
-	while (ft_isspace(*line))
-		line++;
-	if (ft_strncmp("echo", line, 4) == 0 && (!line[4]
-		|| ft_isspace(line[4])))
-		ft_get_echo(parse, &line);
-	else if (ft_strncmp("cd", line, 2) == 0 && (!line[2]
-		|| ft_isspace(line[2])))
-		ft_get_cd(parse, &line);
-	else if (ft_strncmp("pwd", line, 3) == 0 && (!line[3]
-		|| ft_isspace(line[3])))
-		ft_get_pwd_env(parse, CMD_PWD);
-	else if (ft_strncmp("export", line, 6) == 0 && (!line[6]
-		|| ft_isspace(line[6])))
-		ft_get_export(parse, &line);
-	else if (ft_strncmp("unset", line, 5) == 0 && (!line[5]
-		|| ft_isspace(line[5])))
-		ft_get_unset(parse, &line);
-	else if (ft_strncmp("env", line, 3) == 0 && (!line[3]
-		|| ft_isspace(line[3])))
-		ft_get_pwd_env(parse, CMD_ENV);
-	else if (ft_strncmp("exit", line, 4) == 0 && (!line[4]
-		|| ft_isspace(line[4])))
-		ft_get_exit(parse, &line);
-	else
-		ft_get_other(parse, line);
+	t_parse *parse;
+
+	parse = (t_parse *)malloc(sizeof(t_parse));
+	ft_bzero(parse, sizeof(t_parse));
+	parse->env = env;
+	parse->command_id = CMD_ECHO;
+	ft_lstadd_back(&parse->argv, ft_lstnew(ft_strdup("123")));
+	ft_lstadd_back(&parse->argv, ft_lstnew(ft_strdup("456")));
+	parse->pipe_info.pipe_to_next = 1;
+	ft_lstadd_back(parse_line, ft_lstnew(parse));
+
+	parse = (t_parse *)malloc(sizeof(t_parse));
+	ft_bzero(parse, sizeof(t_parse));
+	parse->env = env;
+	parse->command_id = CMD_OTHER;
+	ft_lstadd_back(&parse->argv, ft_lstnew(ft_strdup("cat")));
+	ft_lstadd_back(&parse->argv, ft_lstnew(ft_strdup("-e")));
+	ft_lstadd_back(parse_line, ft_lstnew(parse));
+
+//	while (ft_isspace(*line))
+//		line++;
+//	if (ft_strncmp("echo", line, 4) == 0 && (!line[4]
+//		|| ft_isspace(line[4])))
+//		ft_get_echo(parse, &line);
+//	else if (ft_strncmp("cd", line, 2) == 0 && (!line[2]
+//		|| ft_isspace(line[2])))
+//		ft_get_cd(parse, &line);
+//	else if (ft_strncmp("pwd", line, 3) == 0 && (!line[3]
+//		|| ft_isspace(line[3])))
+//		ft_get_pwd_env(parse, CMD_PWD);
+//	else if (ft_strncmp("export", line, 6) == 0 && (!line[6]
+//		|| ft_isspace(line[6])))
+//		ft_get_export(parse, &line);
+//	else if (ft_strncmp("unset", line, 5) == 0 && (!line[5]
+//		|| ft_isspace(line[5])))
+//		ft_get_unset(parse, &line);
+//	else if (ft_strncmp("env", line, 3) == 0 && (!line[3]
+//		|| ft_isspace(line[3])))
+//		ft_get_pwd_env(parse, CMD_ENV);
+//	else if (ft_strncmp("exit", line, 4) == 0 && (!line[4]
+//		|| ft_isspace(line[4])))
+//		ft_get_exit(parse, &line);
+//	else
+//		ft_get_other(parse, line);
 }

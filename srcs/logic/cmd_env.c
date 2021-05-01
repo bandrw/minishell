@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	cmd_env(char **env)
+void	cmd_env(t_parse *parse_next, char **env)
 {
 	while (*env)
 	{

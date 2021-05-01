@@ -30,31 +30,38 @@
 # define CMD_ENV 6
 # define CMD_EXIT 7
 
+typedef struct s_pipe
+{
+	int			pipe_to_next;
+	int			fd_in;
+	int			append_output;
+	char		*file_out;
+	char		*file_in;
+}				t_pipe;
+
 typedef struct s_parse
 {
 	int			command_id;
 	t_list		*argv;
 	char		**env;
-	char		*file_out;
-	char		*file_in;
-	int			append_output;
+	t_pipe		pipe_info;
 }				t_parse;
 
 //	Logic
-void	execute_command_line(t_parse *parse, char ***env);
+void	execute_command_line(t_list *parse_list, char ***env);
 
-void	cmd_other(t_parse *parse, char **env);
-void	cmd_echo(t_parse *parse);
+void	cmd_other(t_parse *parse, t_parse *parse_next, char **env);
+void	cmd_echo(t_parse *parse, t_parse *parse_next);
 void	cmd_cd(t_list *argv, char ***env);
-void	cmd_pwd(void);
-void	cmd_export(t_list *argv, char ***env);
+void	cmd_pwd(t_parse *parse_next);
+void	cmd_export(t_list *argv, t_parse *parse_next, char ***env);
 void	cmd_unset(t_list *argv, char ***env);
-void	cmd_env(char **env);
+void	cmd_env(t_parse *parse_next, char **env);
 void	cmd_exit(t_list *argv);
 
 void	insert_env(char *key, char *new_env, char ***env);
 char	*get_env(char *key, char **env);
-int		get_fd_out(t_parse *parse);
+int		get_fd_out(t_parse *parse, t_parse *parse_next);
 int		get_fd_in(t_parse *parse);
 void	redirect(int fd_in, int fd_out);
 
@@ -62,7 +69,7 @@ void	sigint_handler(int sig);
 void	sigquit_handler(int sig);
 
 //	Parse
-void	parse_line(char *command_line, t_parse *parse);
+void	parse_line(char *command_line, t_list **parse_list, char **env);
 void	ft_parse_wquotes(char **str, t_parse *parse);
 
 void	ft_get_pwd_env(t_parse *parse, int id);
