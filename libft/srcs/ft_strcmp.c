@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_env.c                                          :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfriese <kfriese@student.21-school>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/28 00:08:20 by kfriese           #+#    #+#             */
-/*   Updated: 2021/04/28 00:08:21 by kfriese          ###   ########.fr       */
+/*   Created: 2021/05/01 14:27:10 by kfriese           #+#    #+#             */
+/*   Updated: 2021/05/01 14:27:10 by kfriese          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-void	cmd_env(t_parse *parse_next, char **env)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	sort_arr(env);
-	while (*env)
+	if (!(s1 && s2))
+		return (0);
+	while ((unsigned char)*s1 == (unsigned char)*s2 && *s1 != '\0')
 	{
-		if (ft_strchr(*env, '='))
-			ft_putendl_fd(*env, 1);
-		env++;
+		s1++;
+		s2++;
 	}
+	return ((unsigned char)*s1 - (unsigned char)*s2);
 }

@@ -61,6 +61,8 @@ void	cmd_exit(t_list *argv);
 
 void	insert_env(char *key, char *new_env, char ***env);
 char	*get_env(char *key, char **env);
+char	**arr_realloc(char **arr);
+void	sort_arr(char **arr);
 int		get_fd_out(t_parse *parse, t_parse *parse_next);
 int		get_fd_in(t_parse *parse);
 void	redirect(int fd_in, int fd_out);

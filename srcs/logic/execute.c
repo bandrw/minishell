@@ -30,13 +30,13 @@ void	execute_command_line(t_list *parse_list, char ***env)
 		else if (parse->command_id == CMD_CD)
 			cmd_cd(parse->argv, env);
 		else if (parse->command_id == CMD_PWD)
-			cmd_pwd(parse_list->next->content);
+			cmd_pwd(next_parse);
 		else if (parse->command_id == CMD_EXPORT)
-			cmd_export(parse->argv, parse_list->next->content, env);
+			cmd_export(parse->argv, next_parse, env);
 		else if (parse->command_id == CMD_UNSET)
 			cmd_unset(parse->argv, env);
 		else if (parse->command_id == CMD_ENV)
-			cmd_env(parse_list->next->content, *env);
+			cmd_env(next_parse, *env);
 		else if (parse->command_id == CMD_EXIT)
 			cmd_exit(parse->argv);
 		parse_list = parse_list->next;

@@ -24,8 +24,10 @@ add_executable(minishell
 		srcs/logic/cmd_exit.c
 		srcs/logic/cmd_env.c
 		srcs/parse/get_exit.c
-		srcs/logic/get_env.c
-		srcs/parse/quote.c srcs/logic/get_fd.c srcs/logic/redirect.c)
+		srcs/logic/logic_utils.c
+		srcs/parse/quote.c
+		srcs/logic/get_fd.c
+		srcs/logic/redirect.c)
 
 include_directories(includes)
 include_directories(libft/includes)
@@ -84,7 +86,10 @@ add_library(ft
 		libft/srcs/ft_toupper.c
 		libft/srcs/get_next_line.c
 		libft/srcs/ft_isspace.c
-		libft/srcs/get_next_line_utils.c includes/minishell.h libft/srcs/ft_lsttoarr.c)
+		libft/srcs/get_next_line_utils.c
+		libft/srcs/ft_lsttoarr.c
+		libft/srcs/ft_strcmp.c
+		includes/minishell.h)
 
 target_link_libraries(minishell LINK_PUBLIC termcap)
 

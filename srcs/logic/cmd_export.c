@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-// todo: sort
+
 static void	write_vars(char **env)
 {
 	int	i;
@@ -20,7 +20,6 @@ static void	write_vars(char **env)
 	while (env[++i])
 	{
 		ft_putstr("declare -x ");
-//		ft_putendl_fd(env[i], 1);
 		write(1, env[i], ft_strchr(env[i], '=') - env[i] + 1);
 		write(1, "\"", 1);
 		ft_putstr(ft_strchr(env[i], '=') + 1);
@@ -43,6 +42,7 @@ static void	insert_new_env(char *new_env, char ***env)
 	arr[l] = new_env;
 	arr[l + 1] = 0;
 	*env = arr;
+	sort_arr(*env);
 }
 
 void	insert_env(char *key, char *new_env, char ***env)

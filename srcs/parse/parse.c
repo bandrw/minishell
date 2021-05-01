@@ -54,7 +54,7 @@ void	ft_get_other(t_parse *parse, char *str)
 		buff++;
 	}
 //	parse->file_out = ft_strdup("out.txt"); // (logic handled)
-//	parse->file_in = ft_strdup("../srcs/main.c"); // (logic почти handled)
+//	parse->file_in = ft_strdup("../srcs/main.c"); // (logic handled)
 }
 
 void	parse_line(char *line, t_list **parse_line, char **env)

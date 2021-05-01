@@ -45,6 +45,8 @@ int	main(int argc, char **argv, char **env)
 
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, sigquit_handler);
+	env = arr_realloc(env);
+	sort_arr(env);
 	while (1)
 	{
 		ft_putstr("\033[35mminishell$ \033[0m");

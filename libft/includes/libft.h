@@ -77,5 +77,6 @@ int					ft_max(int a, int b);
 char				*ft_hexstr(unsigned long p);
 int					get_next_line(int fd, char **line);
 char				**ft_lsttoarr(t_list *list);
+int					ft_strcmp(const char *s1, const char *s2);
 
 #endif
