@@ -19,6 +19,7 @@
 # include <string.h>
 # include <errno.h>
 # include <termcap.h>
+# include <term.h>
 # include <fcntl.h>
 
 # define CMD_OTHER 0
