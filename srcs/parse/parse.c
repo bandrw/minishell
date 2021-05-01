@@ -64,9 +64,7 @@ void	parse_line(char *line, t_list **parse_line, char **env)
 	parse = (t_parse *)malloc(sizeof(t_parse));
 	ft_bzero(parse, sizeof(t_parse));
 	parse->env = env;
-	parse->command_id = CMD_ECHO;
-	ft_lstadd_back(&parse->argv, ft_lstnew(ft_strdup("123")));
-	ft_lstadd_back(&parse->argv, ft_lstnew(ft_strdup("456")));
+	parse->command_id = CMD_ENV;
 	parse->pipe_info.pipe_to_next = 1;
 	ft_lstadd_back(parse_line, ft_lstnew(parse));
 
@@ -76,6 +74,7 @@ void	parse_line(char *line, t_list **parse_line, char **env)
 	parse->command_id = CMD_OTHER;
 	ft_lstadd_back(&parse->argv, ft_lstnew(ft_strdup("cat")));
 	ft_lstadd_back(&parse->argv, ft_lstnew(ft_strdup("-e")));
+	parse->pipe_info.file_out = ft_strdup("out.txt");
 	ft_lstadd_back(parse_line, ft_lstnew(parse));
 
 //	while (ft_isspace(*line))

@@ -12,11 +12,11 @@
 
 #include "minishell.h"
 
-void	cmd_env(t_parse *parse, t_parse *parse_next, char **env)
+void	cmd_env(t_parse *parse, char **env)
 {
 	int	fd_out;
 
-	fd_out = get_fd_out(parse, parse_next);
+	fd_out = get_fd_out(parse);
 	sort_arr(env);
 	while (*env)
 	{
@@ -24,4 +24,6 @@ void	cmd_env(t_parse *parse, t_parse *parse_next, char **env)
 			ft_putendl_fd(*env, fd_out);
 		env++;
 	}
+	if (fd_out != 1)
+		close(fd_out);
 }

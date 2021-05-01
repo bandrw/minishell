@@ -70,12 +70,13 @@ static void	exec_from_path(t_parse *parse, char **env, char **argv_arr, char *pa
 	free(paths);
 }
 
-void	cmd_other(t_parse *parse, t_parse *parse_next, char **env)
+void	cmd_other(t_parse *parse, char **env)
 {
 	int		fd[2];
 	char	*path;
 	char	**argv_arr;
 	int		fd_in;
+	int		fd_out;
 	int		stdout_copy;
 	int		stdin_copy;
 
@@ -100,8 +101,12 @@ void	cmd_other(t_parse *parse, t_parse *parse_next, char **env)
 			exec_from_path(parse, env, argv_arr, path);
 		dup2(stdout_copy, 1);
 		dup2(stdin_copy, 0);
-		redirect(fd[0], get_fd_out(parse, parse_next));
-		close(fd_in);
+		fd_out = get_fd_out(parse);
+		redirect(fd[0], fd_out);
+		if (fd_out != 1)
+			close(fd_out);
+		if (fd_in != 0)
+			close(fd_in);
 		close(fd[0]);
 	}
 }

@@ -12,25 +12,26 @@
 
 #include "minishell.h"
 
-void	cmd_cd(t_list *argv, char ***env)
+void	cmd_cd(t_parse *parse, char ***env)
 {
-	char *buf;
+	int		fd_out;
+	char	*buf;
 
-	if (argv->content)
+	errno = 0;
+	fd_out = get_fd_out(parse);
+	if (fd_out != 1)
+		close(fd_out);
+	chdir(parse->argv->content);
+	if (errno)
 	{
-		errno = 0;
-		chdir(argv->content);
-		if (errno)
-		{
-			ft_putstr_fd("minishell: cd: ", 2);
-			ft_putstr_fd(argv->content, 2);
-			ft_putstr_fd(": ", 2);
-			ft_putendl_fd(strerror(errno), 2);
-		}
-		else
-		{
-			buf = (char*)malloc(sizeof(char) * 1024);
-			insert_env("PWD", ft_strjoin("PWD=", getcwd(buf, 1024)), env);
-		}
+		ft_putstr_fd("minishell: cd: ", 2);
+		ft_putstr_fd(parse->argv->content, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putendl_fd(strerror(errno), 2);
+	}
+	else
+	{
+		buf = (char*)malloc(sizeof(char) * 1024);
+		insert_env("PWD", ft_strjoin("PWD=", getcwd(buf, 1024)), env);
 	}
 }

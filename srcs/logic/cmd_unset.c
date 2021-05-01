@@ -23,21 +23,25 @@ static int	is_in_list(char *str, t_list *list)
 	return (0);
 }
 
-void	cmd_unset(t_list *argv, char ***env)
+void	cmd_unset(t_parse *parse, char ***env)
 {
 	int		i;
 	int		j;
 	char	**arr;
+	int		fd_out;
 
+	fd_out = get_fd_out(parse);
+	if (fd_out != 1)
+		close(fd_out);
 	i = 0;
 	while ((*env)[i])
 		i++;
-	arr = (char**)malloc(sizeof(char*) * (i + 1 - ft_lstsize(argv)));
+	arr = (char**)malloc(sizeof(char*) * (i + 1 - ft_lstsize(parse->argv)));
 	i = -1;
 	j = 0;
 	while ((*env)[++i])
 	{
-		if (!is_in_list((*env)[i], argv))
+		if (!is_in_list((*env)[i], parse->argv))
 			arr[j++] = (*env)[i];
 	}
 	arr[j] = 0;

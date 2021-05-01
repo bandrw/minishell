@@ -12,12 +12,10 @@
 
 #include "minishell.h"
 
-static void	write_vars(t_parse *parse, t_parse *parse_next, char **env)
+static void	write_vars(t_parse *parse, int fd_out, char **env)
 {
 	int	i;
-	int	fd_out;
 
-	fd_out = get_fd_out(parse, parse_next);
 	i = -1;
 	while (env[++i])
 	{
@@ -63,13 +61,17 @@ void	insert_env(char *key, char *new_env, char ***env)
 	insert_new_env(new_env, env);
 }
 
-void	cmd_export(t_list *argv, t_parse *parse, t_parse *parse_next, char ***env)
+void	cmd_export(t_parse *parse, char ***env)
 {
+	int		fd_out;
 	char	**pair;
 	char	*new_env;
+	t_list	*argv;
 
+	argv = parse->argv;
+	fd_out = get_fd_out(parse);
 	if (!argv)
-		write_vars(parse, parse_next, *env);
+		write_vars(parse, fd_out, *env);
 	else
 	{
 		while (argv)
@@ -86,4 +88,6 @@ void	cmd_export(t_list *argv, t_parse *parse, t_parse *parse_next, char ***env)
 			argv = argv->next;
 		}
 	}
+	if (fd_out != 1)
+		close(fd_out);
 }

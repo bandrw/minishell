@@ -12,15 +12,15 @@
 
 #include "minishell.h"
 
-int		get_fd_out(t_parse *parse, t_parse *parse_next)
+int		get_fd_out(t_parse *parse)
 {
-	int	fd;
-	int	pipe_fd[2];
+	int		fd;
+	int		pipe_fd[2];
 
 	if (parse->pipe_info.pipe_to_next)
 	{
 		pipe(pipe_fd);
-		parse_next->pipe_info.fd_in = pipe_fd[0];
+		parse->parse_next->pipe_info.fd_in = pipe_fd[0];
 		return (pipe_fd[1]);
 	}
 	if (parse->pipe_info.file_out)

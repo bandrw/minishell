@@ -41,29 +41,30 @@ typedef struct s_pipe
 
 typedef struct s_parse
 {
-	int			command_id;
-	t_list		*argv;
-	char		**env;
-	t_pipe		pipe_info;
-}				t_parse;
+	int				command_id;
+	t_list			*argv;
+	char			**env;
+	t_pipe			pipe_info;
+	struct s_parse	*parse_next;
+}					t_parse;
 
 //	Logic
 void	execute_command_line(t_list *parse_list, char ***env);
 
-void	cmd_other(t_parse *parse, t_parse *parse_next, char **env);
-void	cmd_echo(t_parse *parse, t_parse *parse_next);
-void	cmd_cd(t_list *argv, char ***env);
-void	cmd_pwd(t_parse *parse, t_parse *parse_next);
-void	cmd_export(t_list *argv, t_parse *parse, t_parse *parse_next, char ***env);
-void	cmd_unset(t_list *argv, char ***env);
-void	cmd_env(t_parse *parse, t_parse *parse_next, char **env);
-void	cmd_exit(t_list *argv);
+void	cmd_other(t_parse *parse, char **env);
+void	cmd_echo(t_parse *parse);
+void	cmd_cd(t_parse *parse, char ***env);
+void	cmd_pwd(t_parse *parse);
+void	cmd_export(t_parse *parse, char ***env);
+void	cmd_unset(t_parse *parse, char ***env);
+void	cmd_env(t_parse *parse, char **env);
+void	cmd_exit(t_parse *parse);
 
 void	insert_env(char *key, char *new_env, char ***env);
 char	*get_env(char *key, char **env);
 char	**arr_realloc(char **arr);
 void	sort_arr(char **arr);
-int		get_fd_out(t_parse *parse, t_parse *parse_next);
+int		get_fd_out(t_parse *parse);
 int		get_fd_in(t_parse *parse);
 void	redirect(int fd_in, int fd_out);
 

@@ -12,12 +12,12 @@
 
 #include "minishell.h"
 
-void	cmd_echo(t_parse *parse, t_parse *parse_next)
+void	cmd_echo(t_parse *parse)
 {
 	int	need_new_line;
 	int	fd_out;
 
-	fd_out = get_fd_out(parse, parse_next);
+	fd_out = get_fd_out(parse);
 	if (parse->argv->content == 0)
 		ft_putchar_fd('\n', 1);
 	need_new_line = 1;
