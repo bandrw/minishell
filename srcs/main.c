@@ -70,6 +70,7 @@ static void	read_line(char *str, char *command_line)
 		{
 			if (pos > 0)
 			{
+				command_line[pos] = '\0';
 				pos--;
 				tputs(cursor_left, 1, (int (*)(int)) ft_putchar);
 				tputs(tgetstr("dc", 0), 1, (int (*)(int)) ft_putchar);
@@ -79,6 +80,8 @@ static void	read_line(char *str, char *command_line)
 		{
 			write(1, str, 1);
 			command_line[pos] = *str;
+			if (command_line[pos] == '\n')
+				command_line[pos] = '\0';
 			pos += 1;
 		}
 	}
@@ -102,7 +105,7 @@ int	main(int argc, char **argv, char **env)
 		str[0] = 0;
 		tputs(save_cursor, 1, (int (*)(int)) ft_putchar);
 		read_line(str, command_line);
-		ft_putstr_fd(command_line, 1);
+		ft_putendl_fd(command_line, 1);
 		parse_list = 0;
 		parse_line(command_line, &parse_list, env);
 		execute_command_line(parse_list, &env);
