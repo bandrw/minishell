@@ -133,7 +133,6 @@ int	main(int argc, char **argv, char **env)
 {
 	char		str[128];
 	char		*command_line;
-	t_list		*parse_list;
 	t_history	history;
 
 	signal(SIGINT, sigint_handler);
@@ -157,10 +156,7 @@ int	main(int argc, char **argv, char **env)
 			return (0);
 		}
 //		printf("Received: \"%s\"\n", command_line);
-		parse_list = 0;
-		parse_line(command_line, &parse_list, env);
-		execute_command_line(parse_list, &env);
-		ft_lstclear(&parse_list, free);
+		parse_line(command_line, &env);
 		free(command_line);
 	}
 }

@@ -64,8 +64,9 @@ void	ft_get_other(t_parse *parse, char **str)
 //	parse->file_in = ft_strdup("../srcs/main.c"); // (logic handled)
 }
 
-void	parse_line(char *line, t_list **parse_list, char **env)
+void	parse_line(char *line, char ***env)
 {
+	t_parse parse;
 //	t_parse *parse;
 //	parse = (t_parse *)malloc(sizeof(t_parse));
 //	ft_bzero(parse, sizeof(t_parse));
@@ -84,49 +85,31 @@ void	parse_line(char *line, t_list **parse_list, char **env)
 //	ft_lstadd_back(parse_list, ft_lstnew(parse));
 	while (*line)
 	{
-		t_parse *parse;
-
-		parse = (t_parse *)malloc(sizeof(t_parse));
-		ft_bzero(parse, sizeof(t_parse));
-		parse->env = env;
-	//	parse->command_id = CMD_ENV;
-	//	parse->pipe_info.pipe_to_next = 1;
-	//	ft_lstadd_back(parse_line, ft_lstnew(parse));
-
-	//	parse = (t_parse *)malloc(sizeof(t_parse));
-	//	ft_bzero(parse, sizeof(t_parse));
-	//	parse->env = env;
-	//	parse->command_id = CMD_OTHER;
-	//	ft_lstadd_back(&parse->argv, ft_lstnew(ft_strdup("cat")));
-	//	ft_lstadd_back(&parse->argv, ft_lstnew(ft_strdup("-e")));
-	//	parse->pipe_info.file_out = ft_strdup("out.txt");
-	//	ft_lstadd_back(parse_line, ft_lstnew(parse));
-
 		while (ft_isspace(*line))
 			line++;
 		if (ft_strncmp("echo", line, 4) == 0 && (!line[4]
 			|| ft_isspace(line[4])))
-			ft_get_echo(parse, &line);
+			ft_get_echo(&parse, &line);
 		else if (ft_strncmp("cd", line, 2) == 0 && (!line[2]
 			|| ft_isspace(line[2])))
-			ft_get_cd(parse, &line);
+			ft_get_cd(&parse, &line);
 		else if (ft_strncmp("pwd", line, 3) == 0 && (!line[3]
 			|| ft_isspace(line[3])))
-			ft_get_pwd_env(parse, CMD_PWD, &line);
+			ft_get_pwd_env(&parse, CMD_PWD, &line);
 		else if (ft_strncmp("export", line, 6) == 0 && (!line[6]
 			|| ft_isspace(line[6])))
-			ft_get_export(parse, &line);
+			ft_get_export(&parse, &line);
 		else if (ft_strncmp("unset", line, 5) == 0 && (!line[5]
 			|| ft_isspace(line[5])))
-			ft_get_unset(parse, &line);
+			ft_get_unset(&parse, &line);
 		else if (ft_strncmp("env", line, 3) == 0 && (!line[3]
 			|| ft_isspace(line[3])))
-			ft_get_pwd_env(parse, CMD_ENV, &line);
+			ft_get_pwd_env(&parse, CMD_ENV, &line);
 		else if (ft_strncmp("exit", line, 4) == 0 && (!line[4]
 			|| ft_isspace(line[4])))
-			ft_get_exit(parse, &line);
+			ft_get_exit(&parse, &line);
 		else
-			ft_get_other(parse, &line);
-		ft_lstadd_back(parse_list, ft_lstnew(parse));
+			ft_get_other(&parse, &line);
+		execute_command_line(&parse, env);
 	}
 }

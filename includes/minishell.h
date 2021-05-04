@@ -57,7 +57,7 @@ typedef struct s_parse
 }					t_parse;
 
 //	Logic
-void	execute_command_line(t_list *parse_list, char ***env);
+void	execute_command_line(t_parse *parse, char ***env);
 
 void	cmd_other(t_parse *parse, char **env);
 void	cmd_echo(t_parse *parse);
@@ -82,7 +82,7 @@ void	sigint_handler(int sig);
 void	sigquit_handler(int sig);
 
 //	Parse
-void	parse_line(char *command_line, t_list **parse_list, char **env);
+void	parse_line(char *command_line, char ***env);
 void	ft_parse_wquotes(char **str, t_parse *parse);
 
 void	ft_get_pwd_env(t_parse *parse, int id, char **str);
