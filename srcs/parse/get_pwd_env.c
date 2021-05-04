@@ -12,11 +12,15 @@
 
 #include "minishell.h"
 
-void	ft_get_pwd_env(t_parse *parse, int id)
+void	ft_get_pwd_env(t_parse *parse, int id, char **str)
 {
+	char	*tmp;
+
+	tmp = *str + 6;
 	if (id == 3)
 		parse->command_id = CMD_PWD;
 	else
 		parse->command_id = CMD_ENV;
-	parse->argv = 0;
+	ft_read_line(&tmp, parse, 0);
+	*str = tmp;
 }

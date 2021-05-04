@@ -85,7 +85,7 @@ void	sigquit_handler(int sig);
 void	parse_line(char *command_line, t_list **parse_list, char **env);
 void	ft_parse_wquotes(char **str, t_parse *parse);
 
-void	ft_get_pwd_env(t_parse *parse, int id);
+void	ft_get_pwd_env(t_parse *parse, int id, char **str);
 void	ft_get_echo(t_parse *parse, char **str);
 void	ft_get_cd(t_parse *parse, char **str);
 void	ft_get_export(t_parse *parse, char **str);

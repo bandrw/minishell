@@ -91,7 +91,7 @@ void	parse_line(char *line, t_list **parse_list, char **env)
 			ft_get_cd(parse, &line);
 		else if (ft_strncmp("pwd", line, 3) == 0 && (!line[3]
 			|| ft_isspace(line[3])))
-			ft_get_pwd_env(parse, CMD_PWD);
+			ft_get_pwd_env(parse, CMD_PWD, &line);
 		else if (ft_strncmp("export", line, 6) == 0 && (!line[6]
 			|| ft_isspace(line[6])))
 			ft_get_export(parse, &line);
@@ -100,7 +100,7 @@ void	parse_line(char *line, t_list **parse_list, char **env)
 			ft_get_unset(parse, &line);
 		else if (ft_strncmp("env", line, 3) == 0 && (!line[3]
 			|| ft_isspace(line[3])))
-			ft_get_pwd_env(parse, CMD_ENV);
+			ft_get_pwd_env(parse, CMD_ENV, &line);
 		else if (ft_strncmp("exit", line, 4) == 0 && (!line[4]
 			|| ft_isspace(line[4])))
 			ft_get_exit(parse, &line);
