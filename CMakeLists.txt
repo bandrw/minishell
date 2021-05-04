@@ -90,7 +90,7 @@ add_library(ft
 		libft/srcs/get_next_line_utils.c
 		libft/srcs/ft_lsttoarr.c
 		libft/srcs/ft_strcmp.c
-		includes/minishell.h)
+		includes/minishell.h libft/srcs/ft_split_str.c)
 
 target_link_libraries(minishell LINK_PUBLIC termcap)
 
