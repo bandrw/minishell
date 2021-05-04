@@ -26,9 +26,9 @@ int		get_fd_out(t_parse *parse)
 	if (parse->pipe_info.file_out)
 	{
 		if (parse->pipe_info.append_output)
-			fd = open(parse->pipe_info.file_out, O_CREAT | O_WRONLY | O_APPEND, S_IRWXU);
+			fd = open(parse->pipe_info.file_out, O_CREAT | O_WRONLY | O_APPEND, 0644);
 		else
-			fd = open(parse->pipe_info.file_out, O_CREAT | O_WRONLY, S_IRWXU);
+			fd = open(parse->pipe_info.file_out, O_CREAT | O_WRONLY, 0644);
 		return (fd);
 	}
 	return (1);

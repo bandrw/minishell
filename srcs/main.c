@@ -95,8 +95,40 @@ static void	read_line(char *str, char *command_line, t_history *history)
 		history_add(history, command_line);
 }
 
-# define DEBUG 0
-# if DEBUG
+#define DEBUG 0
+#if DEBUG
+int	main(int argc, char **argv, char **env)
+{
+	int		n;
+	char	*command_line;
+	t_list	*parse_list;
+
+	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, sigquit_handler);
+	env = arr_realloc(env);
+	sort_arr(env);
+	while (1)
+	{
+		ft_putstr("\033[35mminishell$ \033[0m");
+		n = get_next_line(0, &command_line);
+		if (n == 0)
+		{
+			ft_putendl_fd("exit", 1);
+			return (0);
+		}
+		if (n != 1)
+		{
+			ft_putendl_fd("Error: GNL", 2);
+			return (1);
+		}
+		parse_list = 0;
+		parse_line(command_line, &parse_list, env);
+		execute_command_line(parse_list, &env);
+		ft_lstclear(&parse_list, free);
+		free(command_line);
+	}
+}
+#else
 int	main(int argc, char **argv, char **env)
 {
 	char		str[128];
@@ -124,39 +156,7 @@ int	main(int argc, char **argv, char **env)
 			ft_putendl_fd("exit", 1);
 			return (0);
 		}
-		printf("Received: \"%s\"\n", command_line);
-		parse_list = 0;
-		parse_line(command_line, &parse_list, env);
-		execute_command_line(parse_list, &env);
-		ft_lstclear(&parse_list, free);
-		free(command_line);
-	}
-}
-# else
-int	main(int argc, char **argv, char **env)
-{
-	int		n;
-	char	*command_line;
-	t_list	*parse_list;
-
-	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, sigquit_handler);
-	env = arr_realloc(env);
-	sort_arr(env);
-	while (1)
-	{
-		ft_putstr("\033[35mminishell$ \033[0m");
-		n = get_next_line(0, &command_line);
-		if (n == 0)
-		{
-			ft_putendl_fd("exit", 1);
-			return (0);
-		}
-		if (n != 1)
-		{
-			ft_putendl_fd("Error: GNL", 2);
-			return (1);
-		}
+//		printf("Received: \"%s\"\n", command_line);
 		parse_list = 0;
 		parse_line(command_line, &parse_list, env);
 		execute_command_line(parse_list, &env);
