@@ -31,6 +31,13 @@
 # define CMD_ENV 6
 # define CMD_EXIT 7
 
+typedef struct s_history
+{
+	int			size;
+	char		**content;
+	int			current;
+}				t_history;
+
 typedef struct s_pipe
 {
 	int			pipe_to_next;
@@ -68,6 +75,8 @@ void	sort_arr(char **arr);
 int		get_fd_out(t_parse *parse);
 int		get_fd_in(t_parse *parse);
 void	redirect(int fd_in, int fd_out);
+
+void	history_add(t_history *history, char *command_line);
 
 void	sigint_handler(int sig);
 void	sigquit_handler(int sig);

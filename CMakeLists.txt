@@ -27,7 +27,8 @@ add_executable(minishell
 		srcs/logic/logic_utils.c
 		srcs/parse/quote.c
 		srcs/logic/get_fd.c
-		srcs/logic/redirect.c)
+		srcs/logic/redirect.c
+		srcs/logic/history.c)
 
 include_directories(includes)
 include_directories(libft/includes)
