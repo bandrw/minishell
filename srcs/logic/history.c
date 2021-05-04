@@ -12,11 +12,27 @@
 
 #include "minishell.h"
 
+static void	history_realloc(t_history *history, char *command_line)
+{
+	int		i;
+	char	**arr;
+
+	arr = (char **)malloc(sizeof(char *) * (int)(history->size * 1.5));
+	i = 0;
+	while (i < history->current)
+	{
+		arr[i] = history->content[i];
+		i++;
+	}
+	history->size = (int)(history->size * 1.5);
+	free(history->content);
+	history->content = arr;
+}
+
 void	history_add(t_history *history, char *command_line)
 {
-	if (history->current < history->size)
-	{
-		history->content[history->current] = ft_strdup(command_line);
-		history->current++;
-	}
+	if (history->current >= history->size - 1)
+		history_realloc(history, command_line);
+	history->content[history->current] = ft_strdup(command_line);
+	history->current++;
 }

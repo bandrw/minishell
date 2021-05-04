@@ -46,6 +46,7 @@ static void	read_line(char *str, char *command_line, t_history *history)
 		{
 			command_nbr--;
 			tputs(restore_cursor, 1, (int (*)(int)) ft_putchar);
+			tputs(tgoto(tgetstr("DC", 0), 0, ft_strlen(command_line)), 1, (int (*)(int)) ft_putchar);
 			tputs(tgetstr("ed", 0), 1, (int (*)(int)) ft_putchar);
 			ft_putstr(history->content[command_nbr]);
 			pos = ft_strlen(history->content[command_nbr]);
@@ -55,6 +56,7 @@ static void	read_line(char *str, char *command_line, t_history *history)
 		{
 			command_nbr++;
 			tputs(restore_cursor, 1, (int (*)(int)) ft_putchar);
+			tputs(tgoto(tgetstr("DC", 0), 0, ft_strlen(command_line)), 1, (int (*)(int)) ft_putchar);
 			tputs(tgetstr("ed", 0), 1, (int (*)(int)) ft_putchar);
 			ft_putstr(history->content[command_nbr]);
 			pos = ft_strlen(history->content[command_nbr]);
@@ -88,9 +90,8 @@ static void	read_line(char *str, char *command_line, t_history *history)
 				command_line[pos] = '\0';
 			pos += 1;
 		}
-//		printf("%d: %d %d\n", l, str[0], str[1]);
 	}
-	if (*command_line != '\0')
+	if (*command_line != '\0') // if not empty
 		history_add(history, command_line);
 }
 
@@ -116,16 +117,16 @@ int	main(int argc, char **argv, char **env)
 		str[0] = 0;
 		tputs(save_cursor, 1, (int (*)(int)) ft_putchar);
 		read_line(str, command_line, &history);
+		if (*str == '\4')
+		{
+			ft_putendl_fd("exit", 1);
+			return (0);
+		}
 		printf("Received: \"%s\"\n", command_line);
 		parse_list = 0;
 		parse_line(command_line, &parse_list, env);
 		execute_command_line(parse_list, &env);
 		ft_lstclear(&parse_list, free);
 		free(command_line);
-		if (*str == '\4')
-		{
-			ft_putendl_fd("exit", 1);
-			return (0);
-		}
 	}
 }
