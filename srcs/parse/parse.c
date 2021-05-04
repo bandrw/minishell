@@ -66,25 +66,16 @@ void	ft_get_other(t_parse *parse, char **str)
 
 void	parse_line(char *line, char ***env)
 {
-	t_parse parse;
-//	t_parse *parse;
-//	parse = (t_parse *)malloc(sizeof(t_parse));
-//	ft_bzero(parse, sizeof(t_parse));
-//	parse->env = env;
-//	parse->command_id = CMD_ENV;
-//	parse->pipe_info.pipe_to_next = 1;
-//	ft_lstadd_back(parse_list, ft_lstnew(parse));
-//
-//	parse = (t_parse *)malloc(sizeof(t_parse));
-//	ft_bzero(parse, sizeof(t_parse));
-//	parse->env = env;
-//	parse->command_id = CMD_OTHER;
-//	ft_lstadd_back(&parse->argv, ft_lstnew(ft_strdup("cat")));
-//	ft_lstadd_back(&parse->argv, ft_lstnew(ft_strdup("-e")));
-//	parse->pipe_info.file_out = ft_strdup("out.txt");
-//	ft_lstadd_back(parse_list, ft_lstnew(parse));
+	int		next_parse_fd_in;
+	t_parse	parse;
+
+	next_parse_fd_in = 0;
 	while (*line)
 	{
+		if (parse.next_parse_fd_in)
+			next_parse_fd_in = parse.next_parse_fd_in;
+		ft_bzero(&parse, sizeof(parse));
+		parse.next_parse_fd_in = next_parse_fd_in;
 		while (ft_isspace(*line))
 			line++;
 		if (ft_strncmp("echo", line, 4) == 0 && (!line[4]

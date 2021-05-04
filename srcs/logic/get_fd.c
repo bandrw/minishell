@@ -20,7 +20,7 @@ int		get_fd_out(t_parse *parse)
 	if (parse->pipe_info.pipe_to_next)
 	{
 		pipe(pipe_fd);
-		parse->parse_next->pipe_info.fd_in = pipe_fd[0];
+		parse->next_parse_fd_in = pipe_fd[0];
 		return (pipe_fd[1]);
 	}
 	if (parse->pipe_info.file_out)

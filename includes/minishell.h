@@ -53,7 +53,7 @@ typedef struct s_parse
 	t_list			*argv;
 	char			**env;
 	t_pipe			pipe_info;
-	struct s_parse	*parse_next;
+	int				next_parse_fd_in;
 }					t_parse;
 
 //	Logic
