@@ -42,8 +42,8 @@ void	ft_parse_wquotes(char **str, t_parse *parse)
 		check = 0;
 		if (**str == '\'')
 			ft_quote(str, parse, check);
-		if (**str == '$')
-			ft_dollar(str, parse, check);
+//		if (**str == '$')
+//			ft_dollar(str, parse, check);
 		else
 		{
 			buff = ft_for_print(str, parse, "$\'\"");

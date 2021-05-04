@@ -41,8 +41,8 @@ void	ft_read_line(char **str, t_parse *parse, int num_quote)
 			ft_quote(str, parse, check);
 		else if (**str == '\"')
 			ft_wquote(str, parse, check, ++num_quote);
-		else if (**str == '$')
-			ft_dollar(str, parse, check);
+//		else if (**str == '$')
+//			ft_dollar(str, parse, check);
 		else
 			ft_text(str, parse, check);
 	}
@@ -67,40 +67,48 @@ void	ft_get_other(t_parse *parse, char **str)
 void	parse_line(char *line, char ***env)
 {
 	int		next_parse_fd_in;
+	char	*buff;
 	t_parse	parse;
 
 	next_parse_fd_in = 0;
+	//buff = 0;
 	while (*line)
 	{
+//		while (ft_isspace(*line))
+//			line++;
+		if (*line == ';')
+			line++;
 		if (parse.next_parse_fd_in)
 			next_parse_fd_in = parse.next_parse_fd_in;
 		ft_bzero(&parse, sizeof(parse));
+		parse.env = *env;
 		parse.next_parse_fd_in = next_parse_fd_in;
-		while (ft_isspace(*line))
-			line++;
-		if (ft_strncmp("echo", line, 4) == 0 && (!line[4]
-			|| ft_isspace(line[4])))
-			ft_get_echo(&parse, &line);
-		else if (ft_strncmp("cd", line, 2) == 0 && (!line[2]
-			|| ft_isspace(line[2])))
-			ft_get_cd(&parse, &line);
-		else if (ft_strncmp("pwd", line, 3) == 0 && (!line[3]
-			|| ft_isspace(line[3])))
-			ft_get_pwd_env(&parse, CMD_PWD, &line);
-		else if (ft_strncmp("export", line, 6) == 0 && (!line[6]
-			|| ft_isspace(line[6])))
-			ft_get_export(&parse, &line);
-		else if (ft_strncmp("unset", line, 5) == 0 && (!line[5]
-			|| ft_isspace(line[5])))
-			ft_get_unset(&parse, &line);
-		else if (ft_strncmp("env", line, 3) == 0 && (!line[3]
-			|| ft_isspace(line[3])))
-			ft_get_pwd_env(&parse, CMD_ENV, &line);
-		else if (ft_strncmp("exit", line, 4) == 0 && (!line[4]
-			|| ft_isspace(line[4])))
-			ft_get_exit(&parse, &line);
+		buff = ft_convers_dol(&parse, &line);
+		while (ft_isspace(*buff))
+			buff++;
+		if (ft_strncmp("echo", buff, 4) == 0 && (!buff[4]
+		|| ft_isspace(buff[4])))
+			ft_get_echo(&parse, &buff);
+		else if (ft_strncmp("cd", buff, 2) == 0 && (!buff[2]
+		|| ft_isspace(buff[2])))
+			ft_get_cd(&parse, &buff);
+		else if (ft_strncmp("pwd", buff, 3) == 0 && (!buff[3]
+		|| ft_isspace(buff[3])))
+			ft_get_pwd_env(&parse, CMD_PWD, &buff);
+		else if (ft_strncmp("export", buff, 6) == 0 && (!buff[6]
+		|| ft_isspace(buff[6])))
+			ft_get_export(&parse, &buff);
+		else if (ft_strncmp("unset", buff, 5) == 0 && (!buff[5]
+		|| ft_isspace(buff[5])))
+			ft_get_unset(&parse, &buff);
+		else if (ft_strncmp("env", buff, 3) == 0 && (!buff[3]
+		|| ft_isspace(buff[3])))
+			ft_get_pwd_env(&parse, CMD_ENV, &buff);
+		else if (ft_strncmp("exit", buff, 4) == 0 && (!buff[4]
+		|| ft_isspace(buff[4])))
+			ft_get_exit(&parse, &buff);
 		else
-			ft_get_other(&parse, &line);
+			ft_get_other(&parse, &buff);
 		execute_command_line(&parse, env);
 	}
 }

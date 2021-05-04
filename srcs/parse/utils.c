@@ -63,3 +63,4 @@ int 	ft_strchar_int(const char *str, char *line)
 	}
 	return (i);
 }
+

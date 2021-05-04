@@ -20,7 +20,10 @@ void 	ft_get_echo(t_parse *parse, char **str)
 	while (ft_isspace(*tmp))
 		tmp++;
 	parse->command_id = CMD_ECHO;
-	ft_read_line(&tmp, parse, 0);
+	if (!*tmp)
+		parse->argv->content = 0; //TODO: не работает если echo без аргумента
+	else
+		ft_read_line(&tmp, parse, 0);
 	*str = tmp;
 //	// Redirect example
 //	parse->file_out = ft_strdup("out.txt"); // (echo 123 > out.txt)

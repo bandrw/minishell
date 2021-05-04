@@ -12,25 +12,50 @@
 
 #include "minishell.h"
 
-void	ft_dollar(char **str, t_parse *parse, int n)
+char	*ft_convers_dol(t_parse *parse, char **str)
+{
+	char *line;
+	char *buff;
+	char *env;
+
+	buff = 0;
+	line = 0;
+	while (**str && ft_strchr("|<>;", **str) == 0)
+	{
+		if (**str == '\'')
+		{
+			(*str)++;
+			line = ft_strjoin(line, ft_for_print(str, parse, "\'"));
+		}
+		else if (**str == '$')
+			line = ft_strjoin(line, ft_dollar(str, parse));
+		else
+		{
+			line = ft_strjoin(line, ft_for_print(str, parse, "$;\'"));
+		}
+		//(*str)++;
+	}
+	return (line);
+}
+
+char	*ft_dollar(char **str, t_parse *parse)
 {
 	char	*buff;
 	char	*env;
 
 	(*str) += 1;
-	if (**str == '?')
-	{
-		env = ft_itoa(errno);
-		ft_push_argv(env, parse, 0);
-		(*str) += 1;
-	}
-	else
-	{
-		buff = ft_for_print(str, parse, "$;\t\n\v\f\r\'\" ");
-		env = get_env(buff, parse->env);
-		if (!env)
-			ft_putendl_fd("Error: not env", 2);
-		else
-			ft_push_argv(env, parse, n);
-	}
+//	if (**str == '?')
+//	{
+//		env = ft_itoa(errno);
+//		ft_push_argv(env, parse, 0);
+//		(*str) += 1;
+//	}
+	//else
+	//{
+	buff = ft_for_print(str, parse, "$;\t\n\v\f\r\'\" |<>");
+	env = get_env(buff, parse->env);
+	if (env)
+		return (env);
+	return (0);
+	//}
 }
