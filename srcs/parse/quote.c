@@ -57,7 +57,7 @@ void	ft_wquote(char **str, t_parse *parse, int n, int num_quote)
 	int		check;
 	char	*buff;
 
-	check = 1;
+	//n = 1;
 	(*str) += 1;
 	if (num_quote % 2 != 0)
 	{

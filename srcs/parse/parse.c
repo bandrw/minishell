@@ -16,7 +16,7 @@ void	ft_text(char **str, t_parse *parse, int n)
 {
 	char	*buff;
 
-	buff = ft_for_print(str, parse, "$\t\n\v\f\r ;");
+	buff = ft_for_print(str, parse, "$\t\n\v\f\r ;\'\"");
 	ft_push_argv(buff, parse, n);
 }
 
@@ -24,13 +24,18 @@ void	ft_read_line(char **str, t_parse *parse, int num_quote)
 {
 	int check;
 
-	while (**str && **str != ';')
+	while (**str)
 	{
 		check = 1;
 		while (ft_isspace(**str))
 		{
 			(*str)++;
 			check = 0;
+		}
+		if (**str == ';')
+		{
+			(*str)++;
+			return ;
 		}
 		if (**str == '\'')
 			ft_quote(str, parse, check);
@@ -41,8 +46,6 @@ void	ft_read_line(char **str, t_parse *parse, int num_quote)
 		else
 			ft_text(str, parse, check);
 	}
-	if (**str == ';')
-		(*str)++;
 }
 
 void	ft_get_other(t_parse *parse, char **str)
