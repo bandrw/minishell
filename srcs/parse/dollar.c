@@ -26,7 +26,7 @@ void	ft_dollar(char **str, t_parse *parse, int n)
 	}
 	else
 	{
-		buff = ft_for_print(str, parse, "$\t\n\v\f\r\'\" ");
+		buff = ft_for_print(str, parse, "$;\t\n\v\f\r\'\" ");
 		env = get_env(buff, parse->env);
 		if (!env)
 			ft_putendl_fd("Error: not env", 2);

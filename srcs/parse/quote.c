@@ -40,8 +40,8 @@ void	ft_parse_wquotes(char **str, t_parse *parse)
 	while (**str && **str != '\"')
 	{
 		check = 0;
-//		if (**str == '\'')
-//			ft_quote(str, parse, check);
+		if (**str == '\'')
+			ft_quote(str, parse, check);
 		if (**str == '$')
 			ft_dollar(str, parse, check);
 		else
@@ -61,7 +61,7 @@ void	ft_wquote(char **str, t_parse *parse, int n, int num_quote)
 	(*str) += 1;
 	if (num_quote % 2 != 0)
 	{
-		buff = ft_for_print(str, parse, "$\"");
+		buff = ft_for_print(str, parse, ";$\"");
 		ft_push_argv(buff, parse, n);
 		while (**str && **str != '\"')
 			ft_parse_wquotes(str, parse);
