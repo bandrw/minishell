@@ -19,4 +19,5 @@ void	ft_get_unset(t_parse *parse, char **str)
 	tmp = *str + 5;
 	parse->command_id = CMD_UNSET;
 	ft_read_line(&tmp, parse, 0);
+	*str = tmp;
 }

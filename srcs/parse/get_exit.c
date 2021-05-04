@@ -19,4 +19,5 @@ void	ft_get_exit(t_parse *parse, char **str)
 	tmp = *str + 4;
 	parse->command_id = CMD_EXPORT;
 	ft_read_line(&tmp, parse,0);
+	*str = tmp;
 }

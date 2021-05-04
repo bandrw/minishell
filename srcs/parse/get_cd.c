@@ -19,5 +19,6 @@ void	ft_get_cd(t_parse *parse, char **str)
 	tmp = *str + 2;
 	parse->command_id = CMD_CD;
 	ft_read_line(&tmp, parse,0);
+	*str = tmp;
 }
 
