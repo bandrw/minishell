@@ -95,13 +95,12 @@ static void	read_line(char *str, char *command_line, t_history *history)
 		history_add(history, command_line);
 }
 
-#define DEBUG 0
+#define DEBUG 1
 #if DEBUG
 int	main(int argc, char **argv, char **env)
 {
 	int		n;
 	char	*command_line;
-	t_list	*parse_list;
 
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, sigquit_handler);
@@ -121,10 +120,7 @@ int	main(int argc, char **argv, char **env)
 			ft_putendl_fd("Error: GNL", 2);
 			return (1);
 		}
-		parse_list = 0;
-		parse_line(command_line, &parse_list, env);
-		execute_command_line(parse_list, &env);
-		ft_lstclear(&parse_list, free);
+		parse_line(command_line, &env);
 		free(command_line);
 	}
 }
