@@ -12,12 +12,12 @@
 
 #include "minishell.h"
 
-void	ft_get_infile(char **str, t_parse *parse)
+void	ft_get_outfile(char **str, t_parse *parse)
 {
 	char	*file;
 
 	while (**str && ft_isspace(**str))
 		(*str)++;
 	file = ft_for_print(str, parse, " ;\t\n\v\f\r");
-	parse->pipe_info.file_in = file;
+	parse->pipe_info.file_out = ft_strdup(file);
 }

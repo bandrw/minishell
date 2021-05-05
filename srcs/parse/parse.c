@@ -52,7 +52,8 @@ void	ft_read_line(char **str, t_parse *parse, int num_quote)
 		else if (**str == '>')
 		{
 			(*str)++;
-			ft_get_infile(str, parse);
+			ft_get_outfile(str, parse);
+			return ;
 		}
 //		else if (**str == '$')
 //			ft_dollar(str, parse, check);
