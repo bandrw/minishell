@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cd.c                                           :+:      :+:    :+:   */
+/*   get_other.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pantigon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/27 16:35:16 by pantigon          #+#    #+#             */
-/*   Updated: 2021/04/27 16:35:18 by pantigon         ###   ########.fr       */
+/*   Created: 2021/05/05 18:19:40 by pantigon          #+#    #+#             */
+/*   Updated: 2021/05/05 18:19:42 by pantigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_get_cd(t_parse *parse, char **str)
+void	ft_text(char **str, t_parse *parse, int n)
 {
-	char	*tmp;
-	int		quote;
+	char	*buff;
+
+	buff = ft_for_print(str, parse, " ;|<>\t\n\v\f\r\'\"");
+	ft_push_argv(buff, parse, n);
+}
+
+void	ft_get_other(t_parse *parse, char **str)
+{
+	int	quote;
 
 	quote = 0;
-	tmp = *str + 2;
-	while (ft_isspace(*tmp))
-		tmp++;
-	parse->command_id = CMD_CD;
-	ft_read_line(&tmp, parse, &quote);
-	*str = tmp;
+	parse->command_id = CMD_OTHER;
+	ft_read_line(str, parse, &quote);
 }

@@ -52,14 +52,15 @@ void	ft_parse_wquotes(char **str, t_parse *parse)
 	}
 }
 
-void	ft_wquote(char **str, t_parse *parse, int n, int num_quote)
+void	ft_wquote(char **str, t_parse *parse, int n, int *num_quote)
 {
 	int		check;
 	char	*buff;
 
 	//n = 1;
 	(*str) += 1;
-	if (num_quote % 2 != 0)
+	*num_quote += 1;
+	if (*num_quote % 2 != 0)
 	{
 		buff = ft_for_print(str, parse, "$\'\"");
 		ft_push_argv(buff, parse, n);

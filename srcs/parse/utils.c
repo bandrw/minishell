@@ -14,7 +14,7 @@
 
 void	ft_push_argv(char *str, t_parse *parse, int n)
 {
-	char 	*buff;
+	char	*buff;
 	t_list	*new;
 	t_list	*last;
 
@@ -46,8 +46,8 @@ char	*ft_for_print(char **str, t_parse *parse, char *ch)
 
 int 	ft_strchar_int(const char *str, char *line)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (line[i])
@@ -63,4 +63,3 @@ int 	ft_strchar_int(const char *str, char *line)
 	}
 	return (i);
 }
-

@@ -12,17 +12,60 @@
 
 #include "minishell.h"
 
-void	ft_text(char **str, t_parse *parse, int n)
+void	ft_check_red(char **str, t_parse *parse, int err)
 {
-	char	*buff;
-
-	buff = ft_for_print(str, parse, " ;$|<>\t\n\v\f\r\'\"");
-	ft_push_argv(buff, parse, n);
+	if (err == 0)
+	{
+		(*str)++;
+		if (**str == '>')
+		{
+			(*str)++;
+			parse->pipe_info.append_output = 1;
+		}
+		ft_get_outfile(str, parse);
+	}
+	else
+	{
+		(*str) += 2;
+		if (**str == '>')
+		{
+			(*str)++;
+			parse->pipe_info.append_err_output = 1;
+		}
+		ft_get_errfile(str, parse);
+	}
 }
 
-void	ft_read_line(char **str, t_parse *parse, int num_quote)
+int	ft_check_sym(char **str, t_parse *parse, int *num_quote, int chk)
 {
-	int check;
+	if (**str == '\'')
+		ft_quote(str, parse, chk);
+	else if (**str == '\"')
+		ft_wquote(str, parse, chk, num_quote);
+	else if (**str == '|')
+	{
+		parse->pipe_info.pipe_to_next = 1;
+		(*str)++;
+		return (-1);
+	}
+	else if (**str == '>')
+	{
+		ft_check_red(str, parse, 0);
+		return (-1);
+	}
+	else if (**str == '2' && (*(*str) + 1) == '>')
+	{
+		ft_check_red(str, parse, 1);
+		return (-1);
+	}
+	else
+		ft_text(str, parse, chk);
+	return (0);
+}
+
+void	ft_read_line(char **str, t_parse *parse, int *num_quote)
+{
+	int	check;
 
 	while (**str)
 	{
@@ -39,53 +82,9 @@ void	ft_read_line(char **str, t_parse *parse, int num_quote)
 			(*str)++;
 			return ;
 		}
-		if (**str == '\'')
-			ft_quote(str, parse, check);
-		else if (**str == '\"')
-			ft_wquote(str, parse, check, ++num_quote);
-		else if (**str == '|')
-		{
-			parse->pipe_info.pipe_to_next = 1;
-			(*str)++;
+		if (ft_check_sym(str, parse, num_quote, check) == -1)
 			return ;
-		}
-		else if (**str == '>')
-		{
-			(*str)++;
-			if (**str == '>')
-			{
-				(*str)++;
-				parse->pipe_info.append_output = 1;
-			}
-			ft_get_outfile(str, parse);
-			return ;
-		}
-		else if (**str == '2' && (*(*str) + 1) == '>')
-		{
-			(*str) += 2;
-			if (**str == '>')
-			{
-				(*str)++;
-				parse->pipe_info.append_err_output = 1;
-			}
-			ft_get_errfile(str, parse);
-			return ;
-		}
-//		else if (**str == '$')
-//			ft_dollar(str, parse, check);
-		else
-			ft_text(str, parse, check);
 	}
-}
-
-void	ft_get_other(t_parse *parse, char **str)
-{
-	//char **buff;
-
-	parse->command_id = CMD_OTHER;
-	ft_read_line(str, parse, 0);
-//	parse->file_out = ft_strdup("out.txt"); // (logic handled)
-//	parse->file_in = ft_strdup("../srcs/main.c"); // (logic handled)
 }
 
 void	parse_line(char *line, char ***env)

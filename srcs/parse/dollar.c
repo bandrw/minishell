@@ -14,9 +14,9 @@
 
 char	*ft_convers_dol(t_parse *parse, char **str)
 {
-	char *line;
-	char *buff;
-	char *env;
+	char	*line;
+	char	*buff;
+	char	*env;
 
 	buff = 0;
 	line = 0;
@@ -34,7 +34,6 @@ char	*ft_convers_dol(t_parse *parse, char **str)
 		{
 			line = ft_strjoin(line, ft_for_print(str, parse, "<$;\'"));
 		}
-		//(*str)++;
 	}
 	if (**str == '<')
 		ft_get_infile(str, parse);

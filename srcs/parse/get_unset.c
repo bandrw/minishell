@@ -15,11 +15,13 @@
 void	ft_get_unset(t_parse *parse, char **str)
 {
 	char	*tmp;
+	int		quote;
 
 	tmp = *str + 5;
+	quote = 0;
 	while (ft_isspace(*tmp))
 		tmp++;
 	parse->command_id = CMD_UNSET;
-	ft_read_line(&tmp, parse, 0);
+	ft_read_line(&tmp, parse, &quote);
 	*str = tmp;
 }
