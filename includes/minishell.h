@@ -43,6 +43,7 @@ typedef struct s_pipe
 	int			pipe_to_next;
 	int			fd_in;
 	int			append_output;
+	int			append_err_output;
 	char		*file_out;
 	char		*err_file_out;
 	char		*file_in;
