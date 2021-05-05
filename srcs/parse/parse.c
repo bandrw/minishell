@@ -84,7 +84,9 @@ void	parse_line(char *line, char ***env)
 		parse.env = *env;
 		parse.next_parse_fd_in = next_parse_fd_in;
 		buff = ft_convers_dol(&parse, &line);
-		while (*buff && ft_isspace(*buff))
+		if (!buff)
+			return ;
+		while (ft_isspace(*buff))
 			buff++;
 		if (ft_strncmp("echo", buff, 4) == 0 && (!buff[4]
 		|| ft_isspace(buff[4])))
@@ -107,7 +109,7 @@ void	parse_line(char *line, char ***env)
 		else if (ft_strncmp("exit", buff, 4) == 0 && (!buff[4]
 		|| ft_isspace(buff[4])))
 			ft_get_exit(&parse, &buff);
-		else if (*buff)
+		else if (buff)
 			ft_get_other(&parse, &buff);
 		execute_command_line(&parse, env);
 	}
