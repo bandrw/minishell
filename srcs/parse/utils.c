@@ -12,6 +12,14 @@
 
 #include "minishell.h"
 
+int	ft_check_arg(char *arg, char *buff, int n)
+{
+	if (ft_strncmp(arg, buff, n) == 0 && (!buff[n] || ft_isspace(buff[n])))
+		return (1);
+	else
+		return (-1);
+}
+
 void	ft_push_argv(char *str, t_parse *parse, int n)
 {
 	char	*buff;
