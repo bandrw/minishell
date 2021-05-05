@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static void	write_vars(int fd_out, char **env)
+static void	write_vars(char **env)
 {
 	int		i;
 	char	*delimiter;
@@ -21,16 +21,16 @@ static void	write_vars(int fd_out, char **env)
 	while (env[++i])
 	{
 		delimiter = ft_strchr(env[i], '=');
-		ft_putstr_fd("declare -x ", fd_out);
+		ft_putstr_fd("declare -x ", 1);
 		if (delimiter)
 		{
-			write(fd_out, env[i], delimiter - env[i] + 1);
-			write(fd_out, "\"", 1);
-			ft_putstr_fd(delimiter + 1, fd_out);
-			write(fd_out, "\"\n", 2);
+			write(1, env[i], delimiter - env[i] + 1);
+			write(1, "\"", 1);
+			ft_putstr_fd(delimiter + 1, 1);
+			write(1, "\"\n", 2);
 		}
 		else
-			ft_putendl_fd(env[i], fd_out);
+			ft_putendl_fd(env[i], 1);
 	}
 }
 
@@ -71,15 +71,13 @@ void	insert_env(char *key, char *new_env, char ***env)
 
 void	cmd_export(t_parse *parse, char ***env)
 {
-	int		fd_out;
 	char	**pair;
 	char	*new_env;
 	t_list	*argv;
 
 	argv = parse->argv;
-	fd_out = get_fd_out(parse);
 	if (!argv)
-		write_vars(fd_out, *env);
+		write_vars(*env);
 	else
 	{
 		while (argv)
@@ -97,6 +95,4 @@ void	cmd_export(t_parse *parse, char ***env)
 			argv = argv->next;
 		}
 	}
-	if (fd_out != 1)
-		close(fd_out);
 }

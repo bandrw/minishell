@@ -28,11 +28,7 @@ void	cmd_unset(t_parse *parse, char ***env)
 	int		i;
 	int		j;
 	char	**arr;
-	int		fd_out;
 
-	fd_out = get_fd_out(parse);
-	if (fd_out != 1)
-		close(fd_out);
 	if (!parse->argv)
 		return ;
 	i = 0;

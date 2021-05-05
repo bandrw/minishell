@@ -72,43 +72,17 @@ static void	exec_from_path(t_parse *parse, char **env, char **argv_arr, char *pa
 
 void	cmd_other(t_parse *parse, char **env)
 {
-	int		fd[2];
 	char	*path;
 	char	**argv_arr;
-	int		fd_in;
-	int		fd_out;
-	int		stdout_copy;
-	int		stdin_copy;
 
 	errno = 0;
 	argv_arr = ft_lsttoarr(parse->argv);
 	if (argv_arr)
 	{
 		path = get_env("PATH", env);
-		pipe(fd);
-		stdout_copy = dup(1);
-		stdin_copy = dup(0);
-		dup2(fd[1], 1);
-		close(fd[1]);
-		fd_in = get_fd_in(parse);
-		if (parse->pipe_info.fd_in)
-			dup2(parse->pipe_info.fd_in, 0);
-		else if (parse->pipe_info.file_in)
-			dup2(fd_in, 0);
 		if (argv_arr[0][0] == '/' || argv_arr[0][0] == '.' || !path)
 			exec_relative(parse, env, argv_arr);
 		else
 			exec_from_path(parse, env, argv_arr, path);
-		dup2(stdout_copy, 1);
-		dup2(stdin_copy, 0);
-		close(stdin_copy);
-		close(stdout_copy);
-		fd_out = get_fd_out(parse);
-		redirect(fd[0], fd_out);
-		if (fd_out != 1)
-			close(fd_out);
-		if (fd_in != 0)
-			close(fd_in);
-		close(fd[0]);
 	}
 }

@@ -14,11 +14,6 @@
 
 void	cmd_exit(t_parse *parse)
 {
-	int	fd_out;
-
-	fd_out = get_fd_out(parse);
-	if (fd_out != 1)
-		close(fd_out);
 	if (parse->argv)
 		exit(ft_atoi(parse->argv->content));
 	exit(0);

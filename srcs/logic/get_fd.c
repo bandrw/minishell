@@ -12,10 +12,18 @@
 
 #include "minishell.h"
 
+int		get_fd_in(t_parse *parse)
+{
+	if (parse->pipe_info.fd_in)
+		return (parse->pipe_info.fd_in);
+	if (parse->pipe_info.file_in)
+		return (open(parse->pipe_info.file_in, O_RDONLY));
+	return (0);
+}
+
 int		get_fd_out(t_parse *parse)
 {
-	int		fd;
-	int		pipe_fd[2];
+	int	pipe_fd[2];
 
 	if (parse->pipe_info.pipe_to_next)
 	{
@@ -26,19 +34,21 @@ int		get_fd_out(t_parse *parse)
 	if (parse->pipe_info.file_out)
 	{
 		if (parse->pipe_info.append_output)
-			fd = open(parse->pipe_info.file_out, O_CREAT | O_WRONLY | O_APPEND, 0644);
+			return (open(parse->pipe_info.file_out, O_CREAT | O_WRONLY | O_APPEND, 0644));
 		else
-			fd = open(parse->pipe_info.file_out, O_CREAT | O_WRONLY, 0644);
-		return (fd);
+			return (open(parse->pipe_info.file_out, O_CREAT | O_WRONLY, 0644));
 	}
 	return (1);
 }
 
-int		get_fd_in(t_parse *parse)
+int		get_fd_err(t_parse *parse)
 {
-	if (parse->pipe_info.fd_in)
-		return (parse->pipe_info.fd_in);
-	if (parse->pipe_info.file_in)
-		return (open(parse->pipe_info.file_in, O_RDONLY));
-	return (0);
+	if (parse->pipe_info.err_file_out)
+	{
+		if (parse->pipe_info.append_output)
+			return (open(parse->pipe_info.err_file_out, O_CREAT | O_WRONLY | O_APPEND, 0644));
+		else
+			return (open(parse->pipe_info.err_file_out, O_CREAT | O_WRONLY, 0644));
+	}
+	return (2);
 }

@@ -14,13 +14,9 @@
 
 void	cmd_cd(t_parse *parse, char ***env)
 {
-	int		fd_out;
 	char	*buf;
 
 	errno = 0;
-	fd_out = get_fd_out(parse);
-	if (fd_out != 1)
-		close(fd_out);
 	if (parse->argv == 0)
 		return ;
 	chdir(parse->argv->content);

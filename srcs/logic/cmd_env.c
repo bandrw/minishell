@@ -12,18 +12,13 @@
 
 #include "minishell.h"
 
-void	cmd_env(t_parse *parse, char **env)
+void	cmd_env(char **env)
 {
-	int	fd_out;
-
-	fd_out = get_fd_out(parse);
 	sort_arr(env);
 	while (*env)
 	{
 		if (ft_strchr(*env, '='))
-			ft_putendl_fd(*env, fd_out);
+			ft_putendl_fd(*env, 1);
 		env++;
 	}
-	if (fd_out != 1)
-		close(fd_out);
 }

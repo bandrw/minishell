@@ -64,10 +64,10 @@ void	execute_command_line(t_parse *parse, char ***env);
 void	cmd_other(t_parse *parse, char **env);
 void	cmd_echo(t_parse *parse);
 void	cmd_cd(t_parse *parse, char ***env);
-void	cmd_pwd(t_parse *parse);
+void	cmd_pwd(void);
 void	cmd_export(t_parse *parse, char ***env);
 void	cmd_unset(t_parse *parse, char ***env);
-void	cmd_env(t_parse *parse, char **env);
+void	cmd_env(char **env);
 void	cmd_exit(t_parse *parse);
 
 void	insert_env(char *key, char *new_env, char ***env);

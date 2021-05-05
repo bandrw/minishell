@@ -15,14 +15,10 @@
 void	cmd_echo(t_parse *parse)
 {
 	int	need_new_line;
-	int	fd_out;
 
-	fd_out = get_fd_out(parse);
 	if (parse->argv == 0)
 	{
-		ft_putchar_fd('\n', fd_out);
-		if (fd_out != 1)
-			close(fd_out);
+		ft_putchar_fd('\n', 1);
 		return ;
 	}
 	need_new_line = 1;
@@ -33,13 +29,11 @@ void	cmd_echo(t_parse *parse)
 	}
 	while (parse->argv)
 	{
-		ft_putstr_fd(parse->argv->content, fd_out);
+		ft_putstr_fd(parse->argv->content, 1);
 		if (parse->argv->next)
-			ft_putchar_fd(' ', fd_out);
+			ft_putchar_fd(' ', 1);
 		parse->argv = parse->argv->next;
 	}
 	if (need_new_line)
-		ft_putchar_fd('\n', fd_out);
-	if (fd_out != 1)
-		close(fd_out);
+		ft_putchar_fd('\n', 1);
 }

@@ -115,6 +115,7 @@ void	parse_line(char *line, char ***env)
 
 	fd_in = 0;
 	buff = 0;
+	parse.next_parse_fd_in = 0; // сорян))
 	while (*line)
 	{
 		if (*line == ';')
