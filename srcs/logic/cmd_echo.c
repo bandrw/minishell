@@ -18,7 +18,7 @@ void	cmd_echo(t_parse *parse)
 	int	fd_out;
 
 	fd_out = get_fd_out(parse);
-	if (parse->argv->content == 0)
+	if (parse->argv == 0)
 		ft_putchar_fd('\n', 1);
 	need_new_line = 1;
 	if (ft_strncmp(parse->argv->content, "-n", 3) == 0)
