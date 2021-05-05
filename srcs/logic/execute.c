@@ -14,8 +14,6 @@
 
 void	execute_command_line(t_parse *parse, char ***env)
 {
-//	if (parse_list->next)
-//		parse->parse_next = parse_list->next->content;
 	if (parse->command_id == CMD_OTHER)
 		cmd_other(parse, *env);
 	else if (parse->command_id == CMD_ECHO)

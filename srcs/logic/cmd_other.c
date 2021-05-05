@@ -101,6 +101,8 @@ void	cmd_other(t_parse *parse, char **env)
 			exec_from_path(parse, env, argv_arr, path);
 		dup2(stdout_copy, 1);
 		dup2(stdin_copy, 0);
+		close(stdin_copy);
+		close(stdout_copy);
 		fd_out = get_fd_out(parse);
 		redirect(fd[0], fd_out);
 		if (fd_out != 1)

@@ -33,6 +33,8 @@ void	cmd_unset(t_parse *parse, char ***env)
 	fd_out = get_fd_out(parse);
 	if (fd_out != 1)
 		close(fd_out);
+	if (!parse->argv)
+		return ;
 	i = 0;
 	while ((*env)[i])
 		i++;

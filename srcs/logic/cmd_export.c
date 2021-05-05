@@ -12,18 +12,25 @@
 
 #include "minishell.h"
 
-static void	write_vars(t_parse *parse, int fd_out, char **env)
+static void	write_vars(int fd_out, char **env)
 {
-	int	i;
+	int		i;
+	char	*delimiter;
 
 	i = -1;
 	while (env[++i])
 	{
+		delimiter = ft_strchr(env[i], '=');
 		ft_putstr_fd("declare -x ", fd_out);
-		write(fd_out, env[i], ft_strchr(env[i], '=') - env[i] + 1);
-		write(fd_out, "\"", 1);
-		ft_putstr_fd(ft_strchr(env[i], '=') + 1, fd_out);
-		write(fd_out, "\"\n", 2);
+		if (delimiter)
+		{
+			write(fd_out, env[i], delimiter - env[i] + 1);
+			write(fd_out, "\"", 1);
+			ft_putstr_fd(delimiter + 1, fd_out);
+			write(fd_out, "\"\n", 2);
+		}
+		else
+			ft_putendl_fd(env[i], fd_out);
 	}
 }
 
@@ -54,6 +61,7 @@ void	insert_env(char *key, char *new_env, char ***env)
 	{
 		if (ft_strncmp((*env)[i], key, ft_strlen(key)) == 0)
 		{
+			free((*env)[i]);
 			(*env)[i] = new_env;
 			return ;
 		}
@@ -71,7 +79,7 @@ void	cmd_export(t_parse *parse, char ***env)
 	argv = parse->argv;
 	fd_out = get_fd_out(parse);
 	if (!argv)
-		write_vars(parse, fd_out, *env);
+		write_vars(fd_out, *env);
 	else
 	{
 		while (argv)
@@ -84,7 +92,8 @@ void	cmd_export(t_parse *parse, char ***env)
 				ft_strlcat(new_env, "=", ft_strlen(new_env) + 2);
 				ft_strlcat(new_env, pair[1], ft_strlen(new_env) + ft_strlen(pair[1]) + 1);
 			}
-			insert_env(pair[0], new_env, env);
+			if (pair[1] || !get_env(pair[0], *env))
+				insert_env(pair[0], new_env, env);
 			argv = argv->next;
 		}
 	}

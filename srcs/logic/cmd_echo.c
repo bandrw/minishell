@@ -20,7 +20,7 @@ void	cmd_echo(t_parse *parse)
 	fd_out = get_fd_out(parse);
 	if (parse->argv == 0)
 	{
-		ft_putchar_fd('\n', 1);
+		ft_putchar_fd('\n', fd_out);
 		if (fd_out != 1)
 			close(fd_out);
 		return ;
