@@ -73,21 +73,21 @@ void	ft_get_other(t_parse *parse, char **str)
 
 void	parse_line(char *line, char ***env)
 {
-	int		next_parse_fd_in;
+	int		fd_in;
 	char	*buff;
 	t_parse	parse;
 
-	next_parse_fd_in = 0;
+	fd_in = 0;
 	buff = 0;
 	while (*line)
 	{
 		if (*line == ';')
 			line++;
 		if (parse.next_parse_fd_in)
-			next_parse_fd_in = parse.next_parse_fd_in;
+			fd_in = parse.next_parse_fd_in;
 		ft_bzero(&parse, sizeof(parse));
 		parse.env = *env;
-		parse.next_parse_fd_in = next_parse_fd_in;
+		parse.pipe_info.fd_in = fd_in;
 		buff = ft_convers_dol(&parse, &line);
 		if (!buff)
 			return ;
