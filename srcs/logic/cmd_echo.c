@@ -19,10 +19,18 @@ void	cmd_echo(t_parse *parse)
 
 	fd_out = get_fd_out(parse);
 	if (parse->argv == 0)
+	{
 		ft_putchar_fd('\n', 1);
+		if (fd_out != 1)
+			close(fd_out);
+		return ;
+	}
 	need_new_line = 1;
 	if (ft_strncmp(parse->argv->content, "-n", 3) == 0)
+	{
 		need_new_line = 0;
+		parse->argv =parse->argv->next;
+	}
 	while (parse->argv)
 	{
 		ft_putstr_fd(parse->argv->content, fd_out);
