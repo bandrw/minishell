@@ -44,6 +44,7 @@ typedef struct s_pipe
 	int			fd_in;
 	int			append_output;
 	char		*file_out;
+	char		*err_file_out;
 	char		*file_in;
 }				t_pipe;
 
@@ -72,9 +73,10 @@ void	insert_env(char *key, char *new_env, char ***env);
 char	*get_env(char *key, char **env);
 char	**arr_realloc(char **arr);
 void	sort_arr(char **arr);
-int		get_fd_out(t_parse *parse);
-int		get_fd_in(t_parse *parse);
 void	redirect(int fd_in, int fd_out);
+int		get_fd_in(t_parse *parse);
+int		get_fd_out(t_parse *parse);
+int		get_fd_err(t_parse *parse);
 
 void	history_add(t_history *history, char *command_line);
 
