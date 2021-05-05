@@ -20,7 +20,7 @@ char	*ft_convers_dol(t_parse *parse, char **str)
 
 	buff = 0;
 	line = 0;
-	while (**str && ft_strchr("|<>;", **str) == 0)
+	while (**str && ft_strchr("<>;", **str) == 0)
 	{
 		if (**str == '\'')
 		{

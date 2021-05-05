@@ -16,7 +16,7 @@ void	ft_text(char **str, t_parse *parse, int n)
 {
 	char	*buff;
 
-	buff = ft_for_print(str, parse, "$\t\n\v\f\r ;\'\"");
+	buff = ft_for_print(str, parse, " ;$|<>\t\n\v\f\r\'\"");
 	ft_push_argv(buff, parse, n);
 }
 
@@ -43,6 +43,17 @@ void	ft_read_line(char **str, t_parse *parse, int num_quote)
 			ft_quote(str, parse, check);
 		else if (**str == '\"')
 			ft_wquote(str, parse, check, ++num_quote);
+		else if (**str == '|')
+		{
+			parse->pipe_info.pipe_to_next = 1;
+			(*str)++;
+			return ;
+		}
+		else if (**str == '>')
+		{
+			(*str)++;
+			ft_get_infile(str, parse);
+		}
 //		else if (**str == '$')
 //			ft_dollar(str, parse, check);
 		else
@@ -56,12 +67,6 @@ void	ft_get_other(t_parse *parse, char **str)
 
 	parse->command_id = CMD_OTHER;
 	ft_read_line(str, parse, 0);
-//	buff = ft_split_str(str, "t\n\v\f\r ");
-//	while (*buff)
-//	{
-//		ft_lstadd_back(&parse->argv, ft_lstnew(*buff));
-//		buff++;
-//	}
 //	parse->file_out = ft_strdup("out.txt"); // (logic handled)
 //	parse->file_in = ft_strdup("../srcs/main.c"); // (logic handled)
 }
@@ -73,11 +78,9 @@ void	parse_line(char *line, char ***env)
 	t_parse	parse;
 
 	next_parse_fd_in = 0;
-	//buff = 0;
+	buff = 0;
 	while (*line)
 	{
-//		while (ft_isspace(*line))
-//			line++;
 		if (*line == ';')
 			line++;
 		if (parse.next_parse_fd_in)
@@ -114,5 +117,7 @@ void	parse_line(char *line, char ***env)
 		else if (buff)
 			ft_get_other(&parse, &buff);
 		execute_command_line(&parse, env);
+		if (buff)
+			line = buff;
 	}
 }
