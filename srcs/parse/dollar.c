@@ -26,6 +26,7 @@ char	*ft_convers_dol(t_parse *parse, char **str)
 		{
 			(*str)++;
 			line = ft_strjoin(line, ft_for_print(str, parse, "\'"));
+			(*str)++;
 		}
 		else if (**str == '$')
 			line = ft_strjoin(line, ft_dollar(str, parse));

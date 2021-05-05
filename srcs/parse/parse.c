@@ -32,6 +32,8 @@ void	ft_read_line(char **str, t_parse *parse, int num_quote)
 			(*str)++;
 			check = 0;
 		}
+		if (!**str)
+			return ;
 		if (**str == ';')
 		{
 			(*str)++;
@@ -43,7 +45,7 @@ void	ft_read_line(char **str, t_parse *parse, int num_quote)
 			ft_wquote(str, parse, check, ++num_quote);
 //		else if (**str == '$')
 //			ft_dollar(str, parse, check);
-		else if (**str)
+		else
 			ft_text(str, parse, check);
 	}
 }
