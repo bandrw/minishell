@@ -52,7 +52,23 @@ void	ft_read_line(char **str, t_parse *parse, int num_quote)
 		else if (**str == '>')
 		{
 			(*str)++;
+			if (**str == '>')
+			{
+				(*str)++;
+				parse->pipe_info.append_output = 1;
+			}
 			ft_get_outfile(str, parse);
+			return ;
+		}
+		else if (**str == '2' && (*(*str) + 1) == '>')
+		{
+			(*str) += 2;
+			if (**str == '>')
+			{
+				(*str)++;
+				parse->pipe_info.append_err_output = 1;
+			}
+			ft_get_errfile(str, parse);
 			return ;
 		}
 //		else if (**str == '$')

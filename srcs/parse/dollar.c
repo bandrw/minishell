@@ -20,7 +20,7 @@ char	*ft_convers_dol(t_parse *parse, char **str)
 
 	buff = 0;
 	line = 0;
-	while (**str && ft_strchr(";", **str) == 0)
+	while (**str && ft_strchr("<;", **str) == 0)
 	{
 		if (**str == '\'')
 		{
@@ -32,10 +32,12 @@ char	*ft_convers_dol(t_parse *parse, char **str)
 			line = ft_strjoin(line, ft_dollar(str, parse));
 		else
 		{
-			line = ft_strjoin(line, ft_for_print(str, parse, "$;\'"));
+			line = ft_strjoin(line, ft_for_print(str, parse, "<$;\'"));
 		}
 		//(*str)++;
 	}
+	if (**str == '<')
+		ft_get_infile(str, parse);
 	return (line);
 }
 
