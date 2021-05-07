@@ -40,10 +40,27 @@ char	*ft_convers_dol(t_parse *parse, char **str, int ac, char **av)
 	return (line);
 }
 
-//char	*ft_get_argv(char **str, t_parse *parse, int argc, char **argv)
-//{
-//
-//}
+char	*ft_get_argv(char **str, t_parse *parse, int argc, char **argv)
+{
+	char	i;
+	char	*env;
+	int		j;
+
+	i = '0';
+	j = 0;
+	while (j <= argc)
+	{
+		if (i == **str)
+		{
+			env = ft_strdup(argv[j]);
+			(*str) += 1;
+			return (env);
+		}
+		i++;
+		j++;
+	}
+	return (0);
+}
 
 char	*ft_dollar(char **str, t_parse *parse, int argc, char **argv)
 {
@@ -51,12 +68,8 @@ char	*ft_dollar(char **str, t_parse *parse, int argc, char **argv)
 	char	*env;
 
 	(*str) += 1;
-	if (**str == '0')
-	{
-		env = ft_strdup(argv[0]);
-		(*str) += 1;
-		return (env);
-	}
+	if (ft_isdigit(**str) != 0)
+		return (ft_get_argv(str, parse, argc, argv));
 	if (**str == '?')
 	{
 		env = ft_itoa(errno != 0);
