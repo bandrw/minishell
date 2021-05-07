@@ -32,50 +32,73 @@ static void	execute_selector(t_parse *parse, char ***env)
 		cmd_exit(parse);
 }
 
+static void	close_fds(int fd[3], int std_copy[3])
+{
+	if (fd[0] != 0 && fd[0] >= 0)
+	{
+		dup2(std_copy[0], 0);
+		close(fd[0]);
+		close(std_copy[0]);
+	}
+	if (fd[1] != 1 && fd[1] >= 0)
+	{
+		dup2(std_copy[1], 1);
+		close(fd[1]);
+		close(std_copy[1]);
+	}
+	if (fd[2] != 2 && fd[2] >= 0)
+	{
+		dup2(std_copy[2], 2);
+		close(fd[2]);
+		close(std_copy[2]);
+	}
+}
+
+static int	open_fds(t_parse *parse, int fd[3], int std_copy[3])
+{
+	fd[0] = get_fd_in(parse);
+	if (fd[0] < 0)
+	{
+		close_fds(fd, std_copy);
+		return (1);
+	}
+	fd[1] = get_fd_out(parse);
+	if (fd[1] < 0)
+	{
+		close_fds(fd, std_copy);
+		return (2);
+	}
+	fd[2] = get_fd_err(parse);
+	if (fd[2] < 0)
+	{
+		close_fds(fd, std_copy);
+		return (3);
+	}
+	return (0);
+}
+
 void	execute_command_line(t_parse *parse, char ***env)
 {
-	int	fd_in;
-	int	fd_out;
-	int	fd_err;
-	int	stdin_copy;
-	int	stdout_copy;
-	int	stderr_copy;
+	int	fd[3];
+	int	std_copy[3];
 
-	fd_in = get_fd_in(parse);
-	fd_out = get_fd_out(parse);
-	fd_err = get_fd_err(parse);
-	if (fd_in != 0)
+	if (open_fds(parse, fd, std_copy))
+		return ;
+	if (fd[0] != 0)
 	{
-		stdin_copy = dup(0);
-		dup2(fd_in, 0);
+		std_copy[0] = dup(0);
+		dup2(fd[0], 0);
 	}
-	if (fd_out != 1)
+	if (fd[1] != 1)
 	{
-		stdout_copy = dup(1);
-		dup2(fd_out, 1);
+		std_copy[1] = dup(1);
+		dup2(fd[1], 1);
 	}
-	if (fd_err != 2)
+	if (fd[2] != 2)
 	{
-		stderr_copy = dup(2);
-		dup2(fd_err, 2);
+		std_copy[2] = dup(2);
+		dup2(fd[2], 2);
 	}
 	execute_selector(parse, env);
-	if (fd_in != 0)
-	{
-		dup2(stdin_copy, 0);
-		close(fd_in);
-		close(stdin_copy);
-	}
-	if (fd_out != 1)
-	{
-		dup2(stdout_copy, 1);
-		close(fd_out);
-		close(stdout_copy);
-	}
-	if (fd_err != 2)
-	{
-		dup2(stderr_copy, 2);
-		close(fd_err);
-		close(stderr_copy);
-	}
+	close_fds(fd, std_copy);
 }

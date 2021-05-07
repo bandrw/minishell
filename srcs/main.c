@@ -99,6 +99,20 @@ static void	read_line(char *str, char *command_line, t_history *history)
 #if DEBUG
 int	main(int argc, char **argv, char **env)
 {
+//	struct stat	file;
+//
+//	ft_bzero(&file, sizeof(file));
+//	printf("[%d]\n", stat("out", &file));
+//	printf("r: %d\n", (file.st_mode & S_IRUSR) != 0);
+//	printf("w: %d\n", (file.st_mode & S_IWUSR) != 0);
+//	printf("x: %d\n", (file.st_mode & S_IXUSR) != 0);
+//
+//	ft_bzero(&file, sizeof(file));
+//	printf("\n[%d]\n", stat("forbidden", &file));
+//	printf("r: %d\n", (file.st_mode & S_IRUSR) != 0);
+//	printf("w: %d\n", (file.st_mode & S_IWUSR) != 0);
+//	printf("x: %d\n", (file.st_mode & S_IXUSR) != 0);
+
 	int		n;
 	char	*command_line;
 

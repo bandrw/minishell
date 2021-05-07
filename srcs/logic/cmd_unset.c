@@ -23,24 +23,47 @@ static int	is_in_list(char *str, t_list *list)
 	return (0);
 }
 
+static int	get_env_len(t_list *argv, char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+		i++;
+	while (argv)
+	{
+		if (get_env(argv->content, env))
+			i--;
+		if (ft_isdigit(((char *)argv->content)[0]))
+		{
+			errno = 1;
+			ft_putstr_fd("minishell: unset: `", 2);
+			ft_putstr_fd(argv->content, 2);
+			ft_putendl_fd("': not a valid identifier", 2);
+		}
+		argv = argv->next;
+	}
+	return (i);
+}
+
 void	cmd_unset(t_parse *parse, char ***env)
 {
 	int		i;
 	int		j;
 	char	**arr;
 
+	errno = 0;
 	if (!parse->argv)
 		return ;
-	i = 0;
-	while ((*env)[i])
-		i++;
-	arr = (char**)malloc(sizeof(char*) * (i + 1 - ft_lstsize(parse->argv)));
+	arr = (char **)malloc(sizeof(char *) * (get_env_len(parse->argv, *env) + 1));
 	i = -1;
 	j = 0;
 	while ((*env)[++i])
 	{
-		if (!is_in_list((*env)[i], parse->argv))
+		if (!(is_in_list((*env)[i], parse->argv)))
 			arr[j++] = (*env)[i];
+		else
+			free((*env)[i]);
 	}
 	arr[j] = 0;
 	*env = arr;

@@ -16,6 +16,7 @@
 # include "libft.h"
 # include <stdio.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 # include <string.h>
 # include <errno.h>
 # include <termcap.h>
