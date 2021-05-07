@@ -44,7 +44,7 @@ static void	read_line(char *str, char *command_line, t_history *history)
 	{
 		l = read(0, str, 100);
 		str[l] = 0;
-		if (ft_strcmp(str, "\e[A") == 0 && command_nbr > 0)
+		if (ft_strcmp(str, "\e[A") == 0 && command_nbr > 0) // Up
 		{
 			command_nbr--;
 			tputs(restore_cursor, 1, (int (*)(int)) ft_putchar);
@@ -54,7 +54,7 @@ static void	read_line(char *str, char *command_line, t_history *history)
 			pos = ft_strlen(history->content[command_nbr]);
 			ft_strlcpy(command_line, history->content[command_nbr], pos + 1);
 		}
-		else if (ft_strcmp(str, "\e[B") == 0 && command_nbr < history->current)
+		else if (ft_strcmp(str, "\e[B") == 0 && command_nbr < history->current) // Down
 		{
 			command_nbr++;
 			tputs(restore_cursor, 1, (int (*)(int)) ft_putchar);
@@ -64,35 +64,40 @@ static void	read_line(char *str, char *command_line, t_history *history)
 			pos = ft_strlen(history->content[command_nbr]);
 			ft_strlcpy(command_line, history->content[command_nbr], pos + 1);
 		}
-//		else if (ft_strcmp(str, "\e[C") == 0 && pos < 20) // cursor moving (it's hard)
-//		{
-//			write(1, str, l);
-//			pos++;
-//		}
-//		else if (ft_strcmp(str, "\e[D") == 0 && pos > 0)
-//		{
-//			write(1, str, l);
-//			pos--;
-//		}
-		else if (*str == 127)
+		else if (ft_strcmp(str, "\e[C") == 0 && pos < ft_strlen(command_line)) // Right
+		{
+			write(1, str, l);
+			pos++;
+		}
+		else if (ft_strcmp(str, "\e[D") == 0 && pos > 0) // Left
+		{
+			write(1, str, l);
+			pos--;
+		}
+		else if (*str == 127) // Backspace
 		{
 			if (pos > 0)
 			{
-				command_line[pos] = '\0';
 				pos--;
+				ft_memmove(command_line + pos, command_line + pos + 1, ft_strlen(command_line + pos + 1) + 1);
 				tputs(cursor_left, 1, (int (*)(int)) ft_putchar);
 				tputs(tgetstr("dc", 0), 1, (int (*)(int)) ft_putchar);
 			}
 		}
-		else if (str[1] == 0)
+		else if (str[1] == 0 && str[0] != '\n')
 		{
-			write(1, str, 1);
+			tputs(restore_cursor, 1, (int (*)(int)) ft_putchar);
+			tputs(tgoto(tgetstr("DC", 0), 0, ft_strlen(command_line)), 1, (int (*)(int)) ft_putchar);
+			tputs(tgetstr("ed", 0), 1, (int (*)(int)) ft_putchar);
+			ft_memmove(command_line + pos + 1, command_line + pos, ft_strlen(command_line + pos + 1) + 1);
 			command_line[pos] = *str;
-			if (command_line[pos] == '\n')
-				command_line[pos] = '\0';
+			ft_putstr(command_line);
+//			tputs(tgoto(tgetstr("cm", 0), pos, 0), 1, (int (*)(int)) ft_putchar);
 			pos += 1;
 		}
 	}
+	if (str[0] != '\4')
+		ft_putchar('\n');
 	if (*command_line != '\0') // if not empty
 		history_add(history, command_line);
 }
@@ -156,7 +161,7 @@ int	main(int argc, char **argv, char **env)
 			return (0);
 		}
 		printf("Received: \"%s\"\n", command_line);
-		parse_line(command_line, argc, argv, &env);
+//		parse_line(command_line, argc, argv, &env);
 		free(command_line);
 	}
 }
