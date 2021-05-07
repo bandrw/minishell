@@ -111,5 +111,6 @@ void	ft_get_errfile(char **str, t_parse *parse);
 char	*ft_dollar(char **str, t_parse *parse, int argc, char **argv);
 void	ft_quote(char **str, t_parse *parse, int n);
 void	ft_wquote(char **str, t_parse *parse, int n, int *num_quote);
+void	ft_check_red(char **str, t_parse *parse, int err);
 
 #endif
