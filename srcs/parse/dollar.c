@@ -48,9 +48,9 @@ char	*ft_get_argv(char **str, t_parse *parse, int argc, char **argv)
 
 	i = '0';
 	j = 0;
-	while (j <= argc)
+	while (j <= 9)
 	{
-		if (i == **str)
+		if (i == **str && j < argc)
 		{
 			env = ft_strdup(argv[j]);
 			(*str) += 1;
@@ -59,6 +59,7 @@ char	*ft_get_argv(char **str, t_parse *parse, int argc, char **argv)
 		i++;
 		j++;
 	}
+	(*str) += 1;
 	return (0);
 }
 
