@@ -21,11 +21,15 @@ void	sigint_handler(int sig)
 	if (g_state.process_running)
 	{
 		errno = 130;
-		ft_putchar_fd('\n', g_state.fd_stdout);
+		ft_putstr_fd("^C\n", g_state.fd_stdout);
 	}
 	else
 	{
+		#if DEBUG
 		ft_putstr("\b\b  \b\b\n");
+		#else
+		ft_putstr("\b \b\n");
+		#endif
 		ft_putstr("\033[35mminishell$ \033[0m");
 	}
 }
@@ -36,11 +40,13 @@ void	sigquit_handler(int sig)
 		return ;
 	if (g_state.process_running)
 	{
-		ft_putstr_fd("Quit: 3\n", g_state.fd_stdout);
+		ft_putstr_fd("^\\Quit: 3\n", g_state.fd_stdout);
 		errno = 131;
 	}
 	else
 	{
+		#if DEBUG
 		ft_putstr("\b\b  \b\b");
+		#endif
 	}
 }
