@@ -78,5 +78,4 @@ int	ft_get_outfile(char **str, t_parse *parse)
 	if (!**str || **str == ';')
 		return (-1);
 	return (1);
-	//tesst
 }
