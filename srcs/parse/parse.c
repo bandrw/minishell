@@ -113,13 +113,13 @@ void	parse_line(char *line, char ***env)
 	char	*buff;
 	t_parse	parse;
 
-	fd_in = 0;
 	buff = 0;
 	parse.next_parse_fd_in = 0; // сорян, забыл))
 	while (*line)
 	{
 		if (*line == ';')
 			line++;
+		fd_in = 0;
 		if (parse.next_parse_fd_in)
 			fd_in = parse.next_parse_fd_in;
 		ft_bzero(&parse, sizeof(parse));
