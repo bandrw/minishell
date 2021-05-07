@@ -12,8 +12,14 @@
 
 #include "minishell.h"
 
-static void	execute_selector(t_parse *parse, char ***env)
+extern t_state g_state;
+
+static void	execute_selector(t_parse *parse, char ***env, const int std_copy[3])
 {
+	g_state.process_running = 1;
+	g_state.fd_stdin = std_copy[0];
+	g_state.fd_stdout = std_copy[1];
+	g_state.fd_stderr = std_copy[2];
 	if (parse->command_id == CMD_OTHER)
 		cmd_other(parse, *env);
 	else if (parse->command_id == CMD_ECHO)
@@ -30,6 +36,7 @@ static void	execute_selector(t_parse *parse, char ***env)
 		cmd_env(*env);
 	else if (parse->command_id == CMD_EXIT)
 		cmd_exit(parse);
+	g_state.process_running = 0;
 }
 
 static void	close_fds(int fd[3], int std_copy[3])
@@ -56,6 +63,9 @@ static void	close_fds(int fd[3], int std_copy[3])
 
 static int	open_fds(t_parse *parse, int fd[3], int std_copy[3])
 {
+	std_copy[0] = 0;
+	std_copy[1] = 1;
+	std_copy[2] = 2;
 	fd[0] = get_fd_in(parse);
 	if (fd[0] < 0)
 	{
@@ -99,6 +109,6 @@ void	execute_command_line(t_parse *parse, char ***env)
 		std_copy[2] = dup(2);
 		dup2(fd[2], 2);
 	}
-	execute_selector(parse, env);
+	execute_selector(parse, env, std_copy);
 	close_fds(fd, std_copy);
 }

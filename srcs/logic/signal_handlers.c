@@ -12,18 +12,35 @@
 
 #include "minishell.h"
 
+extern t_state g_state;
+
 void	sigint_handler(int sig)
 {
 	if (sig != SIGINT)
 		return ;
-	ft_putstr("\b\b  \b\b\n\033[35mminishell$ \033[0m");
+	if (g_state.process_running)
+	{
+		errno = 130;
+		ft_putchar_fd('\n', g_state.fd_stdout);
+	}
+	else
+	{
+		ft_putstr("\b\b  \b\b\n");
+		ft_putstr("\033[35mminishell$ \033[0m");
+	}
 }
 
 void	sigquit_handler(int sig)
 {
 	if (sig != SIGQUIT)
 		return ;
-	ft_putstr("\b\b  \b\b");
-//	ft_putstr("\n[35mminishell$ [0m");
+	if (g_state.process_running)
+	{
+		ft_putstr_fd("Quit: 3\n", g_state.fd_stdout);
+		errno = 131;
+	}
+	else
+	{
+		ft_putstr("\b\b  \b\b");
+	}
 }
-

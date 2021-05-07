@@ -32,6 +32,14 @@
 # define CMD_ENV 6
 # define CMD_EXIT 7
 
+typedef struct	s_state
+{
+	int			process_running;
+	int			fd_stdin;
+	int			fd_stdout;
+	int			fd_stderr;
+}				t_state;
+
 typedef struct s_history
 {
 	int			size;
