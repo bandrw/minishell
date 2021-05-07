@@ -107,7 +107,7 @@ void	ft_get_arg(char **buff, t_parse *parse)
 		ft_get_other(parse, buff);
 }
 
-void	parse_line(char *line, char ***env)
+void	parse_line(char *line, int argc, char **argv, char ***env)
 {
 	int		fd_in;
 	char	*buff;

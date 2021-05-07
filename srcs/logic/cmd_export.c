@@ -75,6 +75,7 @@ void	cmd_export(t_parse *parse, char ***env)
 	char	*new_env;
 	t_list	*argv;
 
+	errno = 0;
 	argv = parse->argv;
 	if (!argv)
 		write_vars(*env);
@@ -83,6 +84,14 @@ void	cmd_export(t_parse *parse, char ***env)
 		while (argv)
 		{
 			pair = ft_split(argv->content, '=');
+			if (ft_isdigit(pair[0][0]))
+			{
+				errno = 1;
+				ft_putstr_fd("export: not an identifier: ", 2);
+				ft_putendl_fd(pair[0], 2);
+				argv = argv->next;
+				continue ;
+			}
 			new_env = (char *)malloc(sizeof(char) * (ft_strlen(pair[0]) + ft_strlen(pair[1]) + 1));
 			ft_strlcpy(new_env, pair[0], ft_strlen(pair[0]) + 1);
 			if (pair[1])

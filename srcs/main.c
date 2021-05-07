@@ -120,7 +120,7 @@ int	main(int argc, char **argv, char **env)
 			ft_putendl_fd("Error: GNL", 2);
 			return (1);
 		}
-		parse_line(command_line, &env);
+		parse_line(command_line, argc, argv, &env);
 		free(command_line);
 	}
 }

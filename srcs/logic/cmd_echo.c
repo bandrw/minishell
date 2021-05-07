@@ -36,4 +36,5 @@ void	cmd_echo(t_parse *parse)
 	}
 	if (need_new_line)
 		ft_putchar_fd('\n', 1);
+	errno = 0;
 }
