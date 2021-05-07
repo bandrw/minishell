@@ -73,7 +73,10 @@ char	*ft_dollar(char **str, t_parse *parse, int argc, char **argv)
 		return (ft_get_argv(str, parse, argc, argv));
 	if (**str == '?')
 	{
-		env = ft_itoa(errno != 0);
+		if (errno == 127)
+			env = ft_strdup("127");
+		else
+			env = ft_itoa(errno != 0);
 		(*str) += 1;
 		return (env);
 	}
