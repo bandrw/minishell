@@ -132,7 +132,7 @@ void	parse_line(char *line, char ***env)
 			buff++;
 		ft_get_arg(&buff, &parse);
 		execute_command_line(&parse, env);
-		if (buff)
-			line = buff;
+		if (*buff)
+			line = ft_strjoin(buff, line);
 	}
 }
