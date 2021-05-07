@@ -53,7 +53,7 @@ int	ft_check_sym(char **str, t_parse *parse, int *num_quote, int chk)
 		ft_check_red(str, parse, 0);
 		return (-1);
 	}
-	else if (**str == '2' && (*(*str) + 1) == '>')
+	else if (**str == '2' && (*(*str + 1)) == '>')
 	{
 		ft_check_red(str, parse, 1);
 		return (-1);

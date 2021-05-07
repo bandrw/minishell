@@ -40,7 +40,7 @@ void	ft_get_infile(char **str, t_parse *parse)
 	parse->pipe_info.file_in = ft_strdup(file);
 	while (**str && ft_isspace(**str))
 		(*str)++;
-	if (**str && **str == '2' && (*(*str) + 1) == '>')
+	if (**str && **str == '2' && (*(*str + 1)) == '>')
 		ft_check_red(str, parse, 1);
 	else if (**str && **str != ';')
 	{
