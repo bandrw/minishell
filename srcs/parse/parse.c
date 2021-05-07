@@ -125,7 +125,7 @@ void	parse_line(char *line, int argc, char **argv, char ***env)
 		ft_bzero(&parse, sizeof(parse));
 		parse.env = *env;
 		parse.pipe_info.fd_in = fd_in;
-		buff = ft_convers_dol(&parse, &line);
+		buff = ft_convers_dol(&parse, &line, argc, argv);
 		if (!buff)
 			return ;
 		while (ft_isspace(*buff))

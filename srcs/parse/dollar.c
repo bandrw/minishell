@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-char	*ft_convers_dol(t_parse *parse, char **str)
+char	*ft_convers_dol(t_parse *parse, char **str, int ac, char **av)
 {
 	char	*line;
 	char	*buff;
@@ -29,7 +29,7 @@ char	*ft_convers_dol(t_parse *parse, char **str)
 			(*str)++;
 		}
 		else if (**str == '$')
-			line = ft_strjoin(line, ft_dollar(str, parse));
+			line = ft_strjoin(line, ft_dollar(str, parse, ac, av));
 		else
 		{
 			line = ft_strjoin(line, ft_for_print(str, parse, "<$;\'"));
@@ -40,18 +40,28 @@ char	*ft_convers_dol(t_parse *parse, char **str)
 	return (line);
 }
 
-char	*ft_dollar(char **str, t_parse *parse)
+//char	*ft_get_argv(char **str, t_parse *parse, int argc, char **argv)
+//{
+//
+//}
+
+char	*ft_dollar(char **str, t_parse *parse, int argc, char **argv)
 {
 	char	*buff;
 	char	*env;
 
 	(*str) += 1;
+	if (**str == '0')
+	{
+		env = ft_strdup(argv[0]);
+		(*str) += 1;
+		return (env);
+	}
 	if (**str == '?')
 	{
 		env = ft_itoa(errno != 0);
 		(*str) += 1;
 		return (env);
-		//ft_push_argv(env, parse, 0);
 	}
 	else
 	{
