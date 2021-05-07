@@ -109,22 +109,23 @@ void	ft_get_arg(char **buff, t_parse *parse)
 
 void	parse_line(char *line, int argc, char **argv, char ***env)
 {
-	int		fd_in;
 	char	*buff;
 	t_parse	parse;
+	//int	fd_in;
 
 	buff = 0;
-	parse.next_parse_fd_in = 0; // сорян, забыл))
+	parse.next_parse_fd_in = 0;
 	while (*line)
 	{
 		if (*line == ';')
 			line++;
-		fd_in = 0;
-		if (parse.next_parse_fd_in)
-			fd_in = parse.next_parse_fd_in;
-		ft_bzero(&parse, sizeof(parse));
-		parse.env = *env;
-		parse.pipe_info.fd_in = fd_in;
+		//fd_in = 0;
+		ft_init_parse(&parse, *env);
+//		if (parse.next_parse_fd_in)
+//			fd_in = parse.next_parse_fd_in;
+//		ft_bzero(&parse, sizeof(parse));
+//		parse.env = *env;
+//		parse.pipe_info.fd_in = fd_in;
 		buff = ft_convers_dol(&parse, &line, argc, argv);
 		if (!buff)
 			return ;

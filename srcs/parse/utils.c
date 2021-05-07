@@ -12,6 +12,18 @@
 
 #include "minishell.h"
 
+void	ft_init_parse(t_parse *parse, char **env)
+{
+	int		fd_in;
+
+	fd_in = 0;
+	if (parse->next_parse_fd_in)
+		fd_in = parse->next_parse_fd_in;
+	ft_bzero(parse, sizeof(*parse));
+	parse->env = env;
+	parse->pipe_info.fd_in = fd_in;
+}
+
 int	ft_check_arg(char *arg, char *buff, int n)
 {
 	if (ft_strncmp(arg, buff, n) == 0 && (!buff[n] || ft_isspace(buff[n])))

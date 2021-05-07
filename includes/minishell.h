@@ -92,6 +92,7 @@ void	ft_error();
 void	parse_line(char *buff, int argc, char **argv, char ***env);
 void	ft_parse_wquotes(char **str, t_parse *parse);
 int		ft_check_arg(char *arg, char *buff, int n);
+void	ft_init_parse(t_parse *parse, char **env);
 
 void	ft_get_pwd_env(t_parse *parse, int id, char **str);
 void	ft_get_echo(t_parse *parse, char **str);

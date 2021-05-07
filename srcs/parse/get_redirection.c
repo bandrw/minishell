@@ -30,14 +30,6 @@ int	ft_get_errfile(char **str, t_parse *parse)
 	if (!**str || **str == ';')
 		return (-1);
 	return (1);
-
-//	while (**str && ft_isspace(**str))
-//		(*str)++;
-//	if (**str && **str != ';')
-//	{
-//		ft_putendl_fd("no such file in directory", 2);
-//		exit(0);
-//	}
 }
 
 void 	ft_get_infile(char **str, t_parse *parse)
