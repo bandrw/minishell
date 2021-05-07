@@ -72,6 +72,14 @@ static int	check_executable(char *file_name, char *argv_0)
 {
 	struct stat	file;
 
+	if (!file_name)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(argv_0, 2);
+		ft_putendl_fd(": command not found", 2);
+		errno = 127;
+		return (1);
+	}
 	ft_bzero(&file, sizeof(file));
 	if (lstat(file_name, &file) != 0)
 	{
@@ -79,7 +87,7 @@ static int	check_executable(char *file_name, char *argv_0)
 		ft_putstr_fd(argv_0, 2);
 		ft_putendl_fd(": No such file or directory", 2);
 		errno = 127;
-		return (1);
+		return (2);
 	}
 	if (S_ISDIR(file.st_mode))
 	{
@@ -87,7 +95,7 @@ static int	check_executable(char *file_name, char *argv_0)
 		ft_putstr_fd(argv_0, 2);
 		ft_putendl_fd(": is a directory", 2);
 		errno = 126;
-		return (2);
+		return (3);
 	}
 	if ((file.st_mode & S_IXUSR) == 0)
 	{
@@ -95,7 +103,7 @@ static int	check_executable(char *file_name, char *argv_0)
 		ft_putstr_fd(argv_0, 2);
 		ft_putendl_fd(": Permission denied", 2);
 		errno = 126;
-		return (3);
+		return (4);
 	}
 	return (0);
 }
