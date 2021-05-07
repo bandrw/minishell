@@ -46,18 +46,19 @@ char	*ft_dollar(char **str, t_parse *parse)
 	char	*env;
 
 	(*str) += 1;
-//	if (**str == '?')
-//	{
-//		env = ft_itoa(errno);
-//		ft_push_argv(env, parse, 0);
-//		(*str) += 1;
-//	}
-	//else
-	//{
-	buff = ft_for_print(str, parse, "$;\t\n\v\f\r\'\" |<>");
-	env = get_env(buff, parse->env);
-	if (env)
+	if (**str == '?')
+	{
+		env = ft_itoa(errno != 0);
+		(*str) += 1;
 		return (env);
+		//ft_push_argv(env, parse, 0);
+	}
+	else
+	{
+		buff = ft_for_print(str, parse, "$;\t\n\v\f\r\'\" |<>");
+		env = get_env(buff, parse->env);
+		if (env)
+			return (env);
+	}
 	return (0);
-	//}
 }
