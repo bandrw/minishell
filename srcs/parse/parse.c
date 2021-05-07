@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	ft_check_red(char **str, t_parse *parse, int err)
+int	ft_check_red(char **str, t_parse *parse, int err)
 {
 	if (err == 0)
 	{
@@ -22,7 +22,7 @@ void	ft_check_red(char **str, t_parse *parse, int err)
 			(*str)++;
 			parse->pipe_info.append_output = 1;
 		}
-		ft_get_outfile(str, parse);
+		return (ft_get_outfile(str, parse));
 	}
 	else
 	{
@@ -32,7 +32,7 @@ void	ft_check_red(char **str, t_parse *parse, int err)
 			(*str)++;
 			parse->pipe_info.append_err_output = 1;
 		}
-		ft_get_errfile(str, parse);
+		return (ft_get_errfile(str, parse));
 	}
 }
 
@@ -50,13 +50,13 @@ int	ft_check_sym(char **str, t_parse *parse, int *num_quote, int chk)
 	}
 	else if (**str == '>')
 	{
-		ft_check_red(str, parse, 0);
-		return (-1);
+		if (ft_check_red(str, parse, 0) == -1)
+			return (-1);
 	}
 	else if (**str == '2' && (*(*str + 1)) == '>')
 	{
-		ft_check_red(str, parse, 1);
-		return (-1);
+		if (ft_check_red(str, parse, 1) == -1)
+			return (-1);
 	}
 	else
 		ft_text(str, parse, chk);
