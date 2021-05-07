@@ -85,6 +85,9 @@ void	sigint_handler(int sig);
 void	sigquit_handler(int sig);
 
 //	Parse
+
+void	ft_error();
+
 void	parse_line(char *buff, int argc, char **argv, char ***env);
 void	ft_parse_wquotes(char **str, t_parse *parse);
 int		ft_check_arg(char *arg, char *buff, int n);
