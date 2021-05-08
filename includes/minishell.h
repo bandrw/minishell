@@ -93,11 +93,10 @@ void	history_add(t_history *history, char *command_line);
 void	sigint_handler(int sig);
 void	sigquit_handler(int sig);
 
-//	Parse
-
 void	ft_error();
 
-void	parse_line(char *buff, int argc, char **argv, char ***env);
+//	Parse
+t_list	*parse_line(char *buff, int argc, char **argv, char ***env);
 void	ft_parse_wquotes(char **str, t_parse *parse);
 int		ft_check_arg(char *arg, char *buff, int n);
 void	ft_init_parse(t_parse *parse, char **env);

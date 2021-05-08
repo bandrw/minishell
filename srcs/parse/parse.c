@@ -107,33 +107,81 @@ void	ft_get_arg(char **buff, t_parse *parse)
 		ft_get_other(parse, buff);
 }
 
-void	parse_line(char *line, int argc, char **argv, char ***env)
-{
-	char	*buff;
-	t_parse	parse;
-	//int	fd_in;
+//void	parse_line(char *line, int argc, char **argv, char ***env)
+//{
+//	char	*buff;
+//	t_parse	parse;
+//	//int	fd_in;
+//
+//	buff = 0;
+//	ft_bzero(&parse, sizeof(parse));
+//	while (*line)
+//	{
+//		if (*line == ';')
+//			line++;
+//		//fd_in = 0;
+//		ft_init_parse(&parse, *env);
+////		if (parse.next_parse_fd_in)
+////			fd_in = parse.next_parse_fd_in;
+////		ft_bzero(&parse, sizeof(parse));
+////		parse.env = *env;
+////		parse.pipe_info.fd_in = fd_in;
+//		buff = ft_convers_dol(&parse, &line, argc, argv);
+//		if (!buff)
+//			return ;
+//		while (ft_isspace(*buff))
+//			buff++;
+//		ft_get_arg(&buff, &parse);
+//		execute_command_line(&parse, env);
+//		if (*buff)
+//			line = ft_strjoin(buff, line);
+//	}
+//}
 
+static t_parse	*tmp_parse_dup(t_parse *src)
+{
+	t_parse	*dup;
+
+	dup = (t_parse*)malloc(sizeof(t_parse));
+	dup->command_id = src->command_id;
+	dup->argv = src->argv;
+	dup->next_parse_fd_in = src->next_parse_fd_in;
+	dup->env = src->env;
+	dup->pipe_info.err_file_out = src->pipe_info.err_file_out;
+	dup->pipe_info.fd_in = src->pipe_info.fd_in;
+	dup->pipe_info.file_in = src->pipe_info.file_in;
+	dup->pipe_info.file_out = src->pipe_info.file_out;
+	dup->pipe_info.pipe_to_next = src->pipe_info.pipe_to_next;
+	dup->pipe_info.append_err_output = src->pipe_info.append_err_output;
+	dup->pipe_info.append_output = src->pipe_info.append_output;
+	return (dup);
+}
+
+// Version for CTests
+t_list	*parse_line(char *line, int argc, char **argv, char ***env)
+{
+	t_list	*list;
+	t_parse	parse;
+	char	*buff;
+
+	list = 0;
 	buff = 0;
-	parse.next_parse_fd_in = 0;
+	ft_bzero(&parse, sizeof(parse));
 	while (*line)
 	{
 		if (*line == ';')
 			line++;
-		//fd_in = 0;
 		ft_init_parse(&parse, *env);
-//		if (parse.next_parse_fd_in)
-//			fd_in = parse.next_parse_fd_in;
-//		ft_bzero(&parse, sizeof(parse));
-//		parse.env = *env;
-//		parse.pipe_info.fd_in = fd_in;
 		buff = ft_convers_dol(&parse, &line, argc, argv);
 		if (!buff)
-			return ;
+			return (list);
 		while (ft_isspace(*buff))
 			buff++;
 		ft_get_arg(&buff, &parse);
+		ft_lstadd_back(&list, ft_lstnew(tmp_parse_dup(&parse)));
 		execute_command_line(&parse, env);
 		if (*buff)
 			line = ft_strjoin(buff, line);
 	}
+	return (list);
 }

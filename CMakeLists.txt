@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.17)
 project(minishell C)
 
+enable_testing()
+
 set(CMAKE_C_STANDARD 99)
 
 add_executable(minishell
@@ -28,7 +30,10 @@ add_executable(minishell
 		srcs/parse/quote.c
 		srcs/logic/get_fd.c
 		srcs/logic/redirect.c
-		srcs/logic/history.c srcs/parse/get_redirection.c srcs/parse/get_other.c srcs/error.c)
+		srcs/logic/history.c
+		srcs/parse/get_redirection.c
+		srcs/parse/get_other.c
+		srcs/error.c)
 
 include_directories(includes)
 include_directories(libft/includes)
@@ -90,8 +95,11 @@ add_library(ft
 		libft/srcs/get_next_line_utils.c
 		libft/srcs/ft_lsttoarr.c
 		libft/srcs/ft_strcmp.c
-		includes/minishell.h libft/srcs/ft_split_str.c)
+		libft/srcs/ft_split_str.c
+		includes/minishell.h)
 
 target_link_libraries(minishell LINK_PUBLIC termcap)
 
 target_link_libraries(minishell LINK_PUBLIC ft)
+
+add_subdirectory(tests)
