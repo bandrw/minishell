@@ -118,7 +118,7 @@ void	ft_push_argv(char *str, t_parse *parse, int n);
 char	*ft_convers_dol(t_parse *parse, char **str, int ac, char **av);
 
 int		ft_get_outfile(char **str, t_parse *parse);
-void	ft_get_infile(char **str, t_parse *parse);
+int		ft_get_infile(char **str, t_parse *parse);
 int		ft_get_errfile(char **str, t_parse *parse);
 
 char	*ft_dollar(char **str, t_parse *parse, int argc, char **argv);

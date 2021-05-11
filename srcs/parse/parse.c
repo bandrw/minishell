@@ -58,6 +58,11 @@ int	ft_check_sym(char **str, t_parse *parse, int *num_quote, int chk)
 		if (ft_check_red(str, parse, 1) == -1)
 			return (-1);
 	}
+	else if (**str == '<')
+	{
+		if (ft_get_infile(str, parse) == -1)
+			return (-1);
+	}
 	else
 		ft_text(str, parse, chk);
 	return (0);
