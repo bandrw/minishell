@@ -15,7 +15,6 @@
 void	cmd_env(char **env)
 {
 	errno = 0;
-	sort_arr(env);
 	while (*env)
 	{
 		if (ft_strchr(*env, '='))

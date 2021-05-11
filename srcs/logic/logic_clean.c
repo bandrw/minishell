@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirect.c                                         :+:      :+:    :+:   */
+/*   logic_clean.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfriese <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: kfriese <kfriese@student.21-school>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/30 01:45:39 by kfriese           #+#    #+#             */
-/*   Updated: 2021/04/30 01:45:40 by kfriese          ###   ########.fr       */
+/*   Created: 2021/05/11 18:23:08 by kfriese           #+#    #+#             */
+/*   Updated: 2021/05/11 18:23:09 by kfriese          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	redirect(int fd_in, int fd_out)
+void	clear_array(char **arr)
 {
-	char	*line;
+	int	i;
 
-	if (fd_in == 0)
-		return ;
-	while (get_next_line(fd_in, &line) == 1)
-	{
-		ft_putendl_fd(line, fd_out);
-		free(line);
-	}
-	if (*line != '\0')
-	{
-		ft_putstr_fd(line, fd_out);
-		free(line);
-	}
+	i = -1;
+	while (arr[++i])
+		free(arr[i]);
+	free(arr);
 }

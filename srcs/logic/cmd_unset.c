@@ -66,5 +66,6 @@ void	cmd_unset(t_parse *parse, char ***env)
 			free((*env)[i]);
 	}
 	arr[j] = 0;
+	free(*env);
 	*env = arr;
 }

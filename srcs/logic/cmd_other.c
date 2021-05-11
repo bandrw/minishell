@@ -14,8 +14,8 @@
 
 static void	execute(char *exec_file, char **env, char **argv_arr)
 {
-	int		pid;
-	int		status;
+	int	pid;
+	int	status;
 
 	pid = fork();
 	if (pid == 0)
@@ -24,7 +24,10 @@ static void	execute(char *exec_file, char **env, char **argv_arr)
 		exit(1);
 	}
 	else
+	{
 		waitpid(pid, &status, 0);
+		free(exec_file);
+	}
 }
 
 static int	check_executable_silent(char *executable)
@@ -59,11 +62,13 @@ static char	*get_execute_str(char *str, char *path)
 			ft_strlcat(tmp, "/", ft_strlen(tmp) + 2);
 			ft_strlcat(tmp, str, ft_strlen(tmp) + ft_strlen(str) + 1);
 			if (check_executable_silent(tmp) == 0)
+			{
+				clear_array(paths);
 				return (tmp);
+			}
 			free(tmp);
-			free(paths[i]);
 		}
-		free(paths);
+		clear_array(paths);
 	}
 	return (0);
 }
@@ -122,5 +127,6 @@ void	cmd_other(t_parse *parse, char **env)
 			executable_file = get_execute_str(argv_arr[0], get_env("PATH", env));
 		if (check_executable(executable_file, parse->argv->content) == 0)
 			execute(executable_file, env, argv_arr);
+		free(argv_arr);
 	}
 }

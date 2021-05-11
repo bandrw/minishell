@@ -48,6 +48,7 @@ static void	insert_new_env(char *new_env, char ***env)
 		arr[l] = (*env)[l];
 	arr[l] = new_env;
 	arr[l + 1] = 0;
+	free(*env);
 	*env = arr;
 	sort_arr(*env);
 }
@@ -101,6 +102,7 @@ void	cmd_export(t_parse *parse, char ***env)
 			}
 			if (pair[1] || !get_env(pair[0], *env))
 				insert_env(pair[0], new_env, env);
+			clear_array(pair);
 			argv = argv->next;
 		}
 	}

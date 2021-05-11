@@ -83,7 +83,6 @@ void	insert_env(char *key, char *new_env, char ***env);
 char	*get_env(char *key, char **env);
 char	**arr_realloc(char **arr);
 void	sort_arr(char **arr);
-void	redirect(int fd_in, int fd_out);
 int		get_fd_in(t_parse *parse);
 int		get_fd_out(t_parse *parse);
 int		get_fd_err(t_parse *parse);
@@ -92,6 +91,8 @@ void	history_add(t_history *history, char *command_line);
 
 void	sigint_handler(int sig);
 void	sigquit_handler(int sig);
+
+void	clear_array(char **arr);
 
 void	ft_error();
 int		throw_open_error(char *file);
