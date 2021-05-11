@@ -187,7 +187,11 @@ t_list	*parse_line(char *line, int argc, char **argv, char ***env)
 		execute_command_line(&parse, env);
 		if (*buff)
 			line = ft_strjoin(buff, line);
-		// buff leak
+		if (!line)
+		{
+			ft_putendl_fd("malloc fail", 2);
+			return (0);
+		}
 	}
 	return (list);
 }

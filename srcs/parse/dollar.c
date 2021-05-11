@@ -17,6 +17,8 @@ char	*ft_convers_dol(t_parse *parse, char **str, int ac, char **av)
 	char	*line;
 	char	*buff;
 	char	*env;
+	char	*tmp;
+	char	*tmp1;
 
 	buff = 0;
 	line = 0;
@@ -25,25 +27,53 @@ char	*ft_convers_dol(t_parse *parse, char **str, int ac, char **av)
 	if (**str == ';')
 	{
 		ft_putendl_fd("syntax error near unexpected token `;'", 2);
-		return (0);//d
+		return (0);
 	}
 	while (**str && ft_strchr(";", **str) == 0)
 	{
 		if (**str == '\'')
 		{
 			(*str)++;
-			line = ft_strjoin(line, ft_for_print(str, parse, "\'"));
+			tmp = ft_for_print(str, parse, "\'");
+			line = ft_strjoin(line, tmp);
+			free(tmp);
+			if (!line)
+			{
+				ft_putendl_fd("malloc fail", 2);
+				return (0);
+			}
 			(*str)++;
 		}
 		else if (**str == '$')
-			line = ft_strjoin(line, ft_dollar(str, parse, ac, av));
+		{
+			tmp = ft_dollar(str, parse, ac, av);
+			if (tmp)
+			{
+				tmp1 = line;
+				line = ft_strjoin(line, tmp);
+				free(tmp);
+				free(tmp1);
+			}
+//			if (!line)
+//			{
+//				ft_putendl_fd("malloc fail", 2);
+//				return (0);
+//			}
+		}
 		else
 		{
-			line = ft_strjoin(line, ft_for_print(str, parse, "$;\'"));
+			tmp = ft_for_print(str, parse, "$;\'");
+			tmp1 = line;
+			line = ft_strjoin(line, tmp);
+			free(tmp);
+			free(line);
+			if (!line)
+			{
+				ft_putendl_fd("malloc fail", 2);
+				return (0);
+			}
 		}
 	}
-//	if (**str == '<')
-//		ft_get_infile(str, parse);
 	return (line);
 }
 
@@ -60,6 +90,11 @@ char	*ft_get_argv(char **str, t_parse *parse, int argc, char **argv)
 		if (i == **str && j < argc)
 		{
 			env = ft_strdup(argv[j]);
+			if (!env)
+			{
+				ft_putendl_fd("malloc fail", 2);
+				return (0);
+			}
 			(*str) += 1;
 			return (env);
 		}
@@ -81,15 +116,16 @@ char	*ft_dollar(char **str, t_parse *parse, int argc, char **argv)
 	if (**str == '?')
 	{
 		env = ft_itoa(errno);
+		if (!env)
+		{
+			ft_putendl_fd("malloc fail", 2);
+			return (0);
+		}
 		(*str) += 1;
 		return (env);
 	}
-	else
-	{
-		buff = ft_for_print(str, parse, "$;\t\n\v\f\r\'\" |<>");
-		env = get_env(buff, parse->env);
-		if (env)
-			return (env);
-	}
-	return (0);
+	buff = ft_for_print(str, parse, "$;\t\n\v\f\r\'\" |<>");
+	env = ft_strdup(get_env(buff, parse->env));
+	free(buff);
+	return (env);
 }
