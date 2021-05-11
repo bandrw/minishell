@@ -39,7 +39,7 @@ static void	read_line(char *str, char *command_line, t_history *history)
 
 	command_nbr = history->current;
 	pos = 0;
-	ft_bzero(command_line, sizeof(command_line));
+	ft_bzero(command_line, sizeof(char) * 2048);
 	while (str[0] != '\n' && str[0] != '\4')
 	{
 		l = read(0, str, 100);
@@ -92,7 +92,7 @@ static void	read_line(char *str, char *command_line, t_history *history)
 			ft_memmove(command_line + pos + 1, command_line + pos, ft_strlen(command_line + pos + 1) + 1);
 			command_line[pos] = *str;
 			ft_putstr(command_line);
-//			tputs(tgoto(tgetstr("cm", 0), pos, 0), 1, (int (*)(int)) ft_putchar);
+			tputs(tgoto(tgetstr("ch", 0), 0, pos + 1 + (int)ft_strlen("minishell$ ")), 1, (int (*)(int)) ft_putchar);
 			pos += 1;
 		}
 	}
@@ -161,7 +161,7 @@ int	main(int argc, char **argv, char **env)
 			return (0);
 		}
 		printf("Received: \"%s\"\n", command_line);
-		parse_line(command_line, argc, argv, &env);
+//		parse_line(command_line, argc, argv, &env);
 		free(command_line);
 	}
 }
