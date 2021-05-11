@@ -66,7 +66,7 @@ char	*ft_convers_dol(t_parse *parse, char **str, int ac, char **av)
 			tmp1 = line;
 			line = ft_strjoin(line, tmp);
 			free(tmp);
-			free(line);
+			free(tmp1);
 			if (!line)
 			{
 				ft_putendl_fd("malloc fail", 2);
