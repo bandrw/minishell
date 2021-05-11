@@ -60,6 +60,7 @@ static void	read_line(char *str, char *command_line, t_history *history)
 			tputs(restore_cursor, 1, (int (*)(int)) ft_putchar);
 			tputs(tgoto(tgetstr("DC", 0), 0, ft_strlen(command_line)), 1, (int (*)(int)) ft_putchar);
 			tputs(tgetstr("ed", 0), 1, (int (*)(int)) ft_putchar);
+			ft_bzero(command_line, sizeof(char) * 2048);
 			ft_putstr(history->content[command_nbr]);
 			pos = ft_strlen(history->content[command_nbr]);
 			ft_strlcpy(command_line, history->content[command_nbr], pos + 1);
@@ -102,7 +103,7 @@ static void	read_line(char *str, char *command_line, t_history *history)
 		history_add(history, command_line);
 }
 
-#define DEBUG 1
+#define DEBUG 0
 #if DEBUG
 int	main(int argc, char **argv, char **env)
 {
@@ -157,11 +158,11 @@ int	main(int argc, char **argv, char **env)
 		read_line(str, command_line, &history);
 		if (*str == '\4')
 		{
-			ft_putendl_fd("exit", 1);
+			ft_putendl_fd("\bexit", 1);
 			return (0);
 		}
-		printf("Received: \"%s\"\n", command_line);
-		parse_line(command_line, argc, argv, &env);
+//		printf("Received \"%s\"\n", command_line);
+//		parse_line(command_line, argc, argv, &env);
 		free(command_line);
 	}
 }
