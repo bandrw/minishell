@@ -102,7 +102,7 @@ static void	read_line(char *str, char *command_line, t_history *history)
 		history_add(history, command_line);
 }
 
-#define DEBUG 0
+#define DEBUG 1
 #if DEBUG
 int	main(int argc, char **argv, char **env)
 {
@@ -161,7 +161,7 @@ int	main(int argc, char **argv, char **env)
 			return (0);
 		}
 		printf("Received: \"%s\"\n", command_line);
-//		parse_line(command_line, argc, argv, &env);
+		parse_line(command_line, argc, argv, &env);
 		free(command_line);
 	}
 }
