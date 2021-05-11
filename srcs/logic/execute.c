@@ -45,20 +45,23 @@ static void	close_fds(int fd[3], int std_copy[3])
 	{
 		dup2(std_copy[0], 0);
 		close(fd[0]);
-		close(std_copy[0]);
 	}
 	if (fd[1] != 1 && fd[1] >= 0)
 	{
 		dup2(std_copy[1], 1);
 		close(fd[1]);
-		close(std_copy[1]);
 	}
 	if (fd[2] != 2 && fd[2] >= 0)
 	{
 		dup2(std_copy[2], 2);
 		close(fd[2]);
-		close(std_copy[2]);
 	}
+	if (std_copy[0] != 0)
+		close(std_copy[0]);
+	if (std_copy[1] != 1)
+		close(std_copy[1]);
+	if (std_copy[2] != 2)
+		close(std_copy[2]);
 }
 
 static int	open_fds(t_parse *parse, int fd[3], int std_copy[3])
