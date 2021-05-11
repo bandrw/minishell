@@ -162,7 +162,7 @@ int	main(int argc, char **argv, char **env)
 			return (0);
 		}
 //		printf("Received \"%s\"\n", command_line);
-//		parse_line(command_line, argc, argv, &env);
+		parse_line(command_line, argc, argv, &env);
 		free(command_line);
 	}
 }
