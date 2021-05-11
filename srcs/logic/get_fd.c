@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static int	throw_open_error(char *file)
+int	throw_open_error(char *file)
 {
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(file, 2);

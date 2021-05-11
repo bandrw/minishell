@@ -94,6 +94,7 @@ void	sigint_handler(int sig);
 void	sigquit_handler(int sig);
 
 void	ft_error();
+int		throw_open_error(char *file);
 
 //	Parse
 t_list	*parse_line(char *buff, int argc, char **argv, char ***env);
