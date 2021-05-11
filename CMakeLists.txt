@@ -33,7 +33,8 @@ add_executable(minishell
 		srcs/parse/get_redirection.c
 		srcs/parse/get_other.c
 		srcs/error.c
-		srcs/logic/logic_clean.c)
+		srcs/logic/logic_clean.c
+		includes/minishell.h)
 
 include_directories(includes)
 include_directories(libft/includes)
@@ -95,8 +96,7 @@ add_library(ft
 		libft/srcs/get_next_line_utils.c
 		libft/srcs/ft_lsttoarr.c
 		libft/srcs/ft_strcmp.c
-		libft/srcs/ft_split_str.c
-		includes/minishell.h)
+		libft/srcs/ft_split_str.c)
 
 target_link_libraries(minishell LINK_PUBLIC termcap)
 
