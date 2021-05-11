@@ -37,11 +37,6 @@ char	*ft_convers_dol(t_parse *parse, char **str, int ac, char **av)
 			free(tmp);
 			if (tmp1)
 				free(tmp1);
-			if (!line)
-			{
-				ft_putendl_fd("malloc fail", 2);
-				return (0);
-			}
 			(*str)++;
 		}
 		else if (**str == '$')
@@ -55,11 +50,6 @@ char	*ft_convers_dol(t_parse *parse, char **str, int ac, char **av)
 				if (tmp1)
 					free(tmp1);
 			}
-//			if (!line)
-//			{
-//				ft_putendl_fd("malloc fail", 2);
-//				return (0);
-//			}
 		}
 		else
 		{
@@ -69,11 +59,6 @@ char	*ft_convers_dol(t_parse *parse, char **str, int ac, char **av)
 			free(tmp);
 			if (tmp1)
 				free(tmp1);
-			if (!line)
-			{
-				ft_putendl_fd("malloc fail", 2);
-				return (0);
-			}
 		}
 	}
 	return (line);
@@ -93,10 +78,6 @@ char	*ft_get_argv(char **str, t_parse *parse, int argc, char **argv)
 		{
 			env = ft_strdup(argv[j]);
 			if (!env)
-			{
-				ft_putendl_fd("malloc fail", 2);
-				return (0);
-			}
 			(*str) += 1;
 			return (env);
 		}
@@ -119,10 +100,6 @@ char	*ft_dollar(char **str, t_parse *parse, int argc, char **argv)
 	{
 		env = ft_itoa(errno);
 		if (!env)
-		{
-			ft_putendl_fd("malloc fail", 2);
-			return (0);
-		}
 		(*str) += 1;
 		return (env);
 	}

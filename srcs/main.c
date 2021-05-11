@@ -130,6 +130,7 @@ int	main(int argc, char **argv, char **env)
 			return (1);
 		}
 		parse_line(command_line, argc, argv, &env);
+//		while (1);
 		free(command_line);
 	}
 }

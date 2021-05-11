@@ -196,5 +196,9 @@ t_list	*parse_line(char *line, int argc, char **argv, char ***env)
 			return (0);
 		}
 	}
+	printf("--%s--\n", line);
+	printf("--%s--\n", buff);
+	printf("--%s--\n", tmp);
+	while (1);
 	return (list);
 }
