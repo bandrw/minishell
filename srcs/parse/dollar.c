@@ -25,7 +25,7 @@ char	*ft_convers_dol(t_parse *parse, char **str, int ac, char **av)
 	if (**str == ';')
 	{
 		ft_putendl_fd("syntax error near unexpected token `;'", 2);
-		return (0);
+		return (0);//d
 	}
 	while (**str && ft_strchr(";", **str) == 0)
 	{
