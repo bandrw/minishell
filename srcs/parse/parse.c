@@ -168,6 +168,7 @@ t_list	*parse_line(char *line, int argc, char **argv, char ***env)
 	t_list	*list;
 	t_parse	parse;
 	char	*buff;
+	char	*tmp;
 
 	list = 0;
 	buff = 0;
@@ -178,6 +179,7 @@ t_list	*parse_line(char *line, int argc, char **argv, char ***env)
 			line++;
 		ft_init_parse(&parse, *env);
 		buff = ft_convers_dol(&parse, &line, argc, argv);
+		tmp = buff;
 		if (!buff)
 			return (list);
 		while (ft_isspace(*buff))
@@ -187,6 +189,7 @@ t_list	*parse_line(char *line, int argc, char **argv, char ***env)
 		execute_command_line(&parse, env);
 		if (*buff)
 			line = ft_strjoin(buff, line);
+		free(tmp);
 		if (!line)
 		{
 			ft_putendl_fd("malloc fail", 2);

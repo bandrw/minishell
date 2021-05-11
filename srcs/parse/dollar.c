@@ -15,12 +15,9 @@
 char	*ft_convers_dol(t_parse *parse, char **str, int ac, char **av)
 {
 	char	*line;
-	char	*buff;
-	char	*env;
 	char	*tmp;
 	char	*tmp1;
 
-	buff = 0;
 	line = 0;
 	while (ft_isspace(**str))
 		(*str)++;
@@ -35,8 +32,11 @@ char	*ft_convers_dol(t_parse *parse, char **str, int ac, char **av)
 		{
 			(*str)++;
 			tmp = ft_for_print(str, parse, "\'");
+			tmp1 = line;
 			line = ft_strjoin(line, tmp);
 			free(tmp);
+			if (tmp1)
+				free(tmp1);
 			if (!line)
 			{
 				ft_putendl_fd("malloc fail", 2);
@@ -52,7 +52,8 @@ char	*ft_convers_dol(t_parse *parse, char **str, int ac, char **av)
 				tmp1 = line;
 				line = ft_strjoin(line, tmp);
 				free(tmp);
-				free(tmp1);
+				if (tmp1)
+					free(tmp1);
 			}
 //			if (!line)
 //			{
@@ -66,7 +67,8 @@ char	*ft_convers_dol(t_parse *parse, char **str, int ac, char **av)
 			tmp1 = line;
 			line = ft_strjoin(line, tmp);
 			free(tmp);
-			free(tmp1);
+			if (tmp1)
+				free(tmp1);
 			if (!line)
 			{
 				ft_putendl_fd("malloc fail", 2);
