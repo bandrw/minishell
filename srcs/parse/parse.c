@@ -187,6 +187,7 @@ t_list	*parse_line(char *line, int argc, char **argv, char ***env)
 		execute_command_line(&parse, env);
 		if (*buff)
 			line = ft_strjoin(buff, line);
+		// buff leak
 	}
 	return (list);
 }

@@ -113,5 +113,6 @@ void	execute_command_line(t_parse *parse, char ***env)
 		dup2(fd[2], 2);
 	}
 	execute_selector(parse, env, std_copy);
+	ft_lstclear(&parse->argv, free);
 	close_fds(fd, std_copy);
 }

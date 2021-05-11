@@ -103,7 +103,7 @@ static void	read_line(char *str, char *command_line, t_history *history)
 		history_add(history, command_line);
 }
 
-#define DEBUG 1
+#define DEBUG 0
 #if DEBUG
 int	main(int argc, char **argv, char **env)
 {
@@ -161,7 +161,8 @@ int	main(int argc, char **argv, char **env)
 			ft_putendl_fd("\bexit", 1);
 			return (0);
 		}
-		parse_line(command_line, argc, argv, &env);
+		t_list *tmp = parse_line(command_line, argc, argv, &env); // tmp
+		ft_lstclear(&tmp, free); // tmp
 		free(command_line);
 	}
 }
