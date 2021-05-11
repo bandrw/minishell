@@ -20,6 +20,13 @@ char	*ft_convers_dol(t_parse *parse, char **str, int ac, char **av)
 
 	buff = 0;
 	line = 0;
+	while (ft_isspace(**str))
+		(*str)++;
+	if (**str == ';')
+	{
+		ft_putendl_fd("syntax error near unexpected token `;'", 2);
+		return (0);
+	}
 	while (**str && ft_strchr(";", **str) == 0)
 	{
 		if (**str == '\'')
