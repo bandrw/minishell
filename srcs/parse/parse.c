@@ -140,4 +140,5 @@ void	parse_line(char *line, int argc, char **argv, char ***env)
 		free(line_start);
 		free(tmp);
 	}
+	free(line);
 }
