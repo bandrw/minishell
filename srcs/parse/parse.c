@@ -114,16 +114,17 @@ void	ft_get_arg(char **buff, t_parse *parse)
 
 void	parse_line(char *line, int argc, char **argv, char ***env)
 {
+	char	*line_start;
 	char	*buff;
 	char	*tmp;
-	char	*tmp1;
 	t_parse	parse;
-	int		need_to_clean = 0;
 
 	buff = 0;
+	line = ft_strdup(line);
 	ft_bzero(&parse, sizeof(parse));
 	while (*line)
 	{
+		line_start = line;
 		if (*line == ';')
 			line++;
 		ft_init_parse(&parse, *env);
@@ -135,11 +136,8 @@ void	parse_line(char *line, int argc, char **argv, char ***env)
 			buff++;
 		ft_get_arg(&buff, &parse);
 		execute_command_line(&parse, env);
-		if (need_to_clean)
-			free(tmp1);
 		line = ft_strjoin(buff, line);
-		tmp1 = line;
-		need_to_clean = 1;
+		free(line_start);
 		free(tmp);
 	}
 }
