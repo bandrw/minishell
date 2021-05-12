@@ -38,7 +38,6 @@ int	ft_check_arg(char *arg, char *buff, int n)
 void	ft_push_argv(char *str, t_parse *parse, int n)
 {
 	char	*buff;
-	t_list	*new;
 	t_list	*last;
 
 	buff = 0;

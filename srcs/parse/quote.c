@@ -12,69 +12,144 @@
 
 #include "minishell.h"
 
-void	ft_quote(char **str, t_parse *parse, int n)
+//void	ft_quote(char **str, t_parse *parse, int n)
+//{
+//	int		check;
+//	char	*buff;
+//
+//	check = 1;
+//	(*str) += 1;
+//	buff = ft_for_print(str, parse, "\'");
+//	if (**str != '\'')
+//	{
+//		ft_putendl_fd("Error", 2);
+//		parse->command_id = -1;
+//	}
+//	else
+//	{
+//		ft_push_argv(buff, parse, n);
+//		(*str) += 1;
+//	}
+//}
+//
+//void	ft_parse_wquotes(char **str, t_parse *parse)
+//{
+//	int		check;
+//	char	*buff;
+//
+//	while (**str && **str != '\"')
+//	{
+//		check = 0;
+//		if (**str == '\'')
+//			ft_quote(str, parse, check);
+////		if (**str == '$')
+////			ft_dollar(str, parse, check);
+//		else
+//		{
+//			buff = ft_for_print(str, parse, "$\'\"");
+//			ft_push_argv(buff, parse, check);
+//		}
+//	}
+//}
+//
+//void	ft_wquote(char **str, t_parse *parse, int n, int *num_quote)
+//{
+//	int		check;
+//	char	*buff;
+//
+//	//n = 1;
+//	(*str) += 1;
+//	*num_quote += 1;
+//	if (*num_quote % 2 != 0)
+//	{
+//		buff = ft_for_print(str, parse, "$\'\"");
+//		ft_push_argv(buff, parse, n);
+//		while (**str && **str != '\"')
+//			ft_parse_wquotes(str, parse);
+//		if (**str != '\"')
+//		{
+//			ft_putendl_fd("Error", 2);
+//			parse->command_id = -1;
+//		}
+////		else
+////		{
+////			ft_push_argv(buff, parse, n);
+////			(*str) += 1;
+////		}
+//	}
+//}
+
+char	*ft_prequote(char **str, t_parse *parse)
 {
-	int		check;
 	char	*buff;
 
-	check = 1;
 	(*str) += 1;
 	buff = ft_for_print(str, parse, "\'");
 	if (**str != '\'')
 	{
-		ft_putendl_fd("Error", 2);
+		ft_putendl_fd("Error: need second quote", 2);
 		parse->command_id = -1;
+		return (0);
 	}
 	else
 	{
-		ft_push_argv(buff, parse, n);
 		(*str) += 1;
+		return (buff);
 	}
 }
 
-void	ft_parse_wquotes(char **str, t_parse *parse)
+char	*ft_preparse_wquotes(char **str, t_parse *parse, int ac, char **av)
 {
-	int		check;
 	char	*buff;
+	char	*tmp;
+	char	*tmp1;
 
+	buff = 0;
 	while (**str && **str != '\"')
 	{
-		check = 0;
-		if (**str == '\'')
-			ft_quote(str, parse, check);
-//		if (**str == '$')
-//			ft_dollar(str, parse, check);
+		if (**str == '$')
+			tmp = ft_dollar(str, parse, ac, av);
 		else
+			tmp = ft_for_print(str, parse, "$\"");
+		if (tmp)
 		{
-			buff = ft_for_print(str, parse, "$\'\"");
-			ft_push_argv(buff, parse, check);
+			tmp1 = buff;
+			buff = ft_strjoin(buff, tmp);
+			free(tmp);
+			if (tmp1)
+				free(tmp1);
 		}
 	}
+	return (buff);
 }
 
-void	ft_wquote(char **str, t_parse *parse, int n, int *num_quote)
+char	*ft_prewquote(char **str, t_parse *parse, int *n_q , int ac, char **av)
 {
-	int		check;
 	char	*buff;
+	char	*tmp;
+	char	*tmp1;
 
-	//n = 1;
 	(*str) += 1;
-	*num_quote += 1;
-	if (*num_quote % 2 != 0)
+	*n_q += 1;
+	tmp = 0;
+	if (*n_q % 2 != 0)
 	{
-		buff = ft_for_print(str, parse, "$\'\"");
-		ft_push_argv(buff, parse, n);
+		buff = ft_for_print(str, parse, "$\"");
 		while (**str && **str != '\"')
-			ft_parse_wquotes(str, parse);
+			tmp = ft_preparse_wquotes(str, parse, ac, av);
 		if (**str != '\"')
 		{
 			ft_putendl_fd("Error", 2);
 			parse->command_id = -1;
+			return (0);
 		}
-//		else
-//		{
-//			ft_push_argv(buff, parse, n);
-//			(*str) += 1;
-//		}
+		tmp1 = buff;
+		buff = ft_strjoin(buff, tmp);
+		free(tmp);
+		if (tmp1)
+			free(tmp1);
+		(*str)++;
+		return (buff);
 	}
+	return (0);
 }

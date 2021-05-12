@@ -99,7 +99,6 @@ int		throw_open_error(char *file);
 
 //	Parse
 void	parse_line(char *buff, int argc, char **argv, char ***env);
-void	ft_parse_wquotes(char **str, t_parse *parse);
 int		ft_check_arg(char *arg, char *buff, int n);
 void	ft_init_parse(t_parse *parse, char **env);
 
@@ -123,6 +122,10 @@ int		ft_get_infile(char **str, t_parse *parse);
 int		ft_get_errfile(char **str, t_parse *parse);
 
 char	*ft_dollar(char **str, t_parse *parse, int argc, char **argv);
+char	*ft_prequote(char **str, t_parse *parse);
+char	*ft_preparse_wquotes(char **str, t_parse *parse, int ac, char **av);
+char	*ft_prewquote(char **str, t_parse *parse, int *n_q , int ac, char **av);
+void	ft_parse_wquotes(char **str, t_parse *parse);
 void	ft_quote(char **str, t_parse *parse, int n);
 void	ft_wquote(char **str, t_parse *parse, int n, int *num_quote);
 int		ft_check_red(char **str, t_parse *parse, int err);
