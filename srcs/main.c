@@ -161,8 +161,7 @@ int	main(int argc, char **argv, char **env)
 			ft_putendl_fd("\bexit", 1);
 			return (0);
 		}
-		t_list *tmp = parse_line(command_line, argc, argv, &env); // tmp
-		ft_lstclear(&tmp, free); // tmp
+		parse_line(command_line, argc, argv, &env);
 		free(command_line);
 	}
 }

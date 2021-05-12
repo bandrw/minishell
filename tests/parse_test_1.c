@@ -10,9 +10,9 @@ static void	fatal(char *str)
 
 int		main(int argc, char **argv, char **env)
 {
-	t_list *list;
-	t_parse *parse;
 	char	**argv_arr;
+	t_list	*list;
+	t_parse	*parse;
 
 	list = parse_line("echo 123 | cat -e", argc, argv, &env);
 	if (ft_lstsize(list) != 2)

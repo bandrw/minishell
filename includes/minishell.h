@@ -98,7 +98,7 @@ void	ft_error();
 int		throw_open_error(char *file);
 
 //	Parse
-t_list	*parse_line(char *buff, int argc, char **argv, char ***env);
+void	parse_line(char *buff, int argc, char **argv, char ***env);
 void	ft_parse_wquotes(char **str, t_parse *parse);
 int		ft_check_arg(char *arg, char *buff, int n);
 void	ft_init_parse(t_parse *parse, char **env);

@@ -165,7 +165,6 @@ char	*ft_get_argv(char **str, t_parse *parse, int argc, char **argv)
 		if (i == **str && j < argc)
 		{
 			env = ft_strdup(argv[j]);
-			if (!env)
 			(*str) += 1;
 			return (env);
 		}

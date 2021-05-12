@@ -16,6 +16,7 @@ void	cmd_echo(t_parse *parse)
 {
 	int	need_new_line;
 
+	errno = 0;
 	if (parse->argv == 0)
 	{
 		ft_putchar_fd('\n', 1);
@@ -36,5 +37,4 @@ void	cmd_echo(t_parse *parse)
 	}
 	if (need_new_line)
 		ft_putchar_fd('\n', 1);
-	errno = 0;
 }

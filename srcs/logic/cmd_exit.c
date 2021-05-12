@@ -14,9 +14,14 @@
 
 void	cmd_exit(t_parse *parse)
 {
+	unsigned char	code;
+
+	code = 0;
 	if (parse->argv)
 	{
-		if (!ft_isdigit(((char *)parse->argv->content)[0]))
+		code = (unsigned char)ft_atoi(parse->argv->content);
+		if (((char *)parse->argv->content)[0] != '-' &&
+			!ft_isdigit(((char *)parse->argv->content)[0]))
 		{
 			ft_putendl_fd("exit", 2);
 			ft_putstr_fd("minishell: exit: ", 2);
@@ -31,7 +36,7 @@ void	cmd_exit(t_parse *parse)
 			ft_putendl_fd("minishell: exit: too many arguments", 2);
 			return ;
 		}
-		exit(ft_atoi(parse->argv->content));
 	}
-	exit(0);
+	ft_putendl_fd("exit", 2);
+	exit(code);
 }
