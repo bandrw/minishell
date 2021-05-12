@@ -31,6 +31,7 @@ int	ft_check_arg(char *arg, char *buff, int n)
 	else
 		return (-1);
 }
+//|| buff[n] == '|'
 
 void	ft_push_argv(char *str, t_parse *parse, int n)
 {

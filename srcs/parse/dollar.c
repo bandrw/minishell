@@ -88,6 +88,35 @@ char	*ft_get_argv(char **str, t_parse *parse, int argc, char **argv)
 	return (0);
 }
 
+int 	ft_strchar_isalnum(char *line)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (line[i])
+	{
+		if (ft_isalnum(line[i]) == 0)
+			return (i);
+		i++;
+	}
+	return (i);
+}
+
+char	*ft_for_print_isalnum(char **str, t_parse *parse)
+{
+	char	*tmp;
+	int		i;
+	int		j;
+
+	j = 0;
+	i = ft_strchar_isalnum(*str) + 1;
+	tmp = (char *) malloc(sizeof(char) * (i));
+	ft_strlcpy(tmp, *str, i);
+	(*str) += i - 1;
+	return (tmp);
+}
+
 char	*ft_dollar(char **str, t_parse *parse, int argc, char **argv)
 {
 	char	*buff;
@@ -99,11 +128,11 @@ char	*ft_dollar(char **str, t_parse *parse, int argc, char **argv)
 	if (**str == '?')
 	{
 		env = ft_itoa(errno);
-		if (!env)
 		(*str) += 1;
 		return (env);
 	}
-	buff = ft_for_print(str, parse, "$;\t\n\v\f\r\'\" |<>");
+//	"$;\t\n\v\f\r\'\" |<>_:"
+	buff = ft_for_print_isalnum(str, parse);
 	env = ft_strdup(get_env(buff, parse->env));
 	free(buff);
 	return (env);
