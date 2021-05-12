@@ -64,7 +64,7 @@ char	*get_env(char *key, char **env)
 
 	while (*env)
 	{
-		l = ft_strlen(key);
+		l = (int)ft_strlen(key);
 		if (ft_strncmp(key, *env, l) == 0 && (*env)[l] == '=')
 			return (*env + l + 1);
 		env++;

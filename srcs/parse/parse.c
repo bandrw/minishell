@@ -188,7 +188,7 @@ t_list	*parse_line(char *line, int argc, char **argv, char ***env)
 		ft_lstadd_back(&list, ft_lstnew(tmp_parse_dup(&parse)));
 		execute_command_line(&parse, env);
 		if (*buff)
-			line = ft_strjoin(buff, line);
+			line = ft_strjoin(buff, line); // line leak
 		free(tmp);
 		if (!line)
 		{
@@ -196,9 +196,9 @@ t_list	*parse_line(char *line, int argc, char **argv, char ***env)
 			return (0);
 		}
 	}
-	printf("--%s--\n", line);
-	printf("--%s--\n", buff);
-	printf("--%s--\n", tmp);
-	while (1);
+//	printf("--%s--\n", line);
+//	printf("--%s--\n", buff);
+//	printf("--%s--\n", tmp);
+//	while (1);
 	return (list);
 }

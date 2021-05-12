@@ -114,5 +114,11 @@ void	execute_command_line(t_parse *parse, char ***env)
 	}
 	execute_selector(parse, env, std_copy);
 	ft_lstclear(&parse->argv, free);
+	if (parse->pipe_info.file_in)
+		free(parse->pipe_info.file_in);
+	if (parse->pipe_info.file_out)
+		free(parse->pipe_info.file_out);
+	if (parse->pipe_info.err_file_out)
+		free(parse->pipe_info.err_file_out);
 	close_fds(fd, std_copy);
 }

@@ -25,7 +25,7 @@ add_library(minishell_lib
 		../srcs/logic/logic_utils.c
 		../srcs/parse/quote.c
 		../srcs/logic/get_fd.c
-        ../srcs/logic/history.c
+		../srcs/logic/history.c
 		../srcs/parse/get_redirection.c
 		../srcs/parse/get_other.c
 		../srcs/error.c

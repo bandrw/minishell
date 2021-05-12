@@ -70,6 +70,19 @@ void	insert_env(char *key, char *new_env, char ***env)
 	insert_new_env(new_env, env);
 }
 
+static int	is_valid_key(char *key)
+{
+	if (ft_isdigit(key[0]))
+		return (0);
+	while (*key)
+	{
+		if (!ft_isalnum(*key) && *key != '_')
+			return (0);
+		key++;
+	}
+	return (1);
+}
+
 void	cmd_export(t_parse *parse, char ***env)
 {
 	char	**pair;
@@ -85,7 +98,7 @@ void	cmd_export(t_parse *parse, char ***env)
 		while (argv)
 		{
 			pair = ft_split(argv->content, '=');
-			if (ft_isdigit(pair[0][0]))
+			if (!is_valid_key(pair[0]))
 			{
 				errno = 1;
 				ft_putstr_fd("export: not an identifier: ", 2);
