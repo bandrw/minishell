@@ -11,12 +11,11 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+extern t_state	g_state;
 
-char	*ft_convers_dol(t_parse *parse, char **str, int ac, char **av)
+char	*ft_convers_dol(t_parse *parse, char **str)
 {
 	char	*line;
-	char	*tmp;
-	char	*tmp1;
 
 	line = 0;
 	while (ft_isspace(**str))
@@ -25,52 +24,23 @@ char	*ft_convers_dol(t_parse *parse, char **str, int ac, char **av)
 	{
 		if (**str == '\'')
 		{
-			tmp = ft_prequote(str, parse);
-			if (tmp == 0)
+			if (ft_parse_for_quote(str, &line, parse) == -1)
 				return (0);
-			tmp1 = line;
-			line = ft_strjoin(line, tmp);
-			free(tmp);
-			if (tmp1)
-				free(tmp1);
 		}
 		else if (**str == '"')
 		{
-			tmp = ft_prewquote(str, parse, ac, av);
-			if (!tmp)
+			if (ft_parse_for_wquote(str, &line, parse) == -1)
 				return (0);
-			tmp1 = line;
-			line = ft_strjoin(line, tmp);
-			free(tmp);
-			if (tmp1)
-				free(tmp1);
 		}
 		else if (**str == '$')
-		{
-			tmp = ft_dollar(str, parse, ac, av);
-			if (tmp)
-			{
-				tmp1 = line;
-				line = ft_strjoin(line, tmp);
-				free(tmp);
-				if (tmp1)
-					free(tmp1);
-			}
-		}
+			ft_parse_for_doll(str, &line, parse);
 		else
-		{
-			tmp = ft_for_print(str, parse, "$;\'\"");
-			tmp1 = line;
-			line = ft_strjoin(line, tmp);
-			free(tmp);
-			if (tmp1)
-				free(tmp1);
-		}
+			ft_parse_for_other(str, &line, parse);
 	}
 	return (line);
 }
 
-char	*ft_get_argv(char **str, t_parse *parse, int argc, char **argv)
+char	*ft_get_argv(char **str, t_parse *parse)
 {
 	char	i;
 	char	*env;
@@ -80,9 +50,9 @@ char	*ft_get_argv(char **str, t_parse *parse, int argc, char **argv)
 	j = 0;
 	while (j <= 9)
 	{
-		if (i == **str && j < argc)
+		if (i == **str && j < g_state.argc)
 		{
-			env = ft_strdup(argv[j]);
+			env = ft_strdup(g_state.argv[j]);
 			(*str) += 1;
 			return (env);
 		}
@@ -122,14 +92,14 @@ char	*ft_for_print_isalnum(char **str, t_parse *parse)
 	return (tmp);
 }
 
-char	*ft_dollar(char **str, t_parse *parse, int argc, char **argv)
+char	*ft_dollar(char **str, t_parse *parse)
 {
 	char	*buff;
 	char	*env;
 
 	(*str) += 1;
 	if (ft_isdigit(**str) != 0)
-		return (ft_get_argv(str, parse, argc, argv));
+		return (ft_get_argv(str, parse));
 	if (**str == '?')
 	{
 		env = ft_itoa(errno);

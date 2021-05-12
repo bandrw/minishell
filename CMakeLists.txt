@@ -35,8 +35,10 @@ add_executable(minishell
 		srcs/error.c
 		srcs/logic/logic_clean.c
 		includes/minishell.h
+		srcs/parse/parse_loop.c
+		includes/minishell.h
 		srcs/logic/logic_errors.c
-		srcs/logic/termcap.c)
+		srcs/logic/termcap.c srcs/parse/preparse.c)
 
 include_directories(includes)
 include_directories(libft/includes)

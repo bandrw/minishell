@@ -31,7 +31,7 @@ char	*ft_prequote(char **str, t_parse *parse)
 	}
 }
 
-char	*ft_preparse_wquotes(char **str, t_parse *parse, int ac, char **av)
+char	*ft_preparse_wquotes(char **str, t_parse *parse)
 {
 	char	*buff;
 	char	*tmp;
@@ -41,7 +41,7 @@ char	*ft_preparse_wquotes(char **str, t_parse *parse, int ac, char **av)
 	while (**str && **str != '\"')
 	{
 		if (**str == '$')
-			tmp = ft_dollar(str, parse, ac, av);
+			tmp = ft_dollar(str, parse);
 		else
 			tmp = ft_for_print(str, parse, "$\"");
 		if (tmp)
@@ -67,7 +67,7 @@ int	ft_check_num_quote(char ch, t_parse *parse)
 	return (1);
 }
 
-char	*ft_prewquote(char **str, t_parse *parse, int ac, char **av)
+char	*ft_prewquote(char **str, t_parse *parse)
 {
 	char	*buff;
 	char	*tmp;
@@ -80,7 +80,7 @@ char	*ft_prewquote(char **str, t_parse *parse, int ac, char **av)
 	{
 		buff = ft_for_print(str, parse, "$\"");
 		while (**str && **str != '\"')
-			tmp = ft_preparse_wquotes(str, parse, ac, av);
+			tmp = ft_preparse_wquotes(str, parse);
 		if (ft_check_num_quote(**str, parse) == -1)
 			return (0);
 		tmp1 = buff;

@@ -125,20 +125,28 @@ void	ft_text(char **str, t_parse *parse, int n);
 void	ft_get_exit(t_parse *parse, char **str);
 void	ft_get_other(t_parse *parse, char **str);
 
-void	ft_read_line(char **str, t_parse *parse, int *num_quote);
 char	*ft_for_print(char **str, t_parse *parse, char *ch);
 int		ft_strchar_int(const char *str, char *line);
 void	ft_push_argv(char *str, t_parse *parse, int n);
-char	*ft_convers_dol(t_parse *parse, char **str, int ac, char **av);
+char	*ft_convers_dol(t_parse *parse, char **str);
 
 int		ft_get_outfile(char **str, t_parse *parse);
 int		ft_get_infile(char **str, t_parse *parse);
 int		ft_get_errfile(char **str, t_parse *parse);
 
-char	*ft_dollar(char **str, t_parse *parse, int argc, char **argv);
+char	*ft_dollar(char **str, t_parse *parse);
 char	*ft_prequote(char **str, t_parse *parse);
-char	*ft_preparse_wquotes(char **str, t_parse *parse, int ac, char **av);
-char	*ft_prewquote(char **str, t_parse *parse, int ac, char **av);
+char	*ft_preparse_wquotes(char **str, t_parse *parse);
+char	*ft_prewquote(char **str, t_parse *parse);
+
 int		ft_check_red(char **str, t_parse *parse, int err);
+int		ft_check_sym(char **str, t_parse *parse, int *num_quote, int chk);
+void	ft_read_line(char **str, t_parse *parse, int *num_quote);
+void	ft_get_arg(char **buff, t_parse *parse);
+
+void	ft_parse_for_other(char **str, char **line, t_parse *parse);
+void	ft_parse_for_doll(char **str, char **line, t_parse *parse);
+int	ft_parse_for_quote(char **str, char **line, t_parse *parse);
+int	ft_parse_for_wquote(char **str, char **line, t_parse *parse);
 
 #endif
