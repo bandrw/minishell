@@ -38,10 +38,6 @@ int	ft_check_red(char **str, t_parse *parse, int err)
 
 int	ft_check_sym(char **str, t_parse *parse, int *num_quote, int chk)
 {
-//	if (**str == '\'')
-//		ft_quote(str, parse, chk);
-//	else if (**str == '\"')
-//		ft_wquote(str, parse, chk, num_quote);
 	if (**str == '|')
 	{
 		parse->pipe_info.pipe_to_next = 1;
@@ -90,7 +86,6 @@ void	ft_read_line(char **str, t_parse *parse, int *num_quote)
 		if (ft_check_sym(str, parse, num_quote, check) == -1)
 			return ;
 	}
-//	free(line);
 }
 
 void	ft_get_arg(char **buff, t_parse *parse)
@@ -113,26 +108,14 @@ void	ft_get_arg(char **buff, t_parse *parse)
 		ft_get_other(parse, buff);
 }
 
-void	parse_line(char *line, int argc, char **argv, char ***env)
+int 	ft_loop_for_parse(char *line, int argc, char **argv, char ***env)
 {
 	char	*line_start;
 	char	*buff;
 	char	*tmp;
 	t_parse	parse;
 
-	buff = 0;
-	line = ft_strdup(line);
-	line_start = line;
 	ft_bzero(&parse, sizeof(parse));
-	tmp = 0;
-	while (ft_isspace(*line))
-		line++;
-	if (*line == ';')
-	{
-		ft_putendl_fd("syntax error near unexpected token `;'", 2);
-		free(line_start);
-		return ;
-	}
 	while (*line)
 	{
 		line_start = line;
@@ -142,7 +125,7 @@ void	parse_line(char *line, int argc, char **argv, char ***env)
 		buff = ft_convers_dol(&parse, &line, argc, argv);
 		tmp = buff;
 		if (!buff)
-			return ;
+			return (-1);
 		while (ft_isspace(*buff))
 			buff++;
 		ft_get_arg(&buff, &parse);
@@ -152,4 +135,48 @@ void	parse_line(char *line, int argc, char **argv, char ***env)
 		free(tmp);
 	}
 	free(line);
+	return (1);
+}
+
+void	parse_line(char *line, int argc, char **argv, char ***env)
+{
+	char	*line_start;
+	char	*buff;
+	char	*tmp;
+//	t_parse	parse;
+
+	buff = 0;
+	line = ft_strdup(line);
+	line_start = line;
+//	ft_bzero(&parse, sizeof(parse));
+	tmp = 0;
+	while (ft_isspace(*line))
+		line++;
+	if (*line == ';')
+	{
+		ft_putendl_fd("syntax error near unexpected token `;'", 2);
+		free(line_start);
+		return ;
+	}
+	if (ft_loop_for_parse(line, argc, argv, env) == -1)
+		return ;
+//	while (*line)
+//	{
+//		line_start = line;
+//		if (*line == ';')
+//			line++;
+//		ft_init_parse(&parse, *env);
+//		buff = ft_convers_dol(&parse, &line, argc, argv);
+//		tmp = buff;
+//		if (!buff)
+//			return ;
+//		while (ft_isspace(*buff))
+//			buff++;
+//		ft_get_arg(&buff, &parse);
+//		execute_command_line(&parse, env);
+//		line = ft_strjoin(buff, line);
+//		free(line_start);
+//		free(tmp);
+//	}
+//	free(line);
 }

@@ -65,6 +65,7 @@ typedef struct s_parse
 	char			**env;
 	t_pipe			pipe_info;
 	int				next_parse_fd_in;
+	int				num_quote;
 }					t_parse;
 
 //	Logic
@@ -135,10 +136,7 @@ int		ft_get_errfile(char **str, t_parse *parse);
 char	*ft_dollar(char **str, t_parse *parse, int argc, char **argv);
 char	*ft_prequote(char **str, t_parse *parse);
 char	*ft_preparse_wquotes(char **str, t_parse *parse, int ac, char **av);
-char	*ft_prewquote(char **str, t_parse *parse, int *n_q , int ac, char **av);
-void	ft_parse_wquotes(char **str, t_parse *parse);
-void	ft_quote(char **str, t_parse *parse, int n);
-void	ft_wquote(char **str, t_parse *parse, int n, int *num_quote);
+char	*ft_prewquote(char **str, t_parse *parse, int ac, char **av);
 int		ft_check_red(char **str, t_parse *parse, int err);
 
 #endif
