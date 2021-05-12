@@ -38,6 +38,8 @@ typedef struct	s_state
 	int			fd_stdin;
 	int			fd_stdout;
 	int			fd_stderr;
+	int			argc;
+	char		**argv;
 }				t_state;
 
 typedef struct s_history

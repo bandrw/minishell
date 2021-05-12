@@ -31,9 +31,11 @@ static void	termcap_init(void)
 	}
 }
 
-static void	main_init(char ***env, t_history *history)
+static void	main_init(char ***env, t_history *history, int argc, char **argv)
 {
 	ft_bzero(&g_state, sizeof(g_state));
+	g_state.argc = argc;
+	g_state.argv = argv;
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, sigquit_handler);
 	termcap_init();
@@ -69,7 +71,7 @@ int	main(int argc, char **argv, char **env)
 	char		*command_line;
 	t_history	history;
 
-	main_init(&env, &history);
+	main_init(&env, &history, argc, argv);
 	while (1)
 	{
 		command_line = (char *)malloc(sizeof(char) * 2048);
