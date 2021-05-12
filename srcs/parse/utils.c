@@ -27,13 +27,12 @@ void	ft_init_parse(t_parse *parse, char **env)
 int	ft_check_arg(char *arg, char *buff, int n)
 {
 	if (ft_strncmp(arg, buff, n) == 0 && (!buff[n] || ft_isspace(buff[n])
-		|| buff[n] == '|' || buff[n] == ';' || buff[n] == '>'
-		|| buff[n] == '<' || buff[n] == '$'))
+			|| buff[n] == '|' || buff[n] == ';' || buff[n] == '>'
+			|| buff[n] == '<' || buff[n] == '$'))
 		return (1);
 	else
 		return (-1);
 }
-//|| buff[n] == '|'
 
 void	ft_push_argv(char *str, t_parse *parse, int n)
 {
@@ -46,7 +45,7 @@ void	ft_push_argv(char *str, t_parse *parse, int n)
 		last = ft_lstlast(parse->argv);
 		buff = ft_strjoin(last->content, str);
 		free(last->content);
-		free(str); // new
+		free(str);
 		last->content = buff;
 	}
 	else

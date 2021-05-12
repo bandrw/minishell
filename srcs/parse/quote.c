@@ -12,73 +12,6 @@
 
 #include "minishell.h"
 
-//void	ft_quote(char **str, t_parse *parse, int n)
-//{
-//	int		check;
-//	char	*buff;
-//
-//	check = 1;
-//	(*str) += 1;
-//	buff = ft_for_print(str, parse, "\'");
-//	if (**str != '\'')
-//	{
-//		ft_putendl_fd("Error", 2);
-//		parse->command_id = -1;
-//	}
-//	else
-//	{
-//		ft_push_argv(buff, parse, n);
-//		(*str) += 1;
-//	}
-//}
-//
-//void	ft_parse_wquotes(char **str, t_parse *parse)
-//{
-//	int		check;
-//	char	*buff;
-//
-//	while (**str && **str != '\"')
-//	{
-//		check = 0;
-//		if (**str == '\'')
-//			ft_quote(str, parse, check);
-////		if (**str == '$')
-////			ft_dollar(str, parse, check);
-//		else
-//		{
-//			buff = ft_for_print(str, parse, "$\'\"");
-//			ft_push_argv(buff, parse, check);
-//		}
-//	}
-//}
-//
-//void	ft_wquote(char **str, t_parse *parse, int n, int *num_quote)
-//{
-//	int		check;
-//	char	*buff;
-//
-//	//n = 1;
-//	(*str) += 1;
-//	*num_quote += 1;
-//	if (*num_quote % 2 != 0)
-//	{
-//		buff = ft_for_print(str, parse, "$\'\"");
-//		ft_push_argv(buff, parse, n);
-//		while (**str && **str != '\"')
-//			ft_parse_wquotes(str, parse);
-//		if (**str != '\"')
-//		{
-//			ft_putendl_fd("Error", 2);
-//			parse->command_id = -1;
-//		}
-////		else
-////		{
-////			ft_push_argv(buff, parse, n);
-////			(*str) += 1;
-////		}
-//	}
-//}
-
 char	*ft_prequote(char **str, t_parse *parse)
 {
 	char	*buff;
@@ -123,31 +56,39 @@ char	*ft_preparse_wquotes(char **str, t_parse *parse, int ac, char **av)
 	return (buff);
 }
 
-char	*ft_prewquote(char **str, t_parse *parse, int *n_q , int ac, char **av)
+int	ft_check_num_quote(char ch, t_parse *parse)
+{
+	if (ch != '\"')
+	{
+		ft_putendl_fd("Error: need second quote", 2);
+		parse->command_id = -1;
+		return (-1);
+	}
+	return (1);
+}
+
+char	*ft_prewquote(char **str, t_parse *parse, int ac, char **av)
 {
 	char	*buff;
 	char	*tmp;
 	char	*tmp1;
 
 	(*str) += 1;
-	*n_q += 1;
+	parse->num_quote++;
 	tmp = 0;
-	if (*n_q % 2 != 0)
+	if (parse->num_quote % 2 != 0)
 	{
 		buff = ft_for_print(str, parse, "$\"");
 		while (**str && **str != '\"')
 			tmp = ft_preparse_wquotes(str, parse, ac, av);
-		if (**str != '\"')
-		{
-			ft_putendl_fd("Error", 2);
-			parse->command_id = -1;
+		if (ft_check_num_quote(**str, parse) == -1)
 			return (0);
-		}
 		tmp1 = buff;
 		buff = ft_strjoin(buff, tmp);
 		free(tmp);
 		if (tmp1)
 			free(tmp1);
+		parse->num_quote++;
 		(*str)++;
 		return (buff);
 	}

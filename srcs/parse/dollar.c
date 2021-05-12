@@ -17,17 +17,10 @@ char	*ft_convers_dol(t_parse *parse, char **str, int ac, char **av)
 	char	*line;
 	char	*tmp;
 	char	*tmp1;
-	int		num_quote;
 
 	line = 0;
-	num_quote = 0;
 	while (ft_isspace(**str))
 		(*str)++;
-//	if (**str == ';')
-//	{
-//		ft_putendl_fd("syntax error near unexpected token `;'", 2);
-//		return (0);
-//	}
 	while (**str && ft_strchr(";", **str) == 0)
 	{
 		if (**str == '\'')
@@ -43,7 +36,7 @@ char	*ft_convers_dol(t_parse *parse, char **str, int ac, char **av)
 		}
 		else if (**str == '"')
 		{
-			tmp = ft_prewquote(str, parse, &num_quote, ac, av);
+			tmp = ft_prewquote(str, parse, ac, av);
 			if (!tmp)
 				return (0);
 			tmp1 = line;
@@ -144,8 +137,7 @@ char	*ft_dollar(char **str, t_parse *parse, int argc, char **argv)
 		return (env);
 	}
 	buff = ft_for_print_isalnum(str, parse);
-//	env = ft_strdup(get_env(buff, parse->env));
-	env = get_env(buff, parse->env);
+	env = ft_strdup(get_env(buff, parse->env));
 	free(buff);
 	return (env);
 }
