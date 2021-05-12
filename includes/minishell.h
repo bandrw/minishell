@@ -32,7 +32,7 @@
 # define CMD_ENV 6
 # define CMD_EXIT 7
 
-typedef struct	s_state
+typedef struct s_state
 {
 	int			process_running;
 	int			fd_stdin;
@@ -99,16 +99,15 @@ void	clear_array(char **arr);
 int		is_valid_key(char *key);
 
 void	termcap_up(int *command_nbr, char *command_line, int *pos,
-				t_history *history);
+			t_history *history);
 void	termcap_down(int *command_nbr, char *command_line, int *pos,
-					t_history *history);
-void	termcap_backspace(int *pos,char *command_line);
-void	termcap_input(char *command_line,  int *pos, char *str);
+			t_history *history);
+void	termcap_backspace(int *pos, char *command_line);
+void	termcap_input(char *command_line, int *pos, char *str);
 char	termcap_loop(int *command_nbr, int *pos, char *command_line,
-					t_history *history);
+			t_history *history);
 
 void	throw_error(char *argv, char *description, int err);
-void	ft_error();
 int		throw_open_error(char *file);
 
 //	Parse
@@ -146,7 +145,7 @@ void	ft_get_arg(char **buff, t_parse *parse);
 
 void	ft_parse_for_other(char **str, char **line, t_parse *parse);
 void	ft_parse_for_doll(char **str, char **line, t_parse *parse);
-int	ft_parse_for_quote(char **str, char **line, t_parse *parse);
-int	ft_parse_for_wquote(char **str, char **line, t_parse *parse);
+int		ft_parse_for_quote(char **str, char **line, t_parse *parse);
+int		ft_parse_for_wquote(char **str, char **line, t_parse *parse);
 
 #endif

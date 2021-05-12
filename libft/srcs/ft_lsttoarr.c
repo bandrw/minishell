@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lsttoarr.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kfriese <kfriese@student.21-school>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/12 20:58:40 by kfriese           #+#    #+#             */
+/*   Updated: 2021/05/12 20:58:42 by kfriese          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 char	**ft_lsttoarr(t_list *list)
@@ -7,7 +19,7 @@ char	**ft_lsttoarr(t_list *list)
 
 	if (!list)
 		return (0);
-	arr = (char**)malloc(sizeof(char*) * (ft_lstsize(list) + 1));
+	arr = (char **)malloc(sizeof(char *) * (ft_lstsize(list) + 1));
 	if (arr)
 	{
 		i = -1;

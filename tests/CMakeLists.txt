@@ -28,8 +28,7 @@ add_library(minishell_lib
 		../srcs/logic/history.c
 		../srcs/parse/get_redirection.c
 		../srcs/parse/get_other.c
-		../srcs/error.c
-		../srcs/logic/logic_clean.c)
+        ../srcs/logic/logic_clean.c)
 
 add_test(NAME parse_test_1
 		COMMAND ./tests/parse_test_1
