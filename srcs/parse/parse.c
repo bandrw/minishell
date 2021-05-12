@@ -48,7 +48,7 @@ int	ft_check_sym(char **str, t_parse *parse, int *num_quote, int chk)
 		(*str)++;
 		return (-1);
 	}
-	else if (**str == '>')
+	 else if (**str == '>')
 	{
 		if (ft_check_red(str, parse, 0) == -1)
 			return (-1);
@@ -90,6 +90,7 @@ void	ft_read_line(char **str, t_parse *parse, int *num_quote)
 		if (ft_check_sym(str, parse, num_quote, check) == -1)
 			return ;
 	}
+//	free(line);
 }
 
 void	ft_get_arg(char **buff, t_parse *parse)
@@ -121,7 +122,17 @@ void	parse_line(char *line, int argc, char **argv, char ***env)
 
 	buff = 0;
 	line = ft_strdup(line);
+	line_start = line;
 	ft_bzero(&parse, sizeof(parse));
+	tmp = 0;
+	while (ft_isspace(*line))
+		line++;
+	if (*line == ';')
+	{
+		ft_putendl_fd("syntax error near unexpected token `;'", 2);
+		free(line_start);
+		return ;
+	}
 	while (*line)
 	{
 		line_start = line;
