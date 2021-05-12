@@ -14,26 +14,28 @@
 
 void	cmd_echo(t_parse *parse)
 {
-	int	need_new_line;
+	int		need_new_line;
+	t_list	*list;
 
 	errno = 0;
-	if (parse->argv == 0)
+	list = parse->argv;
+	if (list == 0)
 	{
 		ft_putchar_fd('\n', 1);
 		return ;
 	}
 	need_new_line = 1;
-	if (ft_strncmp(parse->argv->content, "-n", 3) == 0)
+	if (ft_strncmp(list->content, "-n", 3) == 0)
 	{
 		need_new_line = 0;
-		parse->argv =parse->argv->next;
+		list = list->next;
 	}
-	while (parse->argv)
+	while (list)
 	{
-		ft_putstr_fd(parse->argv->content, 1);
-		if (parse->argv->next)
+		ft_putstr_fd(list->content, 1);
+		if (list->next)
 			ft_putchar_fd(' ', 1);
-		parse->argv = parse->argv->next;
+		list = list->next;
 	}
 	if (need_new_line)
 		ft_putchar_fd('\n', 1);
