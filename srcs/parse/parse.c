@@ -38,11 +38,11 @@ int	ft_check_red(char **str, t_parse *parse, int err)
 
 int	ft_check_sym(char **str, t_parse *parse, int *num_quote, int chk)
 {
-	if (**str == '\'')
-		ft_quote(str, parse, chk);
-	else if (**str == '\"')
-		ft_wquote(str, parse, chk, num_quote);
-	else if (**str == '|')
+//	if (**str == '\'')
+//		ft_quote(str, parse, chk);
+//	else if (**str == '\"')
+//		ft_wquote(str, parse, chk, num_quote);
+	if (**str == '|')
 	{
 		parse->pipe_info.pipe_to_next = 1;
 		(*str)++;

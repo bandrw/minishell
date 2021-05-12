@@ -21,7 +21,7 @@ int	ft_get_errfile(char **str, t_parse *parse)
 		(*str)++;
 	file = ft_for_print(str, parse, " ;<>|\t\n\v\f\r");
 	parse->pipe_info.err_file_out = file;
-	fd = open(parse->pipe_info.file_out, O_CREAT | O_WRONLY, 0644);
+	fd = open(parse->pipe_info.file_out, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	close(fd);
 	if (!**str || **str == ';')
 		return (-1);
@@ -76,7 +76,7 @@ int	ft_get_outfile(char **str, t_parse *parse)
 		(*str)++;
 	file = ft_for_print(str, parse, " ;|<>\t\n\v\f\r");
 	parse->pipe_info.file_out = file;
-	fd = open(parse->pipe_info.file_out, O_CREAT | O_WRONLY, 0644);
+	fd = open(parse->pipe_info.file_out, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	close(fd);
 	if (!**str || **str == ';')
 		return (-1);
