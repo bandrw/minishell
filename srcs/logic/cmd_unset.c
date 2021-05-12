@@ -55,7 +55,8 @@ void	cmd_unset(t_parse *parse, char ***env)
 	errno = 0;
 	if (!parse->argv)
 		return ;
-	arr = (char **)malloc(sizeof(char *) * (get_env_len(parse->argv, *env) + 1));
+	arr = (char **)malloc(sizeof(char *)
+			* (get_env_len(parse->argv, *env) + 1));
 	i = -1;
 	j = 0;
 	while ((*env)[++i])

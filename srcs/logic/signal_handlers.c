@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-extern t_state g_state;
+extern t_state	g_state;
 
 void	sigint_handler(int sig)
 {
@@ -25,11 +25,7 @@ void	sigint_handler(int sig)
 	}
 	else
 	{
-		#if DEBUG
-		ft_putstr("\b\b  \b\b\n");
-		#else
 		ft_putstr("\b \b\n");
-		#endif
 		ft_putstr("\033[35mminishell$ \033[0m");
 	}
 }
@@ -42,11 +38,5 @@ void	sigquit_handler(int sig)
 	{
 		ft_putstr_fd("^\\Quit: 3\n", g_state.fd_stdout);
 		errno = 131;
-	}
-	else
-	{
-		#if DEBUG
-		ft_putstr("\b\b  \b\b");
-		#endif
 	}
 }

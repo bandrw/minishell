@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_cd.c                                            :+:      :+:    :+:   */
+/*   cmd_cd.c                                            :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfriese <kfriese@student.21-school>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -30,7 +30,7 @@ void	cmd_cd(t_parse *parse, char ***env)
 	}
 	else
 	{
-		buf = (char*)malloc(sizeof(char) * 1024);
+		buf = (char *)malloc(sizeof(char) * 1024);
 		insert_env("PWD", ft_strjoin("PWD=", getcwd(buf, 1024)), env);
 		free(buf);
 	}

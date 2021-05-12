@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_export.c                                        :+:      :+:    :+:   */
+/*   cmd_export.c                                        :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfriese <kfriese@student.21-school>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -42,7 +42,7 @@ static void	insert_new_env(char *new_env, char ***env)
 	l = 0;
 	while ((*env)[l])
 		l++;
-	arr = (char**)malloc(sizeof(char*) * (l + 2));
+	arr = (char **)malloc(sizeof(char *) * (l + 2));
 	l = -1;
 	while ((*env)[++l])
 		arr[l] = (*env)[l];
@@ -55,7 +55,7 @@ static void	insert_new_env(char *new_env, char ***env)
 
 void	insert_env(char *key, char *new_env, char ***env)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while ((*env)[++i])
@@ -70,23 +70,26 @@ void	insert_env(char *key, char *new_env, char ***env)
 	insert_new_env(new_env, env);
 }
 
-static int	is_valid_key(char *key)
+void	do_export(char **pair, char ***env)
 {
-	if (ft_isdigit(key[0]))
-		return (0);
-	while (*key)
+	char	*new_env;
+
+	new_env = (char *)malloc(sizeof(char)
+			* (ft_strlen(pair[0]) + ft_strlen(pair[1]) + 1));
+	ft_strlcpy(new_env, pair[0], ft_strlen(pair[0]) + 1);
+	if (pair[1])
 	{
-		if (!ft_isalnum(*key) && *key != '_')
-			return (0);
-		key++;
+		ft_strlcat(new_env, "=", ft_strlen(new_env) + 2);
+		ft_strlcat(new_env, pair[1], ft_strlen(new_env)
+			+ ft_strlen(pair[1]) + 1);
 	}
-	return (1);
+	if (pair[1] || !get_env(pair[0], *env))
+		insert_env(pair[0], new_env, env);
 }
 
 void	cmd_export(t_parse *parse, char ***env)
 {
 	char	**pair;
-	char	*new_env;
 	t_list	*argv;
 
 	errno = 0;
@@ -106,15 +109,7 @@ void	cmd_export(t_parse *parse, char ***env)
 				argv = argv->next;
 				continue ;
 			}
-			new_env = (char *)malloc(sizeof(char) * (ft_strlen(pair[0]) + ft_strlen(pair[1]) + 1));
-			ft_strlcpy(new_env, pair[0], ft_strlen(pair[0]) + 1);
-			if (pair[1])
-			{
-				ft_strlcat(new_env, "=", ft_strlen(new_env) + 2);
-				ft_strlcat(new_env, pair[1], ft_strlen(new_env) + ft_strlen(pair[1]) + 1);
-			}
-			if (pair[1] || !get_env(pair[0], *env))
-				insert_env(pair[0], new_env, env);
+			do_export(pair, env);
 			clear_array(pair);
 			argv = argv->next;
 		}

@@ -22,9 +22,9 @@ int	throw_open_error(char *file)
 	return (-1);
 }
 
-int		get_fd_in(t_parse *parse)
+int	get_fd_in(t_parse *parse)
 {
-	int fd;
+	int	fd;
 
 	if (parse->pipe_info.file_in)
 	{
@@ -38,7 +38,7 @@ int		get_fd_in(t_parse *parse)
 	return (0);
 }
 
-int		get_fd_out(t_parse *parse)
+int	get_fd_out(t_parse *parse)
 {
 	int	fd;
 	int	pipe_fd[2];
@@ -52,9 +52,11 @@ int		get_fd_out(t_parse *parse)
 	if (parse->pipe_info.file_out)
 	{
 		if (parse->pipe_info.append_output)
-			fd = open(parse->pipe_info.file_out, O_CREAT | O_WRONLY | O_APPEND, 0644);
+			fd = open(parse->pipe_info.file_out, O_CREAT | O_WRONLY | O_APPEND,
+					0644);
 		else
-			fd = open(parse->pipe_info.file_out, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+			fd = open(parse->pipe_info.file_out, O_CREAT | O_WRONLY | O_TRUNC,
+					0644);
 		if (fd < 0)
 			return (throw_open_error(parse->pipe_info.file_out));
 		return (fd);
@@ -62,16 +64,18 @@ int		get_fd_out(t_parse *parse)
 	return (1);
 }
 
-int		get_fd_err(t_parse *parse)
+int	get_fd_err(t_parse *parse)
 {
 	int	fd;
 
 	if (parse->pipe_info.err_file_out)
 	{
 		if (parse->pipe_info.append_err_output)
-			fd = open(parse->pipe_info.err_file_out, O_CREAT | O_WRONLY | O_APPEND, 0644);
+			fd = open(parse->pipe_info.err_file_out,
+					O_CREAT | O_WRONLY | O_APPEND, 0644);
 		else
-			fd = open(parse->pipe_info.err_file_out, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+			fd = open(parse->pipe_info.err_file_out,
+					O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (fd < 0)
 			return (throw_open_error(parse->pipe_info.err_file_out));
 		return (fd);

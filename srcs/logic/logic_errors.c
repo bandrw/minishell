@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   logic_errors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pantigon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kfriese <kfriese@student.21-school>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/07 16:35:53 by pantigon          #+#    #+#             */
-/*   Updated: 2021/05/07 16:35:55 by pantigon         ###   ########.fr       */
+/*   Created: 2021/05/12 19:45:06 by kfriese           #+#    #+#             */
+/*   Updated: 2021/05/12 19:45:07 by kfriese          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_error(void)
+void	throw_error(char *argv, char *description, int err)
 {
-	char	*msg;
-
-	write(0, "minishell: ", 1);
-	msg = strerror(errno);
-	ft_putendl_fd(msg, 1);
-	exit(0);
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(argv, 2);
+	ft_putendl_fd(description, 2);
+	errno = err;
 }

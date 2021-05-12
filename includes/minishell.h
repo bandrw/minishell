@@ -93,7 +93,18 @@ void	sigint_handler(int sig);
 void	sigquit_handler(int sig);
 
 void	clear_array(char **arr);
+int		is_valid_key(char *key);
 
+void	termcap_up(int *command_nbr, char *command_line, int *pos,
+				t_history *history);
+void	termcap_down(int *command_nbr, char *command_line, int *pos,
+					t_history *history);
+void	termcap_backspace(int *pos,char *command_line);
+void	termcap_input(char *command_line,  int *pos, char *str);
+char	termcap_loop(int *command_nbr, int *pos, char *command_line,
+					t_history *history);
+
+void	throw_error(char *argv, char *description, int err);
 void	ft_error();
 int		throw_open_error(char *file);
 

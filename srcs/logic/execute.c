@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-extern t_state g_state;
+extern t_state	g_state;
 
 static void	execute_selector(t_parse *parse, char ***env, const int std_copy[3])
 {
@@ -90,13 +90,8 @@ static int	open_fds(t_parse *parse, int fd[3], int std_copy[3])
 	return (0);
 }
 
-void	execute_command_line(t_parse *parse, char ***env)
+static void	copy_fds(int fd[3], int std_copy[3])
 {
-	int	fd[3];
-	int	std_copy[3];
-
-	if (open_fds(parse, fd, std_copy))
-		return ;
 	if (fd[0] != 0)
 	{
 		std_copy[0] = dup(0);
@@ -112,6 +107,16 @@ void	execute_command_line(t_parse *parse, char ***env)
 		std_copy[2] = dup(2);
 		dup2(fd[2], 2);
 	}
+}
+
+void	execute_command_line(t_parse *parse, char ***env)
+{
+	int	fd[3];
+	int	std_copy[3];
+
+	if (open_fds(parse, fd, std_copy))
+		return ;
+	copy_fds(fd, std_copy);
 	execute_selector(parse, env, std_copy);
 	ft_lstclear(&parse->argv, free);
 	if (parse->pipe_info.file_in)

@@ -71,3 +71,16 @@ char	*get_env(char *key, char **env)
 	}
 	return (0);
 }
+
+int	is_valid_key(char *key)
+{
+	if (ft_isdigit(key[0]))
+		return (0);
+	while (*key)
+	{
+		if (!ft_isalnum(*key) && *key != '_')
+			return (0);
+		key++;
+	}
+	return (1);
+}
