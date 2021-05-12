@@ -22,7 +22,7 @@ void	ft_quote(char **str, t_parse *parse, int n)
 	buff = ft_for_print(str, parse, "\'");
 	if (**str != '\'')
 	{
-		ft_putendl_fd("Error: need second quote", 2);
+		ft_putendl_fd("Error", 2);
 		parse->command_id = -1;
 	}
 	else
@@ -68,7 +68,7 @@ void	ft_wquote(char **str, t_parse *parse, int n, int *num_quote)
 			ft_parse_wquotes(str, parse);
 		if (**str != '\"')
 		{
-			ft_putendl_fd("Error: need second quote", 2);
+			ft_putendl_fd("Error", 2);
 			parse->command_id = -1;
 		}
 //		else

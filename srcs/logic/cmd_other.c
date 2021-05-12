@@ -27,6 +27,7 @@ static void	execute(char *exec_file, char **env, char **argv_arr)
 	{
 		waitpid(pid, &status, 0);
 		free(exec_file);
+		errno = (status != 0);
 	}
 }
 
@@ -118,7 +119,6 @@ void	cmd_other(t_parse *parse, char **env)
 	char	**argv_arr;
 	char	*executable_file;
 
-	errno = 0;
 	argv_arr = ft_lsttoarr(parse->argv);
 	if (argv_arr)
 	{
