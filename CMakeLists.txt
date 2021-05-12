@@ -33,7 +33,6 @@ add_executable(minishell
 		srcs/parse/get_redirection.c
 		srcs/parse/get_other.c
         srcs/logic/logic_clean.c
-		includes/minishell.h
 		srcs/parse/parse_loop.c
 		includes/minishell.h
 		srcs/logic/logic_errors.c
