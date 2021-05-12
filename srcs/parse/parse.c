@@ -114,9 +114,11 @@ void	ft_get_arg(char **buff, t_parse *parse)
 
 void	parse_line(char *line, int argc, char **argv, char ***env)
 {
-	t_parse	parse;
 	char	*buff;
 	char	*tmp;
+	char	*tmp1;
+	t_parse	parse;
+	int		need_to_clean = 0;
 
 	buff = 0;
 	ft_bzero(&parse, sizeof(parse));
@@ -133,8 +135,11 @@ void	parse_line(char *line, int argc, char **argv, char ***env)
 			buff++;
 		ft_get_arg(&buff, &parse);
 		execute_command_line(&parse, env);
-		if (*buff)
-			line = ft_strjoin(buff, line);
+		if (need_to_clean)
+			free(tmp1);
+		line = ft_strjoin(buff, line);
+		tmp1 = line;
+		need_to_clean = 1;
 		free(tmp);
 	}
 }

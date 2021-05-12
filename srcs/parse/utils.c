@@ -47,7 +47,7 @@ void	ft_push_argv(char *str, t_parse *parse, int n)
 		buff = ft_strjoin(last->content, str);
 		free(last->content);
 		free(str); // new
-		last->content = ft_strdup(buff);
+		last->content = buff;
 	}
 	else
 		ft_lstadd_back(&parse->argv, ft_lstnew(str));
