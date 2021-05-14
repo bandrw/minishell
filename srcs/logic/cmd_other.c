@@ -26,8 +26,8 @@ static void	execute(char *exec_file, char **env, char **argv_arr)
 	else
 	{
 		waitpid(pid, &status, 0);
-		free(exec_file);
-		errno = (status != 0);
+		if (errno != 130 && errno != 131)
+			errno = (status != 0);
 	}
 }
 
@@ -110,12 +110,14 @@ void	cmd_other(t_parse *parse, char **env)
 	argv_arr = ft_lsttoarr(parse->argv);
 	if (argv_arr)
 	{
-		executable_file = argv_arr[0];
 		if (!(argv_arr[0][0] == '/' || argv_arr[0][0] == '.'))
 			executable_file = get_execute_str(argv_arr[0],
 					get_env("PATH", env));
+		else
+			executable_file = ft_strdup(argv_arr[0]);
 		if (check_executable(executable_file, parse->argv->content) == 0)
 			execute(executable_file, env, argv_arr);
+		free(executable_file);
 		free(argv_arr);
 	}
 }

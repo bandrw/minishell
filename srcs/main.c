@@ -87,3 +87,32 @@ int	main(int argc, char **argv, char **env)
 		free(command_line);
 	}
 }
+
+//int	main(int argc, char **argv, char **env)
+//{
+//	int		n;
+//	char	*command_line;
+//
+//	ft_bzero(&g_state, sizeof(g_state));
+//	signal(SIGINT, sigint_handler);
+//	signal(SIGQUIT, sigquit_handler);
+//	env = arr_realloc(env);
+//	sort_arr(env);
+//	while (1)
+//	{
+//		ft_putstr("\033[35mminishell$ \033[0m");
+//		n = get_next_line(0, &command_line);
+//		if (n == 0)
+//		{
+//			ft_putendl_fd("exit", 1);
+//			return (0);
+//		}
+//		if (n != 1)
+//		{
+//			ft_putendl_fd("Error: GNL", 2);
+//			return (1);
+//		}
+//		parse_line(command_line, argc, argv, &env);
+//		free(command_line);
+//	}
+//}
