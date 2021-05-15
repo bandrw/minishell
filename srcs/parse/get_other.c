@@ -22,6 +22,8 @@ void	ft_text_q(char **str, t_parse *parse, int n)
 		buff = ft_preescape(str);
 	else if (parse->wq % 2 != 0)
 		buff = ft_for_print(str, "\"\'\\");
+	else if (parse->q % 2 != 0)
+		buff = ft_for_print(str, "\'");
 	else
 		buff = ft_for_print(str, "\"\'");
 	ft_push_argv(buff, parse, n);
