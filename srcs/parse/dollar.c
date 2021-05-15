@@ -11,9 +11,10 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 extern t_state	g_state;
 
-char	*ft_get_argv(char **str, t_parse *parse)
+char	*ft_get_argv(char **str)
 {
 	char	i;
 	char	*env;
@@ -39,7 +40,6 @@ char	*ft_get_argv(char **str, t_parse *parse)
 int 	ft_strchar_isalnum(char *line)
 {
 	int	i;
-	int	j;
 
 	i = 0;
 	while (line[i])
@@ -51,7 +51,7 @@ int 	ft_strchar_isalnum(char *line)
 	return (i);
 }
 
-char	*ft_for_print_isalnum(char **str, t_parse *parse)
+char	*ft_for_print_isalnum(char **str)
 {
 	char	*tmp;
 	int		i;
@@ -72,14 +72,14 @@ char	*ft_dollar(char **str, t_parse *parse)
 
 	(*str) += 1;
 	if (ft_isdigit(**str) != 0)
-		return (ft_get_argv(str, parse));
+		return (ft_get_argv(str));
 	if (**str == '?')
 	{
 		env = ft_itoa(errno);
 		(*str) += 1;
 		return (env);
 	}
-	buff = ft_for_print_isalnum(str, parse);
+	buff = ft_for_print_isalnum(str);
 	env = ft_strdup(get_env(buff, parse->env));
 	free(buff);
 	return (env);

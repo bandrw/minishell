@@ -52,13 +52,11 @@ void	ft_push_argv(char *str, t_parse *parse, int n)
 		ft_lstadd_back(&parse->argv, ft_lstnew(str));
 }
 
-char	*ft_for_print(char **str, t_parse *parse, char *ch)
+char	*ft_for_print(char **str, char *ch)
 {
 	char	*tmp;
 	int		i;
-	int		j;
 
-	j = 0;
 	i = ft_strchar_int(ch, *str) + 1;
 	tmp = (char *) malloc(sizeof(char) * (i));
 	ft_strlcpy(tmp, *str, i);

@@ -85,12 +85,12 @@ void	ft_parse_for_doll(char **str, char **line, t_parse *parse)
 	}
 }
 
-void	ft_parse_for_other(char **str, char **line, t_parse *parse)
+void	ft_parse_for_other(char **str, char **line)
 {
 	char	*tmp;
 	char	*tmp1;
 
-	tmp = ft_for_print(str, parse, "\\$;\'\"");
+	tmp = ft_for_print(str, "\\$;\'\"");
 	tmp1 = *line;
 	*line = ft_strjoin(*line, tmp);
 	free(tmp);

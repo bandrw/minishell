@@ -15,14 +15,12 @@
 void	ft_get_pwd_env(t_parse *parse, int id, char **str)
 {
 	char	*tmp;
-	int		quote;
 
 	tmp = *str + 3;
-	quote = 0;
-	if (id == 3)
+	if (id == CMD_PWD)
 		parse->command_id = CMD_PWD;
 	else
 		parse->command_id = CMD_ENV;
-	ft_read_line(&tmp, parse, &quote);
+	ft_read_line(&tmp, parse);
 	*str = tmp;
 }

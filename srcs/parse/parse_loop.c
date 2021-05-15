@@ -36,7 +36,7 @@ int	ft_check_red(char **str, t_parse *parse, int err)
 	}
 }
 
-int	ft_check_sym(char **str, t_parse *parse, int *num_quote, int chk)
+int	ft_check_sym(char **str, t_parse *parse, int chk)
 {
 	if (**str == '|' && (parse->q % 2 == 0 || parse->wq % 2 == 0))
 	{
@@ -58,7 +58,7 @@ int	ft_check_sym(char **str, t_parse *parse, int *num_quote, int chk)
 	return (0);
 }
 
-void	ft_read_line(char **str, t_parse *parse, int *num_quote)
+void	ft_read_line(char **str, t_parse *parse)
 {
 	int	check;
 
@@ -77,7 +77,7 @@ void	ft_read_line(char **str, t_parse *parse, int *num_quote)
 			(*str)++;
 			return ;
 		}
-		if (ft_check_sym(str, parse, num_quote, check) == -1)
+		if (ft_check_sym(str, parse, check) == -1)
 			return ;
 	}
 }

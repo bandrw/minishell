@@ -101,12 +101,6 @@ void	sigquit_handler(int sig);
 void	clear_array(char **arr);
 int		is_valid_key(char *key);
 
-void	termcap_up(int *command_nbr, char *command_line, int *pos,
-			t_history *history);
-void	termcap_down(int *command_nbr, char *command_line, int *pos,
-			t_history *history);
-void	termcap_backspace(int *pos, char *command_line);
-void	termcap_input(char *command_line, int *pos, const char *str);
 char	termcap_loop(int *command_nbr, int *pos, char *command_line,
 			t_history *history);
 
@@ -133,8 +127,8 @@ void	ft_text_q(char **str, t_parse *parse, int n);
 void	ft_get_exit(t_parse *parse, char **str);
 void	ft_get_other(t_parse *parse, char **str);
 
-char	*ft_for_print(char **str, t_parse *parse, char *ch);
-char	*ft_for_print_q(char **str, t_parse *parse, char *ch);
+char	*ft_for_print(char **str, char *ch);
+char	*ft_for_print_q(char **str, char *ch);
 int		ft_strchar_int(const char *str, char *line);
 void	ft_fshell(char **tmp, char **buff);
 void	ft_push_argv(char *str, t_parse *parse, int n);
@@ -152,11 +146,11 @@ char	*ft_preescape(char **str);
 char	*ft_escape(char **str);
 
 int		ft_check_red(char **str, t_parse *parse, int err);
-int		ft_check_sym(char **str, t_parse *parse, int *num_quote, int chk);
-void	ft_read_line(char **str, t_parse *parse, int *num_quote);
+int		ft_check_sym(char **str, t_parse *parse, int chk);
+void	ft_read_line(char **str, t_parse *parse);
 void	ft_get_arg(char **buff, t_parse *parse);
 
-void	ft_parse_for_other(char **str, char **line, t_parse *parse);
+void	ft_parse_for_other(char **str, char **line);
 int		ft_parse_for_escape(char **str, char **line);
 void	ft_parse_for_doll(char **str, char **line, t_parse *parse);
 int		ft_parse_for_quote(char **str, char **line, t_parse *parse);

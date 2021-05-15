@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	termcap_up(int *command_nbr, char *command_line, int *pos,
+static void	termcap_up(int *command_nbr, char *command_line, int *pos,
 				t_history *history)
 {
 	(*command_nbr)--;
@@ -25,7 +25,7 @@ void	termcap_up(int *command_nbr, char *command_line, int *pos,
 	ft_strlcpy(command_line, history->content[*command_nbr], *pos + 1);
 }
 
-void	termcap_down(int *command_nbr, char *command_line, int *pos,
+static void	termcap_down(int *command_nbr, char *command_line, int *pos,
 					t_history *history)
 {
 	(*command_nbr)++;
@@ -43,7 +43,7 @@ void	termcap_down(int *command_nbr, char *command_line, int *pos,
 	}
 }
 
-void	termcap_backspace(int *pos, char *command_line)
+static void	termcap_backspace(int *pos, char *command_line)
 {
 	if (*pos > 0)
 	{
@@ -55,7 +55,7 @@ void	termcap_backspace(int *pos, char *command_line)
 	}
 }
 
-void	termcap_input(char *command_line, int *pos, const char *str)
+static void	termcap_input(char *command_line, int *pos, const char *str)
 {
 	tputs(restore_cursor, 1, (int (*)(int)) ft_putchar);
 	tputs(tgoto(tgetstr("DC", 0), 0, ft_strlen(command_line)), 1,
@@ -82,7 +82,7 @@ char	termcap_loop(int *command_nbr, int *pos, char *command_line,
 		termcap_up(command_nbr, command_line, pos, history);
 	else if (ft_strcmp(str, "\e[B") == 0 && *command_nbr < history->current)
 		termcap_down(command_nbr, command_line, pos, history);
-	else if (ft_strcmp(str, "\e[C") == 0 && *pos < ft_strlen(command_line))
+	else if (ft_strcmp(str, "\e[C") == 0 && *pos < (int)ft_strlen(command_line))
 	{
 		write(1, str, l);
 		(*pos)++;

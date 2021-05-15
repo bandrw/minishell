@@ -35,7 +35,7 @@ void	ft_convers_add(char **str, char **line, t_parse *parse)
 	if (**str == '$')
 		ft_parse_for_doll(str, line, parse);
 	else
-		ft_parse_for_other(str, line, parse);
+		ft_parse_for_other(str, line);
 }
 
 char	*ft_convers_dol(t_parse *parse, char **str)

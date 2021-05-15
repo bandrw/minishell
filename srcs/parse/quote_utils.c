@@ -47,7 +47,7 @@ int 	ft_strchar_int_q(const char *str, char *line)
 	return (i);
 }
 
-char	*ft_for_print_q(char **str, t_parse *parse, char *ch)
+char	*ft_for_print_q(char **str, char *ch)
 {
 	char	*tmp;
 	int		i;

@@ -21,9 +21,9 @@ void	ft_text_q(char **str, t_parse *parse, int n)
 	else if (**str == '\\' && parse->wq % 2 != 0)
 		buff = ft_preescape(str);
 	else if (parse->wq % 2 != 0)
-		buff = ft_for_print(str, parse, "\"\'\\");
+		buff = ft_for_print(str, "\"\'\\");
 	else
-		buff = ft_for_print(str, parse, "\"\'");
+		buff = ft_for_print(str, "\"\'");
 	ft_push_argv(buff, parse, n);
 }
 
@@ -34,7 +34,7 @@ void	ft_text(char **str, t_parse *parse, int n)
 	if (**str == '\\')
 		buff = ft_escape(str);
 	else
-		buff = ft_for_print(str, parse, " ;|<>\t\n\v\f\r\\\"\'");
+		buff = ft_for_print(str, " ;|<>\t\n\v\f\r\\\"\'");
 	ft_push_argv(buff, parse, n);
 }
 
@@ -44,5 +44,5 @@ void	ft_get_other(t_parse *parse, char **str)
 
 	quote = 0;
 	parse->command_id = CMD_OTHER;
-	ft_read_line(str, parse, &quote);
+	ft_read_line(str, parse);
 }

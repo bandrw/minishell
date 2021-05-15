@@ -32,7 +32,7 @@ int	ft_get_errfile(char **str, t_parse *parse)
 
 	while (**str && ft_isspace(**str))
 		(*str)++;
-	file = ft_for_print(str, parse, " ;<>|\\\t\n\v\f\r");
+	file = ft_for_print(str, " ;<>|\\\t\n\v\f\r");
 	if (**str == '\\')
 		ft_red_for_escape(str, &file);
 	parse->pipe_info.err_file_out = file;
@@ -46,12 +46,11 @@ int	ft_get_errfile(char **str, t_parse *parse)
 int	ft_get_infile(char **str, t_parse *parse)
 {
 	char	*file;
-	int		fd;
 
 	(*str)++;
 	while (**str && ft_isspace(**str))
 		(*str)++;
-	file = ft_for_print(str, parse, " ;|<>\\\t\n\v\f\r");
+	file = ft_for_print(str, " ;|<>\\\t\n\v\f\r");
 	if (**str == '\\')
 		ft_red_for_escape(str, &file);
 	parse->pipe_info.file_in = file;
@@ -67,7 +66,7 @@ int	ft_get_outfile(char **str, t_parse *parse)
 
 	while (**str && ft_isspace(**str))
 		(*str)++;
-	file = ft_for_print(str, parse, " ;|<>\\\t\n\v\f\r");
+	file = ft_for_print(str, " ;|<>\\\t\n\v\f\r");
 	if (**str == '\\')
 		ft_red_for_escape(str, &file);
 	parse->pipe_info.file_out = file;
