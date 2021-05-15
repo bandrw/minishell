@@ -59,19 +59,19 @@ int	ft_check_sym(char **str, t_parse *parse, int *num_quote, int chk)
 		if (ft_get_infile(str, parse) == -1)
 			return (-1);
 	}
-	else if (**str == '\'')
-	{
-		(*str)++;
-		parse->q += 1;
-	}
-	else if (**str == '\"')
-	{
-		(*str)++;
-		parse->wq += 1;
-	}
 	else
 	{
-		if (parse->q % 2 == 0 || parse->wq % 2 == 0)
+		if (**str == '\'')
+		{
+			(*str)++;
+			parse->q += 1;
+		}
+		else if (**str == '\"')
+		{
+			(*str)++;
+			parse->wq += 1;
+		}
+		if (parse->q % 2 != 0 || parse->wq % 2 != 0)
 			ft_text_q(str, parse, chk);
 		else
 			ft_text(str, parse, chk);

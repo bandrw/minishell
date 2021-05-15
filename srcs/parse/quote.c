@@ -42,9 +42,9 @@ char	*ft_prequote(char **str, t_parse *parse)
 	char	*line;
 
 	//(*str) += 1;
-	line = ft_for_print_q(str, parse, "\\\'");
-	if (**str == '\\')
-		line = ft_quote_escape(str, line, parse);
+	line = ft_for_print_q(str, parse, "\'");
+//	if (**str == '\\')
+//		line = ft_quote_escape(str, line, parse);
 	if (**str != '\'')
 	{
 		ft_putendl_fd("Error: need second quote", 2);
@@ -71,9 +71,18 @@ char	*ft_preparse_wquotes(char **str, t_parse *parse)
 		if (**str == '$')
 			tmp = ft_dollar(str, parse);
 		else if (**str == '\\')
-			tmp = ft_escape(str);
+		{
+			if (ft_strchr("$\\", (*(*str + 1))) != 0)
+			{
+//				(*str)++;
+				tmp = ft_escape(str);
+//				(*str) += 2;
+			}
+			else
+				tmp = ft_preescape(str);
+		}
 		else
-			tmp = ft_for_print(str, parse, "$\"");
+			tmp = ft_for_print(str, parse, "$\"\\");
 		if (tmp)
 		{
 			tmp1 = buff;

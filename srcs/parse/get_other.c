@@ -16,10 +16,14 @@ void	ft_text_q(char **str, t_parse *parse, int n)
 {
 	char	*buff;
 
-	if (**str == '\\')
+	if (**str == '\\' && parse->wq % 2 != 0 && (*(*str + 1)) == '"')
 		buff = ft_escape(str);
+	else if (**str == '\\' && parse->wq % 2 != 0)
+		buff = ft_preescape(str);
+	else if (parse->wq % 2 != 0)
+		buff = ft_for_print(str, parse, "\"\'\\");
 	else
-		buff = ft_for_print(str, parse, "\\\"\'");
+		buff = ft_for_print(str, parse, "\"\'");
 	ft_push_argv(buff, parse, n);
 }
 
