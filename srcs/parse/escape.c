@@ -56,6 +56,8 @@ int	ft_parse_for_escape_quote(char **str, char **line)
 	tmp = ft_preescape_quote(str);
 	if (tmp == 0)
 		return (-1);
+	if (!*line)
+		*line = ft_strdup("");
 	tmp1 = *line;
 	*line = ft_strjoin(*line, tmp);
 	free(tmp);
@@ -72,6 +74,8 @@ int	ft_parse_for_escape(char **str, char **line)
 	tmp = ft_preescape(str);
 	if (tmp == 0)
 		return (-1);
+	if (!*line)
+		*line = ft_strdup("");
 	tmp1 = *line;
 	*line = ft_strjoin(*line, tmp);
 	free(tmp);

@@ -18,6 +18,8 @@ void	ft_red_for_escape(char **str, char **line)
 	char	*tmp1;
 
 	tmp = ft_escape(str);
+	if (!*line)
+		*line = ft_strdup("");
 	tmp1 = *line;
 	*line = ft_strjoin(*line, tmp);
 	free(tmp);

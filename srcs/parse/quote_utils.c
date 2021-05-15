@@ -18,6 +18,8 @@ void	ft_fshell(char **tmp, char **buff)
 
 	if (*tmp)
 	{
+		if (!*buff)
+			*buff = ft_strdup("");
 		tmp1 = *buff;
 		*buff = ft_strjoin(*buff, *tmp);
 		free(*tmp);

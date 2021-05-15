@@ -45,6 +45,8 @@ int	ft_parse_for_wquote(char **str, char **line, t_parse *parse)
 	tmp = ft_prewquote(str, parse);
 	if (!tmp)
 		return (-1);
+	if (!*line)
+		*line = ft_strdup("");
 	tmp1 = *line;
 	*line = ft_strjoin(*line, tmp);
 	free(tmp);
@@ -61,6 +63,8 @@ int	ft_parse_for_quote(char **str, char **line, t_parse *parse)
 	tmp = ft_prequote(str, parse);
 	if (tmp == 0)
 		return (-1);
+	if (!*line)
+		*line = ft_strdup("");
 	tmp1 = *line;
 	*line = ft_strjoin(*line, tmp);
 	free(tmp);
@@ -77,11 +81,12 @@ void	ft_parse_for_doll(char **str, char **line, t_parse *parse)
 	tmp = ft_dollar(str, parse);
 	if (tmp)
 	{
+		if (!*line)
+			*line = ft_strdup("");
 		tmp1 = *line;
 		*line = ft_strjoin(*line, tmp);
 		free(tmp);
-		if (tmp1)
-			free(tmp1);
+		free(tmp1);
 	}
 }
 
@@ -91,9 +96,10 @@ void	ft_parse_for_other(char **str, char **line)
 	char	*tmp1;
 
 	tmp = ft_for_print(str, "\\$;\'\"");
+	if (!*line)
+		*line = ft_strdup("");
 	tmp1 = *line;
 	*line = ft_strjoin(*line, tmp);
 	free(tmp);
-	if (tmp1)
-		free(tmp1);
+	free(tmp1);
 }
