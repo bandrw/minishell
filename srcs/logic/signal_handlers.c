@@ -25,7 +25,7 @@ void	sigint_handler(int sig)
 	}
 	else
 	{
-		ft_putstr("\b \b\n");
+		ft_putstr("\b \n");
 		ft_putstr("\033[35mminishell$ \033[0m");
 	}
 }
