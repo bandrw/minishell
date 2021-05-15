@@ -69,6 +69,8 @@ typedef struct s_parse
 	t_pipe			pipe_info;
 	int				next_parse_fd_in;
 	int				num_quote;
+	int				q;
+	int				wq;
 }					t_parse;
 
 //	Logic
@@ -126,10 +128,12 @@ void	ft_get_cd(t_parse *parse, char **str);
 void	ft_get_export(t_parse *parse, char **str);
 void	ft_get_unset(t_parse *parse, char **str);
 void	ft_text(char **str, t_parse *parse, int n);
+void	ft_text_q(char **str, t_parse *parse, int n);
 void	ft_get_exit(t_parse *parse, char **str);
 void	ft_get_other(t_parse *parse, char **str);
 
 char	*ft_for_print(char **str, t_parse *parse, char *ch);
+char	*ft_for_print_q(char **str, t_parse *parse, char *ch);
 int		ft_strchar_int(const char *str, char *line);
 void	ft_push_argv(char *str, t_parse *parse, int n);
 char	*ft_convers_dol(t_parse *parse, char **str);

@@ -52,6 +52,39 @@ void	ft_push_argv(char *str, t_parse *parse, int n)
 		ft_lstadd_back(&parse->argv, ft_lstnew(str));
 }
 
+int 	ft_strchar_int_q(const char *str, char *line)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	line++;
+	while (line[i])
+	{
+		j = 0;
+		while (str[j])
+		{
+			if (str[j] == line[i])
+				return (i);
+			j++;
+		}
+		i++;
+	}
+	return (i);
+}
+
+char	*ft_for_print_q(char **str, t_parse *parse, char *ch)
+{
+	char	*tmp;
+	int		i;
+
+	i = ft_strchar_int_q(ch, *str) + 2;
+	tmp = (char *) malloc(sizeof(char) * (i));
+	ft_strlcpy(tmp, *str, i);
+	(*str) += i - 1;
+	return (tmp);
+}
+
 char	*ft_for_print(char **str, t_parse *parse, char *ch)
 {
 	char	*tmp;

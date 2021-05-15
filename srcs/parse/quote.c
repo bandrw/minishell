@@ -27,13 +27,22 @@ char	*ft_quote_escape(char **str, char *line, t_parse *parse)
 	return (line);
 }
 
+void	ft_add_quote(char **line, char *ch)
+{
+	char	*tmp;
+
+	tmp = *line;
+	*line = ft_strjoin(*line, ch);
+	free(tmp);
+}
+
 char	*ft_prequote(char **str, t_parse *parse)
 {
 	char	*buff;
 	char	*line;
 
-	(*str) += 1;
-	line = ft_for_print(str, parse, "\\\'");
+	//(*str) += 1;
+	line = ft_for_print_q(str, parse, "\\\'");
 	if (**str == '\\')
 		line = ft_quote_escape(str, line, parse);
 	if (**str != '\'')
@@ -45,6 +54,7 @@ char	*ft_prequote(char **str, t_parse *parse)
 	else
 	{
 		(*str) += 1;
+		ft_add_quote(&line, "\'");
 		return (line);
 	}
 }
@@ -93,12 +103,12 @@ char	*ft_prewquote(char **str, t_parse *parse)
 	char	*tmp;
 	char	*tmp1;
 
-	(*str) += 1;
+	//(*str) += 1;
 	parse->num_quote++;
 	tmp = 0;
 	if (parse->num_quote % 2 != 0)
 	{
-		buff = ft_for_print(str, parse, "\\$\"");
+		buff = ft_for_print_q(str, parse, "\\$\"");
 		while (**str && **str != '\"')
 			tmp = ft_preparse_wquotes(str, parse);
 		if (ft_check_num_quote(**str, parse) == -1)
@@ -109,6 +119,7 @@ char	*ft_prewquote(char **str, t_parse *parse)
 		if (tmp1)
 			free(tmp1);
 		parse->num_quote++;
+		ft_add_quote(&buff, "\"");
 		(*str)++;
 		return (buff);
 	}

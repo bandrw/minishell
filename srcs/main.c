@@ -64,52 +64,52 @@ static char	read_line(char *command_line, t_history *history)
 	return (ch);
 }
 
-int	main(int argc, char **argv, char **env)
-{
-	char		ch;
-	char		command_line[2048];
-	t_history	history;
-
-	main_init(&env, &history, argc, argv);
-	while (1)
-	{
-		ft_putstr("\033[35mminishell$ \033[0m");
-		tputs(save_cursor, 1, (int (*)(int)) ft_putchar);
-		ch = read_line(command_line, &history);
-		if (ch == '\4')
-		{
-			ft_putendl_fd("\bexit", 1);
-			return (0);
-		}
-		parse_line(command_line, &env);
-	}
-}
-
 //int	main(int argc, char **argv, char **env)
 //{
-//	int		n;
-//	char	*command_line;
+//	char		ch;
+//	char		command_line[2048];
+//	t_history	history;
 //
-//	ft_bzero(&g_state, sizeof(g_state));
-//	signal(SIGINT, sigint_handler);
-//	signal(SIGQUIT, sigquit_handler);
-//	env = arr_realloc(env);
-//	sort_arr(env);
+//	main_init(&env, &history, argc, argv);
 //	while (1)
 //	{
 //		ft_putstr("\033[35mminishell$ \033[0m");
-//		n = get_next_line(0, &command_line);
-//		if (n == 0)
+//		tputs(save_cursor, 1, (int (*)(int)) ft_putchar);
+//		ch = read_line(command_line, &history);
+//		if (ch == '\4')
 //		{
-//			ft_putendl_fd("exit", 1);
+//			ft_putendl_fd("\bexit", 1);
 //			return (0);
 //		}
-//		if (n != 1)
-//		{
-//			ft_putendl_fd("Error: GNL", 2);
-//			return (1);
-//		}
 //		parse_line(command_line, &env);
-//		free(command_line);
 //	}
 //}
+
+int	main(int argc, char **argv, char **env)
+{
+	int		n;
+	char	*command_line;
+
+	ft_bzero(&g_state, sizeof(g_state));
+	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, sigquit_handler);
+	env = arr_realloc(env);
+	sort_arr(env);
+	while (1)
+	{
+		ft_putstr("\033[35mminishell$ \033[0m");
+		n = get_next_line(0, &command_line);
+		if (n == 0)
+		{
+			ft_putendl_fd("exit", 1);
+			return (0);
+		}
+		if (n != 1)
+		{
+			ft_putendl_fd("Error: GNL", 2);
+			return (1);
+		}
+		parse_line(command_line, &env);
+		free(command_line);
+	}
+}

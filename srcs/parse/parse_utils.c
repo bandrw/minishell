@@ -33,7 +33,7 @@ char	*ft_convers_dol(t_parse *parse, char **str)
 			if (ft_parse_for_quote(str, &line, parse) == -1)
 				return (0);
 		}
-		else if (**str == '"')
+		else if (**str == '\"')
 		{
 			if (ft_parse_for_wquote(str, &line, parse) == -1)
 				return (0);

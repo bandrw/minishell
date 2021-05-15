@@ -12,6 +12,17 @@
 
 #include "minishell.h"
 
+void	ft_text_q(char **str, t_parse *parse, int n)
+{
+	char	*buff;
+
+	if (**str == '\\')
+		buff = ft_escape(str);
+	else
+		buff = ft_for_print(str, parse, "\\\"\'");
+	ft_push_argv(buff, parse, n);
+}
+
 void	ft_text(char **str, t_parse *parse, int n)
 {
 	char	*buff;
@@ -19,7 +30,7 @@ void	ft_text(char **str, t_parse *parse, int n)
 	if (**str == '\\')
 		buff = ft_escape(str);
 	else
-		buff = ft_for_print(str, parse, " ;|<>\t\n\v\f\r\\");
+		buff = ft_for_print(str, parse, " ;|<>\t\n\v\f\r\\\"\'");
 	ft_push_argv(buff, parse, n);
 }
 
