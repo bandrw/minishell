@@ -12,21 +12,6 @@
 
 #include "minishell.h"
 
-char	*ft_quote_escape(char **str, char *line, t_parse *parse)
-{
-	char	*tmp;
-	char	*tmp1;
-
-	ft_parse_for_escape_quote(str, &line);
-	tmp = ft_for_print(str, parse, "\'");
-	tmp1 = line;
-	line = ft_strjoin(line, tmp);
-	free(tmp);
-	if (tmp1)
-		free(tmp1);
-	return (line);
-}
-
 void	ft_add_quote(char **line, char *ch)
 {
 	char	*tmp;
@@ -41,10 +26,7 @@ char	*ft_prequote(char **str, t_parse *parse)
 	char	*buff;
 	char	*line;
 
-	//(*str) += 1;
 	line = ft_for_print_q(str, parse, "\'");
-//	if (**str == '\\')
-//		line = ft_quote_escape(str, line, parse);
 	if (**str != '\'')
 	{
 		ft_putendl_fd("Error: need second quote", 2);
@@ -63,7 +45,6 @@ char	*ft_preparse_wquotes(char **str, t_parse *parse)
 {
 	char	*buff;
 	char	*tmp;
-	char	*tmp1;
 
 	buff = 0;
 	while (**str && **str != '\"')
@@ -73,24 +54,13 @@ char	*ft_preparse_wquotes(char **str, t_parse *parse)
 		else if (**str == '\\')
 		{
 			if (ft_strchr("$\\", (*(*str + 1))) != 0)
-			{
-//				(*str)++;
 				tmp = ft_escape(str);
-//				(*str) += 2;
-			}
 			else
 				tmp = ft_preescape(str);
 		}
 		else
 			tmp = ft_for_print(str, parse, "$\"\\");
-		if (tmp)
-		{
-			tmp1 = buff;
-			buff = ft_strjoin(buff, tmp);
-			free(tmp);
-			if (tmp1)
-				free(tmp1);
-		}
+		ft_fshell(&tmp, &buff);
 	}
 	return (buff);
 }
@@ -112,7 +82,6 @@ char	*ft_prewquote(char **str, t_parse *parse)
 	char	*tmp;
 	char	*tmp1;
 
-	//(*str) += 1;
 	parse->num_quote++;
 	tmp = 0;
 	if (parse->num_quote % 2 != 0)

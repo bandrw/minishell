@@ -116,6 +116,7 @@ int		throw_open_error(char *file);
 //	Parse
 
 void	ft_skip_space(char **buff);
+void	ft_push_text(char **str, t_parse *parse, int chk);
 
 void	parse_line(char *buff, char ***env);
 int		ft_walk_str(char *str);
@@ -135,6 +136,7 @@ void	ft_get_other(t_parse *parse, char **str);
 char	*ft_for_print(char **str, t_parse *parse, char *ch);
 char	*ft_for_print_q(char **str, t_parse *parse, char *ch);
 int		ft_strchar_int(const char *str, char *line);
+void	ft_fshell(char **tmp, char **buff);
 void	ft_push_argv(char *str, t_parse *parse, int n);
 char	*ft_convers_dol(t_parse *parse, char **str);
 
@@ -156,7 +158,6 @@ void	ft_get_arg(char **buff, t_parse *parse);
 
 void	ft_parse_for_other(char **str, char **line, t_parse *parse);
 int		ft_parse_for_escape(char **str, char **line);
-int		ft_parse_for_escape_quote(char **str, char **line);
 void	ft_parse_for_doll(char **str, char **line, t_parse *parse);
 int		ft_parse_for_quote(char **str, char **line, t_parse *parse);
 int		ft_parse_for_wquote(char **str, char **line, t_parse *parse);

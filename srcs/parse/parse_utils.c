@@ -12,6 +12,24 @@
 
 #include "minishell.h"
 
+void	ft_push_text(char **str, t_parse *parse, int chk)
+{
+	if (**str == '\'')
+	{
+		(*str)++;
+		parse->q += 1;
+	}
+	else if (**str == '\"')
+	{
+		(*str)++;
+		parse->wq += 1;
+	}
+	if (parse->q % 2 != 0 || parse->wq % 2 != 0)
+		ft_text_q(str, parse, chk);
+	else
+		ft_text(str, parse, chk);
+}
+
 void	ft_convers_add(char **str, char **line, t_parse *parse)
 {
 	if (**str == '$')

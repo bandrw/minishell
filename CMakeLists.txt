@@ -32,12 +32,15 @@ add_executable(minishell
 		srcs/logic/history.c
 		srcs/parse/get_redirection.c
 		srcs/parse/get_other.c
-        srcs/logic/logic_clean.c
+		srcs/logic/logic_clean.c
 		srcs/parse/parse_loop.c
 		includes/minishell.h
 		srcs/logic/logic_errors.c
 		srcs/logic/termcap.c
-		srcs/parse/preparse.c srcs/parse/escape.c srcs/parse/parse_utils.c)
+		srcs/parse/preparse.c
+		srcs/parse/escape.c
+		srcs/parse/parse_utils.c
+		srcs/parse/quote_utils.c)
 
 include_directories(includes)
 include_directories(libft/includes)
