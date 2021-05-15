@@ -34,9 +34,13 @@ void	termcap_down(int *command_nbr, char *command_line, int *pos,
 		(int (*)(int)) ft_putchar);
 	tputs(tgetstr("ed", 0), 1, (int (*)(int)) ft_putchar);
 	ft_bzero(command_line, sizeof(char) * 2048);
-	ft_putstr(history->content[*command_nbr]);
-	*pos = ft_strlen(history->content[*command_nbr]);
-	ft_strlcpy(command_line, history->content[*command_nbr], *pos + 1);
+	*pos = 0;
+	if (*command_nbr < history->current)
+	{
+		ft_putstr(history->content[*command_nbr]);
+		*pos = ft_strlen(history->content[*command_nbr]);
+		ft_strlcpy(command_line, history->content[*command_nbr], *pos + 1);
+	}
 }
 
 void	termcap_backspace(int *pos, char *command_line)
