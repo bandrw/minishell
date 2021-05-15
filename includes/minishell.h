@@ -23,14 +23,14 @@
 # include <term.h>
 # include <fcntl.h>
 
-# define CMD_OTHER 0
-# define CMD_ECHO 1
-# define CMD_CD 2
-# define CMD_PWD 3
-# define CMD_EXPORT 4
-# define CMD_UNSET 5
-# define CMD_ENV 6
-# define CMD_EXIT 7
+# define CMD_OTHER 1
+# define CMD_ECHO 2
+# define CMD_CD 3
+# define CMD_PWD 4
+# define CMD_EXPORT 5
+# define CMD_UNSET 6
+# define CMD_ENV 7
+# define CMD_EXIT 8
 
 typedef struct s_state
 {
@@ -68,6 +68,7 @@ typedef struct s_parse
 	t_pipe			pipe_info;
 	int				next_parse_fd_in;
 	int				num_quote;
+	int				chk_brk;
 }					t_parse;
 
 //	Logic
@@ -111,7 +112,8 @@ void	throw_error(char *argv, char *description, int err);
 int		throw_open_error(char *file);
 
 //	Parse
-void	parse_line(char *buff, int argc, char **argv, char ***env);
+void	parse_line(char *buff, char ***env);
+int		ft_walk_str(char *str);
 int		ft_check_arg(char *arg, char *buff, int n);
 void	ft_init_parse(t_parse *parse, char **env);
 
