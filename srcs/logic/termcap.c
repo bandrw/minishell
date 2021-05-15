@@ -51,7 +51,7 @@ void	termcap_backspace(int *pos, char *command_line)
 	}
 }
 
-void	termcap_input(char *command_line, int *pos, char *str)
+void	termcap_input(char *command_line, int *pos, const char *str)
 {
 	tputs(restore_cursor, 1, (int (*)(int)) ft_putchar);
 	tputs(tgoto(tgetstr("DC", 0), 0, ft_strlen(command_line)), 1,

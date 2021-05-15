@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+extern t_state	g_state;
+
 static void	execute(char *exec_file, char **env, char **argv_arr)
 {
 	int	pid;
@@ -20,12 +22,19 @@ static void	execute(char *exec_file, char **env, char **argv_arr)
 	pid = fork();
 	if (pid == 0)
 	{
+//		tcgetattr(0, &g_state.term);
+//		g_state.term.c_lflag = ~(ICANON);
+//		tcsetattr(0, TCSANOW, &g_state.term);
 		execve(exec_file, argv_arr, env);
 		exit(1);
 	}
 	else
 	{
 		waitpid(pid, &status, 0);
+//		tcgetattr(0, &g_state.term);
+//		g_state.term.c_lflag &= ~(ECHO);
+//		g_state.term.c_lflag &= ~(ICANON);
+//		tcsetattr(0, TCSANOW, &g_state.term);
 		if (errno != 130 && errno != 131)
 			errno = (status != 0);
 	}

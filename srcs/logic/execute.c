@@ -37,6 +37,9 @@ static void	execute_selector(t_parse *parse, char ***env, const int std_copy[3])
 	else if (parse->command_id == CMD_EXIT)
 		cmd_exit(parse);
 	g_state.process_running = 0;
+	g_state.fd_stdin = 0;
+	g_state.fd_stdout = 1;
+	g_state.fd_stderr = 2;
 }
 
 static void	close_fds(int fd[3], int std_copy[3])

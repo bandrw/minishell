@@ -18,7 +18,6 @@ static void	history_realloc(t_history *history)
 	char	**arr;
 
 	history->size = (int)(history->size * 1.5);
-	printf("Realloc to %d\n", history->size);
 	arr = (char **)malloc(sizeof(char *) * history->size);
 	i = 0;
 	while (i < history->current)
@@ -36,5 +35,4 @@ void	history_add(t_history *history, char *command_line)
 		history_realloc(history);
 	history->content[history->current] = ft_strdup(command_line);
 	history->current++;
-	printf("<%d>\n", history->current);
 }
