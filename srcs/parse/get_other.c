@@ -16,7 +16,10 @@ void	ft_text(char **str, t_parse *parse, int n)
 {
 	char	*buff;
 
-	buff = ft_for_print(str, parse, " ;|<>\t\n\v\f\r");
+	if (**str == '\\')
+		buff = ft_escape(str);
+	else
+		buff = ft_for_print(str, parse, " ;|<>\t\n\v\f\r\\");
 	ft_push_argv(buff, parse, n);
 }
 

@@ -13,43 +13,6 @@
 #include "minishell.h"
 extern t_state	g_state;
 
-//char	*ft_chk_bkr(t_parse *parse, char **str, char *line)
-//{
-//	if (**str == ';' && parse->chk_brk == 0)
-//	{
-//		ft_putendl_fd("syntax error near unexpected token `;'", 2);
-//		return (0);
-//	}
-//	return (line);
-//}
-
-char	*ft_convers_dol(t_parse *parse, char **str)
-{
-	char	*line;
-
-	line = 0;
-	while (ft_isspace(**str))
-		(*str)++;
-	while (**str && ft_strchr(";", **str) == 0)
-	{
-		if (**str == '\'')
-		{
-			if (ft_parse_for_quote(str, &line, parse) == -1)
-				return (0);
-		}
-		else if (**str == '"')
-		{
-			if (ft_parse_for_wquote(str, &line, parse) == -1)
-				return (0);
-		}
-		else if (**str == '$')
-			ft_parse_for_doll(str, &line, parse);
-		else
-			ft_parse_for_other(str, &line, parse);
-	}
-	return (line);
-}
-
 char	*ft_get_argv(char **str, t_parse *parse)
 {
 	char	i;

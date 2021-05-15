@@ -12,13 +12,13 @@
 
 #include "minishell.h"
 
-void	ft_skip_brk(char **line, t_parse *parse)
+void	ft_skip_brk(char **line)
 {
 	if (**line == ';')
 		(*line)++;
 }
 
-void	ft_skip_space(char **buff, t_parse *parse)
+void	ft_skip_space(char **buff)
 {
 	while (ft_isspace(**buff))
 		(*buff)++;
@@ -36,13 +36,13 @@ int 	ft_loop_for_parse(char *line, char ***env)
 	while (*line)
 	{
 		line_start = line;
-		ft_skip_brk(&line, &parse);
+		ft_skip_brk(&line);
 		ft_init_parse(&parse, *env);
 		buff = ft_convers_dol(&parse, &line);
 		tmp = buff;
 		if (!buff)
 			return (-1);
-		ft_skip_space(&buff, &parse);
+		ft_skip_space(&buff);
 		ft_get_arg(&buff, &parse);
 		execute_command_line(&parse, env);
 		line = ft_strjoin(buff, line);

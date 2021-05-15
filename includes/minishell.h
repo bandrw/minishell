@@ -68,7 +68,6 @@ typedef struct s_parse
 	t_pipe			pipe_info;
 	int				next_parse_fd_in;
 	int				num_quote;
-	int				chk_brk;
 }					t_parse;
 
 //	Logic
@@ -112,6 +111,9 @@ void	throw_error(char *argv, char *description, int err);
 int		throw_open_error(char *file);
 
 //	Parse
+
+void	ft_skip_space(char **buff);
+
 void	parse_line(char *buff, char ***env);
 int		ft_walk_str(char *str);
 int		ft_check_arg(char *arg, char *buff, int n);
@@ -139,6 +141,8 @@ char	*ft_dollar(char **str, t_parse *parse);
 char	*ft_prequote(char **str, t_parse *parse);
 char	*ft_preparse_wquotes(char **str, t_parse *parse);
 char	*ft_prewquote(char **str, t_parse *parse);
+char	*ft_preescape(char **str);
+char	*ft_escape(char **str);
 
 int		ft_check_red(char **str, t_parse *parse, int err);
 int		ft_check_sym(char **str, t_parse *parse, int *num_quote, int chk);
@@ -146,6 +150,8 @@ void	ft_read_line(char **str, t_parse *parse, int *num_quote);
 void	ft_get_arg(char **buff, t_parse *parse);
 
 void	ft_parse_for_other(char **str, char **line, t_parse *parse);
+int		ft_parse_for_escape(char **str, char **line);
+int		ft_parse_for_escape_quote(char **str, char **line);
 void	ft_parse_for_doll(char **str, char **line, t_parse *parse);
 int		ft_parse_for_quote(char **str, char **line, t_parse *parse);
 int		ft_parse_for_wquote(char **str, char **line, t_parse *parse);
